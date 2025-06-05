@@ -1,8 +1,15 @@
+import HeroIdentitySection from "./components/HeroIdentitySection";
+import { AboutSection } from "./components/AboutSection";
+import { FeaturedProjectsSection } from "./components/FeaturedProjectsSection";
+import { ContactCTASection } from "./components/ContactCTASection";
 
 export default function HomePage() {
   return (
-    <main className="min-h-screen flex items-center justify-center">
-      <h1 className="text-4xl font-bold">Welcome to my portfolio</h1>
+    <main>
+      <HeroIdentitySection />
+      <AboutSection />
+      <FeaturedProjectsSection />
+      <ContactCTASection />
     </main>
   );
 }
