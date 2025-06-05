@@ -52,4 +52,6 @@ export default function ProjectsPage() {
       </div>
     </main>
   );
+  console.log({ loading, error, data });
+
 }
