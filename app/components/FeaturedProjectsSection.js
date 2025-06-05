@@ -3,9 +3,9 @@
 import { motion } from "framer-motion";
 import { gql, useQuery } from "@apollo/client";
 
-const GET_FEATURED_PROJECTS = gql`
-  query GetFeaturedProjects {
-    acfprojects(where: { metaQuery: { metaArray: [{ key: "projectFields_featured", value: "1", compare: EQUAL }] } }) {
+const GET_PROJECTS = gql`
+  query {
+    acfprojects {
       nodes {
         id
         title
