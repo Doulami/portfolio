@@ -17,7 +17,7 @@ const GET_PROJECTS = gql`
       }
     }
   }
-\`;
+`;
 
 export default function ProjectsPage() {
   const { loading, error, data } = useQuery(GET_PROJECTS, { client });
