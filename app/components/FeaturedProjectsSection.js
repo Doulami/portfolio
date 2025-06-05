@@ -3,25 +3,20 @@
 import { motion } from "framer-motion";
 import { gql, useQuery } from "@apollo/client";
 
-const GET_PROJECTS = gql`
+const GET_PROJECTS_SIMPLE = gql`
   query {
     acfprojects {
       nodes {
         id
         title
-        uri
-        projectFields {
-          description
-          role
-          projectUrl
-          screenshot {
-            sourceUrl
-          }
-        }
       }
     }
   }
 `;
+const { loading, error, data } = useQuery(GET_PROJECTS_SIMPLE);
+
+
+console.log("DATA", data)
 
 export function FeaturedProjectsSection() {
   const { loading, error, data } = useQuery(GET_FEATURED_PROJECTS);
