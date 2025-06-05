@@ -13,17 +13,16 @@ const GET_PROJECTS_SIMPLE = gql`
     }
   }
 `;
-const { loading, error, data } = useQuery(GET_PROJECTS_SIMPLE);
 
-
-console.log("DATA", data)
 
 export function FeaturedProjectsSection() {
-  const { loading, error, data } = useQuery(GET_FEATURED_PROJECTS);
+  const { loading, error, data } = useQuery(GET_PROJECTS_SIMPLE);
 
   if (loading) return <p className="text-center py-10">Loading...</p>;
   if (error) return <p className="text-center py-10 text-red-500">Error loading projects</p>;
 
+
+console.log("DATA", data)
   return (
     <section id="projects" className="py-24 px-6 bg-white">
       <motion.h2
