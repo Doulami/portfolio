@@ -4,7 +4,7 @@ import { gql, useQuery } from '@apollo/client';
 import client from '@/lib/apollo-client';
 import { motion } from 'framer-motion';
 
-const GET_PROJECTS = gql\`
+const GET_PROJECTS = gql`
   query {
     acfProjects {
       nodes {
