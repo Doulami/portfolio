@@ -1,7 +1,7 @@
 
 'use client';
 import { gql, useQuery } from '@apollo/client';
-import client from '@/lib/apollo-client';
+import client from '../../lib/apollo-client';
 import { motion } from 'framer-motion';
 
 const GET_PROJECTS = gql`
