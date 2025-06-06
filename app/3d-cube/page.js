@@ -2,7 +2,7 @@
 
 import dynamic from 'next/dynamic';
 
-const CubeScene = dynamic(() => import('../../components/CubeScene.js'), { ssr: false });
+const CubeScene = dynamic(() => import('../components/CubeScene.js'), { ssr: false });
 
 export default function CubePage() {
   return (
