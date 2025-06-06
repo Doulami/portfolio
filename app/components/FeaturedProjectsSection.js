@@ -43,7 +43,7 @@ console.log("DATA", data)
       </motion.h2>
 
       <div className="grid gap-10 md:grid-cols-2 xl:grid-cols-3 max-w-7xl mx-auto">
-        {data.acfprojects.nodes.map((project) => {
+        {data.acfprojects.nodes.map((project, ids) => {
           const { title, uri, projectFields } = project;
           const { projectUrl, role, screenshot } = projectFields;
 
@@ -52,7 +52,7 @@ console.log("DATA", data)
               href={projectUrl || uri}
               target="_blank"
               rel="noopener noreferrer"
-              key={project.id}
+              key={ids}
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.98 }}
               className="group relative block rounded-2xl overflow-hidden shadow-xl transition-all bg-gray-100"
