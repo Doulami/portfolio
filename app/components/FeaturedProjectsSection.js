@@ -26,7 +26,7 @@ export function FeaturedProjectsSection() {
   const { loading, error, data } = useQuery(GET_PROJECTS);
 
   if (loading) return <p className="text-center py-10">Loading...</p>;
-  if (error) return <p className="text-center py-10 text-red-500">Error loading projects</p>;
+  if (error) return console.log("DATA", data); 
 
 
 console.log("DATA", data)
