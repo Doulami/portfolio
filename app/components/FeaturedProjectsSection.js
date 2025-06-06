@@ -7,6 +7,7 @@ const GET_PROJECTS = gql`
   query {
     acfProjects {
       nodes {
+        id
         title
         uri
         projectFields {
@@ -26,10 +27,13 @@ export function FeaturedProjectsSection() {
   const { loading, error, data } = useQuery(GET_PROJECTS);
 
   if (loading) return <p className="text-center py-10">Loading...</p>;
-  if (error) return console.log("DATA", data); 
+  if (error) {
+    console.error("Apollo Error:", error);
+    return <p className="text-center text-red-500 py-10">Error loading projects</p>;
+  }
 
+  console.log("DATA:", data); // ✅ For debugging
 
-console.log("DATA", data)
   return (
     <section id="projects" className="py-24 px-6 bg-white">
       <motion.h2
@@ -43,8 +47,8 @@ console.log("DATA", data)
       </motion.h2>
 
       <div className="grid gap-10 md:grid-cols-2 xl:grid-cols-3 max-w-7xl mx-auto">
-        {data.acfprojects.nodes.map((project, ids) => {
-          const { title, uri, projectFields } = project;
+        {data.acfProjects.nodes.map((project) => {
+          const { title, uri, projectFields, id } = project;
           const { projectUrl, role, screenshot } = projectFields;
 
           return (
@@ -52,7 +56,7 @@ console.log("DATA", data)
               href={projectUrl || uri}
               target="_blank"
               rel="noopener noreferrer"
-              key={ids}
+              key={id}
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.98 }}
               className="group relative block rounded-2xl overflow-hidden shadow-xl transition-all bg-gray-100"
