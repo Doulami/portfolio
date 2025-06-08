@@ -21,7 +21,7 @@ export default function CubeScene() {
 
   // Load textures (add your 4 images in /public/textures/)
   const textures = useLoader(TextureLoader, [
-    '/textures/face1.png',
+    '../public/textures/face1.png',
     //'/textures/back.jpg',
    // '/textures/left.jpg',
     //'/textures/right.jpg',
@@ -42,9 +42,9 @@ export default function CubeScene() {
 
       <group ref={group} rotation={[0, 0, 0]}>
         <Face position={[0, 0, 1]} rotation={[0, 0, 0]} texture={textures[0]} />
-        <Face position={[0, 0, -1]} rotation={[0, Math.PI, 0]} texture={textures[1]} />
-        <Face position={[-1, 0, 0]} rotation={[0, Math.PI / 2, 0]} texture={textures[2]} />
-        <Face position={[1, 0, 0]} rotation={[0, -Math.PI / 2, 0]} texture={textures[3]} />
+        <Face position={[0, 0, -1]} rotation={[0, Math.PI, 0]} texture={textures[0]} />
+        <Face position={[-1, 0, 0]} rotation={[0, Math.PI / 2, 0]} texture={textures[0]} />
+        <Face position={[1, 0, 0]} rotation={[0, -Math.PI / 2, 0]} texture={textures[0]} />
       </group>
     </Canvas>
   );
