@@ -6,3 +6,7 @@
 body {
   @apply bg-white text-black dark:bg-zinc-900 dark:text-white;
 }
+
+body {
+  background-color: rgb(24, 40, 37);
+}
