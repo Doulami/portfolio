@@ -9,17 +9,17 @@ export default function IntroOverlay({ onFinish }) {
   const [startExit, setStartExit] = useState(false);
 
   useEffect(() => {
-    const delayStart = setTimeout(() => setStartStripes(true), 1000); // 1s dark screen
-    const startExitAnim = setTimeout(() => setStartExit(true), 5000); // start exit sequence
-    const end = setTimeout(() => {
+    const delayStart = setTimeout(() => setStartStripes(true), 1000); // dark screen
+    const delayExit = setTimeout(() => setStartExit(true), 5000);     // trigger exit
+    const finish = setTimeout(() => {
       setShowOverlay(false);
       if (onFinish) onFinish();
-    }, 7000); // unmount overlay
+    }, 7000); // full end
 
     return () => {
       clearTimeout(delayStart);
-      clearTimeout(startExitAnim);
-      clearTimeout(end);
+      clearTimeout(delayExit);
+      clearTimeout(finish);
     };
   }, [onFinish]);
 
@@ -39,18 +39,18 @@ export default function IntroOverlay({ onFinish }) {
       opacity: 0,
       transition: {
         duration: 0.4,
-        delay: i >= 0 ? i * 0.2 + 0.4 : 0,
+        delay: i * 0.2 + 0.4,
         ease: "easeIn",
       },
     }),
   };
 
-  const nameVariants = (delay = 0, exitDelay = 0) => ({
+  const nameVariants = (entryDelay, exitDelay) => ({
     initial: { opacity: 0, y: -80 },
     animate: {
       opacity: 1,
       y: 0,
-      transition: { delay, duration: 0.6, ease: "easeOut" },
+      transition: { delay: entryDelay, duration: 0.6, ease: "easeOut" },
     },
     exit: {
       opacity: 0,
@@ -83,8 +83,8 @@ export default function IntroOverlay({ onFinish }) {
                 variants={stripeVariants}
                 initial="initial"
                 animate={startStripes ? "animate" : "initial"}
-                exit="exit"
-                custom={startExit ? i : -1}
+                exit={startExit ? "exit" : ""}
+                custom={i}
               />
             ))}
           </div>
@@ -93,7 +93,7 @@ export default function IntroOverlay({ onFinish }) {
             <motion.h1
               className="text-[76px] md:text-[82px] font-extrabold leading-none"
               style={{ color: "rgb(180,180,0)" }}
-              variants={nameVariants(3.4, 0)}
+              variants={nameVariants(3.4, 0.0)}
               initial="initial"
               animate={startStripes ? "animate" : "initial"}
               exit={startExit ? "exit" : ""}
