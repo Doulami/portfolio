@@ -6,33 +6,37 @@ import { useEffect, useState } from "react";
 export default function IntroOverlay({ onFinish }) {
   const [showOverlay, setShowOverlay] = useState(true);
   const [startStripes, setStartStripes] = useState(false);
-  const [startExit, setStartExit] = useState(false);
+  const [startTextExit, setStartTextExit] = useState(false);
+  const [startOverlayExit, setStartOverlayExit] = useState(false);
 
   useEffect(() => {
     const delayStart = setTimeout(() => setStartStripes(true), 1000);
-    const startExitAnim = setTimeout(() => setStartExit(true), 5000);
+    const delayTextExit = setTimeout(() => setStartTextExit(true), 5000);
+    const delayOverlayExit = setTimeout(() => setStartOverlayExit(true), 5800);
     const end = setTimeout(() => {
       setShowOverlay(false);
       if (onFinish) onFinish();
-    }, 7000);
+    }, 6800);
 
     return () => {
       clearTimeout(delayStart);
-      clearTimeout(startExitAnim);
+      clearTimeout(delayTextExit);
+      clearTimeout(delayOverlayExit);
       clearTimeout(end);
     };
   }, [onFinish]);
 
-  const overlayVariants = {
-    initial: { y: "0%" },
-    exit: {
-      y: "100%",
+  const stripeVariants = {
+    initial: { y: "-100%", opacity: 0 },
+    animate: (i) => ({
+      y: "0%",
+      opacity: 1,
       transition: {
-        delay: 1.2,
         duration: 0.6,
-        ease: "easeInOut",
+        delay: i * 0.5 + 1,
+        ease: "easeOut",
       },
-    },
+    }),
   };
 
   const nameVariants = (entryDelay = 0, exitDelay = 0) => ({
@@ -55,12 +59,14 @@ export default function IntroOverlay({ onFinish }) {
         <motion.div
           className="fixed inset-0 z-[100] flex flex-col items-center justify-center"
           style={{ backgroundColor: "rgb(24,40,37)" }}
-          initial="initial"
-          animate="animate"
-          exit="exit"
-          variants={overlayVariants}
+          initial={{ y: "0%" }}
+          animate={{ y: "0%" }}
+          exit={{
+            y: "100%",
+            transition: { duration: 0.6, ease: "easeInOut" },
+          }}
         >
-          {/* Curtain stripes (entrance only) */}
+          {/* Curtain stripes */}
           <div className="absolute w-full h-full overflow-hidden">
             {[...Array(5)].map((_, i) => (
               <motion.div
@@ -72,16 +78,9 @@ export default function IntroOverlay({ onFinish }) {
                   backgroundColor: "rgb(255,255,0)",
                   visibility: startStripes ? "visible" : "hidden",
                 }}
-                initial={{ y: "-100%", opacity: 0 }}
-                animate={{
-                  y: "0%",
-                  opacity: 1,
-                  transition: {
-                    duration: 0.6,
-                    delay: i * 0.5 + 1,
-                    ease: "easeOut",
-                  },
-                }}
+                variants={stripeVariants}
+                initial="initial"
+                animate={startStripes ? "animate" : "initial"}
               />
             ))}
           </div>
@@ -91,24 +90,34 @@ export default function IntroOverlay({ onFinish }) {
             <motion.h1
               className="text-[76px] md:text-[82px] font-extrabold leading-none"
               style={{ color: "rgb(180,180,0)" }}
-              variants={nameVariants(3.4, 0.4)} // exits later
+              variants={nameVariants(3.4, 0.4)}
               initial="initial"
               animate={startStripes ? "animate" : "initial"}
-              exit={startExit ? "exit" : ""}
+              exit={startTextExit ? "exit" : ""}
             >
               Khaled
             </motion.h1>
             <motion.h1
               className="text-[76px] md:text-[82px] font-extrabold leading-none"
               style={{ color: "rgb(180,180,0)" }}
-              variants={nameVariants(3.8, 0.0)} // exits first
+              variants={nameVariants(3.8, 0.0)}
               initial="initial"
               animate={startStripes ? "animate" : "initial"}
-              exit={startExit ? "exit" : ""}
+              exit={startTextExit ? "exit" : ""}
             >
               Doulami
             </motion.h1>
           </div>
+
+          {/* Trigger the exit of the whole overlay once text is gone */}
+          {startOverlayExit && (
+            <motion.div
+              className="absolute inset-0"
+              initial={{ y: 0 }}
+              animate={{ y: "100%" }}
+              transition={{ duration: 0.6, ease: "easeInOut" }}
+            />
+          )}
         </motion.div>
       )}
     </AnimatePresence>
