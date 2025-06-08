@@ -28,19 +28,6 @@ export default function IntroOverlay({ onFinish }) {
 
   if (isGone) return null;
 
-  const stripeVariants = {
-    initial: { y: "-100%", opacity: 0 },
-    animate: (i) => ({
-      y: "0%",
-      opacity: 1,
-      transition: {
-        duration: 0.4,
-        delay: i * 0.2 + 0.5,
-        ease: "easeOut",
-      },
-    }),
-  };
-
   const nameVariants = (entryDelay = 0, exitDelay = 0) => ({
     initial: { opacity: 0, y: -80 },
     animate: {
@@ -58,31 +45,30 @@ export default function IntroOverlay({ onFinish }) {
   return (
     <motion.div
       className="fixed inset-0 z-[100] flex flex-col items-center justify-center"
-      style={{
-        backgroundColor: "rgb(24,40,37)",
-        opacity: hideOverlay ? 0 : 1,
-        transition: "opacity 0.6s ease-in-out",
-      }}
+      initial={{ opacity: 1 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0, transition: { duration: 0.6, delay: 0.6 } }}
+      style={{ backgroundColor: "rgb(24,40,37)" }}
     >
       {/* Stripes */}
-      <div className="absolute w-full h-full overflow-hidden">
+      <motion.div
+        className="absolute w-full h-full origin-top"
+        initial={{ scaleY: 1 }}
+        animate={hideOverlay ? { scaleY: 0 } : { scaleY: 1 }}
+        transition={{ duration: 0.6, ease: "easeInOut" }}
+      >
         {[...Array(5)].map((_, i) => (
-          <motion.div
+          <div
             key={i}
-            className="absolute w-full h-1/5 overflow-hidden"
+            className="absolute w-full h-1/5"
             style={{
               top: `${i * 20}%`,
               left: 0,
               backgroundColor: "rgb(255,255,0)",
-              visibility: startStripes ? "visible" : "hidden",
             }}
-            variants={stripeVariants}
-            initial="initial"
-            animate={startStripes ? "animate" : "initial"}
-            custom={i}
           />
         ))}
-      </div>
+      </motion.div>
 
       {/* Name */}
       <div className="z-50 text-center mt-[-5vh]">
