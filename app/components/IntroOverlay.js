@@ -21,17 +21,19 @@ export default function IntroOverlay({ onFinish }) {
   }, [onFinish]);
 
   const stripeVariants = {
-    initial: { y: "-100%" },
+    initial: { y: "-100%", opacity: 0 },
     animate: (i) => ({
       y: "0%",
+      opacity: 1,
       transition: {
         duration: 0.6,
-        delay: i * 0.5 + 1, // delay + 1s black
+        delay: i * 0.5 + 1,
         ease: "easeOut",
       },
     }),
     exit: (i) => ({
       y: "100%",
+      opacity: 0,
       transition: {
         duration: 0.4,
         delay: i * 0.2,
@@ -64,15 +66,16 @@ export default function IntroOverlay({ onFinish }) {
           animate={{ opacity: 1, transition: { duration: 1 } }}
           exit={{ opacity: 0 }}
         >
-          <div className="absolute w-full h-full">
+          <div className="absolute w-full h-full overflow-hidden">
             {[...Array(5)].map((_, i) => (
               <motion.div
                 key={i}
-                className="absolute w-full h-1/5"
+                className="absolute w-full h-1/5 overflow-hidden"
                 style={{
                   top: `${i * 20}%`,
                   left: 0,
                   backgroundColor: "rgb(255,255,0)",
+                  visibility: startStripes ? "visible" : "hidden",
                 }}
                 variants={stripeVariants}
                 initial="initial"
