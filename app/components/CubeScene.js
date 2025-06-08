@@ -21,7 +21,7 @@ export default function CubeScene() {
 
   // Load textures (add your 4 images in /public/textures/)
   const textures = useLoader(TextureLoader, [
-    '/textures/front.jpg',
+    '/textures/face1.png',
     //'/textures/back.jpg',
    // '/textures/left.jpg',
     //'/textures/right.jpg',
