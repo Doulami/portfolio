@@ -6,16 +6,19 @@ import { useEffect, useState } from "react";
 export default function IntroOverlay({ onFinish }) {
   const [showOverlay, setShowOverlay] = useState(true);
   const [startStripes, setStartStripes] = useState(false);
+  const [startExit, setStartExit] = useState(false);
 
   useEffect(() => {
-    const delayStart = setTimeout(() => setStartStripes(true), 1000); // 1s black screen
+    const delayStart = setTimeout(() => setStartStripes(true), 1000); // dark screen
+    const startExitAnim = setTimeout(() => setStartExit(true), 5000); // exit sequence
     const end = setTimeout(() => {
       setShowOverlay(false);
       if (onFinish) onFinish();
-    }, 7500); // total animation duration
+    }, 7000); // total time before unmount
 
     return () => {
       clearTimeout(delayStart);
+      clearTimeout(startExitAnim);
       clearTimeout(end);
     };
   }, [onFinish]);
@@ -36,13 +39,13 @@ export default function IntroOverlay({ onFinish }) {
       opacity: 0,
       transition: {
         duration: 0.4,
-        delay: i * 0.2,
+        delay: i * 0.2 + 0.4,
         ease: "easeIn",
       },
     }),
   };
 
-  const nameVariants = (delay = 0) => ({
+  const nameVariants = (delay = 0, exitDelay = 0) => ({
     initial: { opacity: 0, y: -80 },
     animate: {
       opacity: 1,
@@ -52,7 +55,7 @@ export default function IntroOverlay({ onFinish }) {
     exit: {
       opacity: 0,
       y: 80,
-      transition: { duration: 0.5, ease: "easeIn" },
+      transition: { delay: exitDelay, duration: 0.5, ease: "easeIn" },
     },
   });
 
@@ -64,7 +67,7 @@ export default function IntroOverlay({ onFinish }) {
           style={{ backgroundColor: "rgb(24,40,37)" }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1, transition: { duration: 1 } }}
-          exit={{ opacity: 0 }}
+          exit={{ opacity: 0, transition: { delay: 1.6, duration: 0.5 } }} // overlay fades last
         >
           <div className="absolute w-full h-full overflow-hidden">
             {[...Array(5)].map((_, i) => (
@@ -80,7 +83,7 @@ export default function IntroOverlay({ onFinish }) {
                 variants={stripeVariants}
                 initial="initial"
                 animate={startStripes ? "animate" : "initial"}
-                exit="exit"
+                exit={startExit ? "exit" : ""}
                 custom={i}
               />
             ))}
@@ -90,20 +93,20 @@ export default function IntroOverlay({ onFinish }) {
             <motion.h1
               className="text-[76px] md:text-[82px] font-extrabold leading-none"
               style={{ color: "rgb(180,180,0)" }}
-              variants={nameVariants(3.4)}
+              variants={nameVariants(3.4, 0.0)}
               initial="initial"
               animate={startStripes ? "animate" : "initial"}
-              exit="exit"
+              exit={startExit ? "exit" : ""}
             >
               Khaled
             </motion.h1>
             <motion.h1
               className="text-[76px] md:text-[82px] font-extrabold leading-none"
               style={{ color: "rgb(180,180,0)" }}
-              variants={nameVariants(3.8)}
+              variants={nameVariants(3.8, 0.2)}
               initial="initial"
               animate={startStripes ? "animate" : "initial"}
-              exit="exit"
+              exit={startExit ? "exit" : ""}
             >
               Doulami
             </motion.h1>
