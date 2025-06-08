@@ -9,43 +9,33 @@ export default function IntroOverlay({ onFinish }) {
   const [startExit, setStartExit] = useState(false);
 
   useEffect(() => {
-    const delayStart = setTimeout(() => setStartStripes(true), 1000); // dark screen
-    const delayExit = setTimeout(() => setStartExit(true), 5000);     // trigger exit
-    const finish = setTimeout(() => {
+    const delayStart = setTimeout(() => setStartStripes(true), 1000);
+    const startExitAnim = setTimeout(() => setStartExit(true), 5000);
+    const end = setTimeout(() => {
       setShowOverlay(false);
       if (onFinish) onFinish();
-    }, 7000); // full end
+    }, 7000);
 
     return () => {
       clearTimeout(delayStart);
-      clearTimeout(delayExit);
-      clearTimeout(finish);
+      clearTimeout(startExitAnim);
+      clearTimeout(end);
     };
   }, [onFinish]);
 
-  const stripeVariants = {
-    initial: { y: "-100%", opacity: 0 },
-    animate: (i) => ({
-      y: "0%",
-      opacity: 1,
-      transition: {
-        duration: 0.6,
-        delay: i * 0.5 + 1,
-        ease: "easeOut",
-      },
-    }),
-    exit: (i) => ({
+  const overlayVariants = {
+    initial: { y: "0%" },
+    exit: {
       y: "100%",
-      opacity: 0,
       transition: {
-        duration: 0.4,
-        delay: i * 0.2 + 0.4,
-        ease: "easeIn",
+        delay: 1.2,
+        duration: 0.6,
+        ease: "easeInOut",
       },
-    }),
+    },
   };
 
-  const nameVariants = (entryDelay, exitDelay) => ({
+  const nameVariants = (entryDelay = 0, exitDelay = 0) => ({
     initial: { opacity: 0, y: -80 },
     animate: {
       opacity: 1,
@@ -65,10 +55,12 @@ export default function IntroOverlay({ onFinish }) {
         <motion.div
           className="fixed inset-0 z-[100] flex flex-col items-center justify-center"
           style={{ backgroundColor: "rgb(24,40,37)" }}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1, transition: { duration: 1 } }}
-          exit={{ opacity: 0, transition: { delay: 1.6, duration: 0.5 } }}
+          initial="initial"
+          animate="animate"
+          exit="exit"
+          variants={overlayVariants}
         >
+          {/* Curtain stripes (entrance only) */}
           <div className="absolute w-full h-full overflow-hidden">
             {[...Array(5)].map((_, i) => (
               <motion.div
@@ -80,20 +72,26 @@ export default function IntroOverlay({ onFinish }) {
                   backgroundColor: "rgb(255,255,0)",
                   visibility: startStripes ? "visible" : "hidden",
                 }}
-                variants={stripeVariants}
-                initial="initial"
-                animate={startStripes ? "animate" : "initial"}
-                exit={startExit ? "exit" : ""}
-                custom={i}
+                initial={{ y: "-100%", opacity: 0 }}
+                animate={{
+                  y: "0%",
+                  opacity: 1,
+                  transition: {
+                    duration: 0.6,
+                    delay: i * 0.5 + 1,
+                    ease: "easeOut",
+                  },
+                }}
               />
             ))}
           </div>
 
+          {/* Name */}
           <div className="z-50 text-center mt-[-5vh]">
             <motion.h1
               className="text-[76px] md:text-[82px] font-extrabold leading-none"
               style={{ color: "rgb(180,180,0)" }}
-              variants={nameVariants(3.4, 0.0)}
+              variants={nameVariants(3.4, 0.4)} // exits later
               initial="initial"
               animate={startStripes ? "animate" : "initial"}
               exit={startExit ? "exit" : ""}
@@ -103,7 +101,7 @@ export default function IntroOverlay({ onFinish }) {
             <motion.h1
               className="text-[76px] md:text-[82px] font-extrabold leading-none"
               style={{ color: "rgb(180,180,0)" }}
-              variants={nameVariants(3.8, 0.2)}
+              variants={nameVariants(3.8, 0.0)} // exits first
               initial="initial"
               animate={startStripes ? "animate" : "initial"}
               exit={startExit ? "exit" : ""}
