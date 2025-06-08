@@ -10,14 +10,14 @@ const CubeScene = dynamic(() => import('./components/CubeScene.js'), { ssr: fals
 
 
 export default function HomePage() {
-  return (
+ /* return (
     <>
       <IntroOverlay />
-      {/* Your cube or main content here 
+      { Your cube or main content here 
        <HeroIdentitySection />
       <AboutSection />
       <FeaturedProjectsSection />
-      <ContactCTASection />*/
+      <ContactCTASection />
        <div style={{ width: '100vw', height: '100vh', background: 'black' }}>
       <CubeScene />
     </div>
@@ -25,5 +25,14 @@ export default function HomePage() {
       }
     </>
      
+  );*/
+    const [showCube, setShowCube] = useState(false);
+
+  return (
+    <>
+      {!showCube && <IntroOverlay onFinish={() => setShowCube(true)} />}
+      {showCube && <CubeScene />}
+    </>
   );
+
 }
