@@ -1,4 +1,3 @@
-// app/components/IntroOverlay.js
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
@@ -6,13 +5,19 @@ import { useEffect, useState } from "react";
 
 export default function IntroOverlay({ onFinish }) {
   const [showOverlay, setShowOverlay] = useState(true);
+  const [startStripes, setStartStripes] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
+    const delayStart = setTimeout(() => setStartStripes(true), 1000); // 1s black screen
+    const end = setTimeout(() => {
       setShowOverlay(false);
       if (onFinish) onFinish();
-    }, 7000);
-    return () => clearTimeout(timer);
+    }, 7500); // total animation duration
+
+    return () => {
+      clearTimeout(delayStart);
+      clearTimeout(end);
+    };
   }, [onFinish]);
 
   const stripeVariants = {
@@ -21,7 +26,7 @@ export default function IntroOverlay({ onFinish }) {
       y: "0%",
       transition: {
         duration: 0.6,
-        delay: i * 0.5, // stagger more clearly like curtains
+        delay: i * 0.5 + 1, // delay + 1s black
         ease: "easeOut",
       },
     }),
@@ -64,10 +69,14 @@ export default function IntroOverlay({ onFinish }) {
               <motion.div
                 key={i}
                 className="absolute w-full h-1/5"
-                style={{ top: `${i * 20}%`, left: 0, backgroundColor: "rgb(255,255,0)" }}
+                style={{
+                  top: `${i * 20}%`,
+                  left: 0,
+                  backgroundColor: "rgb(255,255,0)",
+                }}
                 variants={stripeVariants}
                 initial="initial"
-                animate="animate"
+                animate={startStripes ? "animate" : "initial"}
                 exit="exit"
                 custom={i}
               />
@@ -78,9 +87,9 @@ export default function IntroOverlay({ onFinish }) {
             <motion.h1
               className="text-[76px] md:text-[82px] font-extrabold leading-none"
               style={{ color: "rgb(180,180,0)" }}
-              variants={nameVariants(2.6)}
+              variants={nameVariants(3.4)}
               initial="initial"
-              animate="animate"
+              animate={startStripes ? "animate" : "initial"}
               exit="exit"
             >
               Khaled
@@ -88,9 +97,9 @@ export default function IntroOverlay({ onFinish }) {
             <motion.h1
               className="text-[76px] md:text-[82px] font-extrabold leading-none"
               style={{ color: "rgb(180,180,0)" }}
-              variants={nameVariants(3)}
+              variants={nameVariants(3.8)}
               initial="initial"
-              animate="animate"
+              animate={startStripes ? "animate" : "initial"}
               exit="exit"
             >
               Doulami
