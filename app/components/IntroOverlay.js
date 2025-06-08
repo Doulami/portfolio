@@ -11,14 +11,28 @@ export default function IntroOverlay({ onFinish }) {
     const timer = setTimeout(() => {
       setShowOverlay(false);
       if (onFinish) onFinish();
-    }, 6500);
+    }, 7000);
     return () => clearTimeout(timer);
   }, [onFinish]);
 
   const stripeVariants = {
     initial: { y: "-100%" },
-    animate: { y: "0%" },
-    exit: { y: "100%" },
+    animate: (i) => ({
+      y: "0%",
+      transition: {
+        duration: 0.6,
+        delay: i * 0.5, // stagger more clearly like curtains
+        ease: "easeOut",
+      },
+    }),
+    exit: (i) => ({
+      y: "100%",
+      transition: {
+        duration: 0.4,
+        delay: i * 0.2,
+        ease: "easeIn",
+      },
+    }),
   };
 
   const nameVariants = (delay = 0) => ({
@@ -55,7 +69,7 @@ export default function IntroOverlay({ onFinish }) {
                 initial="initial"
                 animate="animate"
                 exit="exit"
-                transition={{ duration: 0.6, delay: i * 0.2 }}
+                custom={i}
               />
             ))}
           </div>
@@ -64,7 +78,7 @@ export default function IntroOverlay({ onFinish }) {
             <motion.h1
               className="text-[76px] md:text-[82px] font-extrabold leading-none"
               style={{ color: "rgb(180,180,0)" }}
-              variants={nameVariants(1.2)}
+              variants={nameVariants(2.6)}
               initial="initial"
               animate="animate"
               exit="exit"
@@ -74,7 +88,7 @@ export default function IntroOverlay({ onFinish }) {
             <motion.h1
               className="text-[76px] md:text-[82px] font-extrabold leading-none"
               style={{ color: "rgb(180,180,0)" }}
-              variants={nameVariants(1.6)}
+              variants={nameVariants(3)}
               initial="initial"
               animate="animate"
               exit="exit"
