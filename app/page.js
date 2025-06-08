@@ -6,14 +6,17 @@ import { ContactCTASection } from "./components/ContactCTASection";
 
 export default function HomePage() {
   return (
-       <>
+    <>
       <IntroOverlay />
-      {/* Your cube or main content here */
-      
+      {/* Your cube or main content here 
        <HeroIdentitySection />
       <AboutSection />
       <FeaturedProjectsSection />
-      <ContactCTASection />
+      <ContactCTASection />*/
+       <div style={{ width: '100vw', height: '100vh', background: 'black' }}>
+      <CubeScene />
+    </div>
+      
       }
     </>
      
