@@ -10,7 +10,7 @@ export default function IntroOverlay({ onFinish }) {
   const [isGone, setIsGone] = useState(false);
 
   useEffect(() => {
-    const delayStart = setTimeout(() => setStartStripes(true), 1000);
+    const delayStart = setTimeout(() => setStartStripes(true), 500);
     const textExit = setTimeout(() => setStartTextExit(true), 5000);
     const fadeOut = setTimeout(() => setHideOverlay(true), 5800);
     const finish = setTimeout(() => {
@@ -34,8 +34,8 @@ export default function IntroOverlay({ onFinish }) {
       y: "0%",
       opacity: 1,
       transition: {
-        duration: 0.6,
-        delay: i * 0.5 + 1,
+        duration: 0.4,
+        delay: i * 0.2 + 0.5,
         ease: "easeOut",
       },
     }),
@@ -46,23 +46,18 @@ export default function IntroOverlay({ onFinish }) {
     animate: {
       opacity: 1,
       y: 0,
-      transition: { delay: entryDelay, duration: 0.6, ease: "easeOut" },
+      transition: { delay: entryDelay, duration: 0.4, ease: "easeOut" },
     },
     exit: {
       opacity: 0,
       y: 80,
-      transition: { delay: exitDelay, duration: 0.5, ease: "easeIn" },
+      transition: { delay: exitDelay, duration: 0.4, ease: "easeIn" },
     },
   });
 
   return (
     <motion.div
       className="fixed inset-0 z-[100] flex flex-col items-center justify-center"
-      style={{ backgroundColor: "rgb(24,40,37)" }}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 1 }}
       style={{
         backgroundColor: "rgb(24,40,37)",
         opacity: hideOverlay ? 0 : 1,
@@ -94,21 +89,20 @@ export default function IntroOverlay({ onFinish }) {
         <motion.h1
           className="text-[76px] md:text-[82px] font-extrabold leading-none"
           style={{ color: "rgb(180,180,0)" }}
-          variants={nameVariants(3.4, 0.4)}
+          variants={nameVariants(2.2, 5.4)}
           initial="initial"
           animate={startStripes ? "animate" : "initial"}
-          animate={startStripes ? "animate" : "initial"}
-          animate={startTextExit ? "exit" : "animate"}
+          exit={startTextExit ? "exit" : ""}
         >
           Khaled
         </motion.h1>
         <motion.h1
           className="text-[76px] md:text-[82px] font-extrabold leading-none"
           style={{ color: "rgb(180,180,0)" }}
-          variants={nameVariants(3.8, 0.0)}
+          variants={nameVariants(2.4, 5.0)}
           initial="initial"
           animate={startStripes ? "animate" : "initial"}
-          animate={startTextExit ? "exit" : "animate"}
+          exit={startTextExit ? "exit" : ""}
         >
           Doulami
         </motion.h1>
