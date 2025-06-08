@@ -1,8 +1,13 @@
 import IntroOverlay from "./components/IntroOverlay";
-import HeroIdentitySection from "./components/HeroIdentitySection";
+/*import HeroIdentitySection from "./components/HeroIdentitySection";
 import { AboutSection } from "./components/AboutSection";
 import { FeaturedProjectsSection } from "./components/FeaturedProjectsSection";
-import { ContactCTASection } from "./components/ContactCTASection";
+import { ContactCTASection } from "./components/ContactCTASection";*/
+
+import dynamic from 'next/dynamic';
+
+const CubeScene = dynamic(() => import('./components/CubeScene.js'), { ssr: false });
+
 
 export default function HomePage() {
   return (
