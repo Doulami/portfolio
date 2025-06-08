@@ -9,12 +9,12 @@ export default function IntroOverlay({ onFinish }) {
   const [startExit, setStartExit] = useState(false);
 
   useEffect(() => {
-    const delayStart = setTimeout(() => setStartStripes(true), 1000); // dark screen
-    const startExitAnim = setTimeout(() => setStartExit(true), 5000); // exit sequence
+    const delayStart = setTimeout(() => setStartStripes(true), 1000); // 1s dark screen
+    const startExitAnim = setTimeout(() => setStartExit(true), 5000); // start exit sequence
     const end = setTimeout(() => {
       setShowOverlay(false);
       if (onFinish) onFinish();
-    }, 7000); // total time before unmount
+    }, 7000); // unmount overlay
 
     return () => {
       clearTimeout(delayStart);
@@ -39,7 +39,7 @@ export default function IntroOverlay({ onFinish }) {
       opacity: 0,
       transition: {
         duration: 0.4,
-        delay: i * 0.2 + 0.4,
+        delay: i >= 0 ? i * 0.2 + 0.4 : 0,
         ease: "easeIn",
       },
     }),
@@ -67,7 +67,7 @@ export default function IntroOverlay({ onFinish }) {
           style={{ backgroundColor: "rgb(24,40,37)" }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1, transition: { duration: 1 } }}
-          exit={{ opacity: 0, transition: { delay: 1.6, duration: 0.5 } }} // overlay fades last
+          exit={{ opacity: 0, transition: { delay: 1.6, duration: 0.5 } }}
         >
           <div className="absolute w-full h-full overflow-hidden">
             {[...Array(5)].map((_, i) => (
@@ -83,8 +83,8 @@ export default function IntroOverlay({ onFinish }) {
                 variants={stripeVariants}
                 initial="initial"
                 animate={startStripes ? "animate" : "initial"}
-                exit={startExit ? "exit" : ""}
-                custom={i}
+                exit="exit"
+                custom={startExit ? i : -1}
               />
             ))}
           </div>
@@ -93,7 +93,7 @@ export default function IntroOverlay({ onFinish }) {
             <motion.h1
               className="text-[76px] md:text-[82px] font-extrabold leading-none"
               style={{ color: "rgb(180,180,0)" }}
-              variants={nameVariants(3.4, 0.0)}
+              variants={nameVariants(3.4, 0)}
               initial="initial"
               animate={startStripes ? "animate" : "initial"}
               exit={startExit ? "exit" : ""}
