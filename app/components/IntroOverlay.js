@@ -1,4 +1,3 @@
-
 // app/components/IntroOverlay.js
 "use client";
 
@@ -11,48 +10,59 @@ export default function IntroOverlay() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowOverlay(false);
-    }, 4000); // Total time before unmount (bars in + hold + bars out)
+    }, 5000);
     return () => clearTimeout(timer);
   }, []);
 
-  const barVariants = {
-    initial: { y: "100%" },
-    animate: { y: 0 },
-    exit: { y: "-100%" },
+  const stripeVariants = {
+    initial: { y: "-100%" },
+    animate: { y: "0%" },
+    exit: { y: "100%" },
   };
 
   const textVariants = {
-    initial: { opacity: 0, y: 20 },
-    animate: { opacity: 1, y: 0, transition: { delay: 1.2 } },
-    exit: { opacity: 0, y: -20, transition: { duration: 0.5 } },
+    initial: { opacity: 0, y: -50, x: 40, scale: 1.4 },
+    animate: {
+      opacity: 1,
+      y: 0,
+      x: 0,
+      scale: 1,
+      transition: { delay: 1, duration: 0.6 },
+    },
+    exit: {
+      opacity: 0,
+      y: 100,
+      transition: { delay: 0.2, duration: 0.5 },
+    },
   };
 
   return (
     <AnimatePresence>
       {showOverlay && (
         <motion.div
-          className="fixed inset-0 z-50 flex flex-col items-center justify-center"
+          className="fixed inset-0 z-50 flex items-center justify-center"
           style={{ backgroundColor: "rgb(24,40,37)" }}
           initial={{ opacity: 1 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
         >
-          <div className="w-full h-full flex flex-col justify-center items-center gap-1">
+          <div className="absolute w-full h-full">
             {[...Array(5)].map((_, i) => (
               <motion.div
                 key={i}
-                className="w-full h-[20%] bg-yellow-400"
-                variants={barVariants}
+                className="absolute w-full h-1/5 bg-yellow-400"
+                style={{ top: `${i * 20}%`, left: 0 }}
+                variants={stripeVariants}
                 initial="initial"
                 animate="animate"
                 exit="exit"
-                transition={{ duration: 0.5, delay: i * 0.1 }}
+                transition={{ duration: 0.4, delay: i * 0.1 }}
               />
             ))}
           </div>
 
           <motion.h1
-            className="absolute text-white text-4xl md:text-6xl font-bold"
+            className="text-yellow-900 text-5xl md:text-7xl font-extrabold z-50"
             variants={textVariants}
             initial="initial"
             animate="animate"
