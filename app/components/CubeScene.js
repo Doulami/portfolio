@@ -1,51 +1,52 @@
-'use client';
+// app/components/CubeScene.js
+"use client";
 
-import { Canvas } from '@react-three/fiber';
-import { OrbitControls } from '@react-three/drei';
-import { useRef } from 'react';
-import * as THREE from 'three';
-import { TextureLoader } from 'three';
-import { useLoader } from '@react-three/fiber';
+import { Canvas } from "@react-three/fiber";
+import { OrbitControls } from "@react-three/drei";
+import { useRef } from "react";
+import * as THREE from "three";
 
-function Face({ position, rotation, texture }) {
+function Face({ position, rotation, color }) {
   return (
     <mesh position={position} rotation={rotation}>
       <planeGeometry args={[2, 2]} />
-      <meshBasicMaterial map={texture} toneMapped={false} />
+      <meshStandardMaterial color={color} side={THREE.DoubleSide} />
     </mesh>
   );
 }
 
 export default function CubeScene() {
-  const group = useRef(null);
-
-  // Load textures (add your 4 images in /public/textures/)
-  const textures = useLoader(TextureLoader, [
-    '../public/textures/face1.png',
-    //'/textures/back.jpg',
-   // '/textures/left.jpg',
-    //'/textures/right.jpg',
-  ]);
+  const group = useRef();
 
   return (
-    <Canvas camera={{ position: [4, 0, 6], fov: 50 }}>
-      <ambientLight />
-      <pointLight position={[10, 10, 10]} />
-      <OrbitControls
-        enableZoom={false}
-        enablePan={false}
-        maxPolarAngle={Math.PI / 2}
-        minPolarAngle={Math.PI / 2}
-        autoRotate
-        autoRotateSpeed={1.5}
-      />
+    <div className="fixed inset-0 z-10">
+      <Canvas camera={{ position: [0, 0, 3.5], fov: 60 }}>
+        <ambientLight intensity={0.5} />
+        <pointLight position={[10, 10, 10]} />
+        <OrbitControls
+          enableZoom={false}
+          enablePan={false}
+          autoRotate
+          autoRotateSpeed={0.7}
+          maxPolarAngle={Math.PI / 2}
+          minPolarAngle={Math.PI / 2}
+        />
 
-      <group ref={group} rotation={[0, 0, 0]}>
-        <Face position={[0, 0, 1]} rotation={[0, 0, 0]} texture={textures[0]} />
-        <Face position={[0, 0, -1]} rotation={[0, Math.PI, 0]} texture={textures[0]} />
-        <Face position={[-1, 0, 0]} rotation={[0, Math.PI / 2, 0]} texture={textures[0]} />
-        <Face position={[1, 0, 0]} rotation={[0, -Math.PI / 2, 0]} texture={textures[0]} />
-      </group>
-    </Canvas>
+        <group ref={group}>
+          {/* Front */}
+          <Face position={[0, 0, 1]} rotation={[0, 0, 0]} color="white" />
+          {/* Back */}
+          <Face position={[0, 0, -1]} rotation={[0, Math.PI, 0]} color="#ccc" />
+          {/* Left */}
+          <Face position={[-1, 0, 0]} rotation={[0, Math.PI / 2, 0]} color="#ddd" />
+          {/* Right */}
+          <Face position={[1, 0, 0]} rotation={[0, -Math.PI / 2, 0]} color="#ddd" />
+          {/* Top */}
+          <Face position={[0, 1, 0]} rotation={[Math.PI / 2, 0, 0]} color="#eee" />
+          {/* Bottom */}
+          <Face position={[0, -1, 0]} rotation={[-Math.PI / 2, 0, 0]} color="#eee" />
+        </group>
+      </Canvas>
+    </div>
   );
 }
