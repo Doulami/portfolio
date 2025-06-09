@@ -7,13 +7,15 @@ const faces = [
   {
     id: "face1",
     label: "CTO / Developer",
-    bg: "#0f1e17",
+    bg: "#182825",
     content: (
       <div className="text-center space-y-4">
-        <p className="text-xl text-neon">Experienced in AWS, WordPress, React & server ops.</p>
+        <p className="text-xl text-neon text-opacity-75">
+          Experienced in AWS, WordPress, React & server ops.
+        </p>
         <a
           href="/#projects"
-          className="inline-block mt-2 px-6 py-3 bg-neon       text-black font-semibold rounded hover:bg-neon      "
+          className="inline-block mt-2 px-6 py-3 bg-neon text-black font-semibold rounded hover:opacity-90"
         >
           See My Projects
         </a>
@@ -26,10 +28,12 @@ const faces = [
     bg: "#11303d",
     content: (
       <div className="text-center space-y-4">
-        <p className="text-xl text-neon">Built and sold multiple digital products and plugins.</p>
+        <p className="text-xl text-neon text-opacity-75">
+          Built and sold multiple digital products and plugins.
+        </p>
         <a
           href="/#plugins"
-          className="inline-block mt-2 px-6 py-3 bg-neon       text-black font-semibold rounded hover:bg-neon"
+          className="inline-block mt-2 px-6 py-3 bg-neon text-black font-semibold rounded hover:opacity-90"
         >
           Explore Plugins
         </a>
@@ -42,10 +46,12 @@ const faces = [
     bg: "#1b103f",
     content: (
       <div className="text-center space-y-4">
-        <p className="text-xl text-neon">Concepts across AI, travel, merch, SaaS, and tools.</p>
+        <p className="text-xl text-neon text-opacity-75">
+          Concepts across AI, travel, merch, SaaS, and tools.
+        </p>
         <a
           href="/#ideas"
-          className="inline-block mt-2 px-6 py-3 bg-neon text-black font-semibold rounded hover:bg-neon"
+          className="inline-block mt-2 px-6 py-3 bg-neon text-black font-semibold rounded hover:opacity-90"
         >
           Browse Concepts
         </a>
@@ -58,10 +64,12 @@ const faces = [
     bg: "#251b2e",
     content: (
       <div className="text-center space-y-4">
-        <p className="text-xl text-neon">Want to collaborate or hire me? Let’s connect.</p>
+        <p className="text-xl text-neon text-opacity-75">
+          Want to collaborate or hire me? Let’s connect.
+        </p>
         <a
           href="/#contact"
-          className="inline-block mt-2 px-6 py-3 bg-neon text-black font-semibold rounded hover:bg-neon"
+          className="inline-block mt-2 px-6 py-3 bg-neon text-black font-semibold rounded hover:opacity-90"
         >
           Contact Me
         </a>
@@ -72,6 +80,7 @@ const faces = [
 
 export default function FakeCubeScene() {
   const cubeRef = useRef();
+  const containerRef = useRef();
   const [index, setIndex] = useState(0);
 
   const rotateCube = (dir = 1) => {
@@ -80,7 +89,7 @@ export default function FakeCubeScene() {
       const angle = newIndex * -90;
       gsap.to(cubeRef.current, {
         rotateY: angle,
-        duration: 1,
+        duration: 0.8,
         ease: "power2.inOut",
       });
       return newIndex;
@@ -96,9 +105,43 @@ export default function FakeCubeScene() {
     return () => window.removeEventListener("keydown", handleKey);
   }, []);
 
+  // Drag/Swipe detection
+  useEffect(() => {
+    let startX = null;
+
+    const onStart = (e) => {
+      startX = e.touches ? e.touches[0].clientX : e.clientX;
+    };
+
+    const onEnd = (e) => {
+      if (startX === null) return;
+      const endX = e.changedTouches ? e.changedTouches[0].clientX : e.clientX;
+      const diff = endX - startX;
+
+      if (diff > 50) rotateCube(-1); // Swipe right
+      else if (diff < -50) rotateCube(1); // Swipe left
+
+      startX = null;
+    };
+
+    const el = containerRef.current;
+    el.addEventListener("mousedown", onStart);
+    el.addEventListener("mouseup", onEnd);
+    el.addEventListener("touchstart", onStart, { passive: true });
+    el.addEventListener("touchend", onEnd);
+
+    return () => {
+      el.removeEventListener("mousedown", onStart);
+      el.removeEventListener("mouseup", onEnd);
+      el.removeEventListener("touchstart", onStart);
+      el.removeEventListener("touchend", onEnd);
+    };
+  }, []);
+
   return (
     <div
-      className="relative w-screen h-screen overflow-hidden bg-black"
+      ref={containerRef}
+      className="relative w-screen h-screen overflow-hidden bg-[#182825]"
       style={{ perspective: "2000px" }}
     >
       <div
