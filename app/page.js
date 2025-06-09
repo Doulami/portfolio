@@ -83,7 +83,7 @@ requestAnimationFrame(() => {
     ease: "power2.inOut",
   });
 
-
+});
     return () => tl.kill();
   }, [onFinish]);
 
