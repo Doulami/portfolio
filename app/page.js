@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useRef, useState, createElement } from "react";
+import { useLayoutEffect, useRef, useState, createElement } from "react";
+
 import gsap from "gsap";
 
 export default function IntroOverlay({ onFinish }) {
@@ -9,79 +10,79 @@ export default function IntroOverlay({ onFinish }) {
   const nameRef = useRef([]);
   const [isGone, setIsGone] = useState(false);
 
-  useEffect(() => {
-    const orderedStripes = [...stripesRef.current];
-    const tl = gsap.timeline({
-      onComplete: () => {
-        setTimeout(() => {
-          setIsGone(true);
-          if (onFinish) onFinish();
-        }, 500);
-      },
-    });
+  useLayoutEffect(() => {
+requestAnimationFrame(() => {
+  const orderedStripes = [...stripesRef.current];
+  const tl = gsap.timeline({
+    onComplete: () => {
+      setTimeout(() => {
+        setIsGone(true);
+        if (onFinish) onFinish();
+      }, 500);
+    },
+  });
+;
 
     // Fully hide all before animation
-    gsap.set(orderedStripes, {
-      y: "-100%",
-      opacity: 0,
-      visibility: "hidden",
-    });
-    gsap.set(nameRef.current, {
-      y: -80,
-      opacity: 0,
-      visibility: "hidden",
-    });
+      gsap.set(orderedStripes, {
+    y: "-100%",
+    opacity: 0,
+    visibility: "hidden",
+  });
 
-    // Animate stripes cascade in
-    tl.to(orderedStripes, {
-      y: "0%",
-      opacity: 1,
-      visibility: "visible",
-      stagger: 0.3,
-      duration: 0.4,
-      ease: "power2.out",
-    });
+  gsap.set(nameRef.current, {
+    y: -80,
+    opacity: 0,
+    visibility: "hidden",
+  });
 
-    // Text appears after stripes are fully in
-    tl.to(nameRef.current[0], {
-      y: 0,
-      opacity: 1,
-      visibility: "visible",
-      duration: 0.4,
-      ease: "power2.out",
-    });
+  tl.to(orderedStripes, {
+    y: "0%",
+    opacity: 1,
+    visibility: "visible",
+    stagger: 0.3,
+    duration: 0.4,
+    ease: "power2.out",
+  });
 
-    tl.to(nameRef.current[1], {
-      y: 0,
-      opacity: 1,
-      visibility: "visible",
-      duration: 0.4,
-      ease: "power2.out",
-    }, "-=0.2");
+  tl.to(nameRef.current[0], {
+    y: 0,
+    opacity: 1,
+    visibility: "visible",
+    duration: 0.4,
+    ease: "power2.out",
+  });
 
-    // Text exits (top to bottom)
-    tl.to(nameRef.current[0], {
-      y: 80,
-      opacity: 0,
-      duration: 0.4,
-      ease: "power2.in",
-    }, "+=1");
+  tl.to(nameRef.current[1], {
+    y: 0,
+    opacity: 1,
+    visibility: "visible",
+    duration: 0.4,
+    ease: "power2.out",
+  }, "-=0.2");
 
-    tl.to(nameRef.current[1], {
-      y: 80,
-      opacity: 0,
-      duration: 0.4,
-      ease: "power2.in",
-    }, "+=0.2");
+  tl.to(nameRef.current[0], {
+    y: 80,
+    opacity: 0,
+    duration: 0.4,
+    ease: "power2.in",
+  }, "+=1");
 
-    // Stripe exit: slide down
-    tl.to(orderedStripes, {
-      y: "100%",
-      opacity: 0,
-      stagger: 0.3,
-      duration: 0.4,
-      ease: "power2.inOut",
-    });
+  tl.to(nameRef.current[1], {
+    y: 80,
+    opacity: 0,
+    duration: 0.4,
+    ease: "power2.in",
+  }, "+=0.2");
+
+  tl.to(orderedStripes, {
+    y: "100%",
+    opacity: 0,
+    stagger: 0.3,
+    duration: 0.4,
+    ease: "power2.inOut",
+  });
+
 
     return () => tl.kill();
   }, [onFinish]);
