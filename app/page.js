@@ -112,6 +112,7 @@ requestAnimationFrame(() => {
             top: `${i * 20}%`,
             backgroundColor: `hsl(${i * 40}, 100%, 50%)`, // debug colors; replace with yellow if needed
             transform: "translateY(-100%)",
+            transformOrigin: "top",
             opacity: 0,
             visibility: "hidden",
           }
