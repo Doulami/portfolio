@@ -62,34 +62,34 @@ export default function FakeCubeScene() {
           transformOrigin: "center center",
         }}
       >
-        {faces.map((face, i) => (
-          <div
-            key={face.id}
-            className="absolute w-full h-full flex flex-col items-center justify-center px-4 text-center text-neon"
-            style={{
-              backgroundColor: face.bg,
-              transform: `rotateY(${i * 90}deg) translateZ(50vw)`,
-              backfaceVisibility: "hidden",
-              willChange: "transform",
-              transformStyle: "preserve-3d",
-              WebkitFontSmoothing: "antialiased",
-              textRendering: "optimizeLegibility",
-            }}
-          >
-            <h2
-              className="text-4xl font-bold mb-4"
-              style={{
-                textRendering: "optimizeLegibility",
-                WebkitFontSmoothing: "antialiased",
-                willChange: "transform",
-                backfaceVisibility: "hidden",
-              }}
-            >
-              {face.label}
-            </h2>
-            {face.content}
-          </div>
-        ))}
+ {faces.map((face, i) => (
+  <div
+    key={face.id}
+    className="absolute w-full h-full flex flex-col items-center justify-center px-4 text-center text-neon"
+    style={{
+      backgroundColor: face.bg,
+      transform: `rotateY(${i * 90}deg) translateZ(50vw)`,
+      backfaceVisibility: "hidden",
+      willChange: "transform",
+      transformStyle: "preserve-3d",
+      WebkitFontSmoothing: "antialiased",
+      textRendering: "optimizeLegibility",
+    }}
+  >
+    <h2
+      className="text-4xl font-bold mb-4"
+      style={{
+        textRendering: "optimizeLegibility",
+        WebkitFontSmoothing: "antialiased",
+        willChange: "transform",
+        backfaceVisibility: "hidden",
+      }}
+    >
+      {face.label}
+    </h2>
+    {face.ContentComponent && <face.ContentComponent />}
+  </div>
+))}
       </div>
 
       {/* Next button */}
