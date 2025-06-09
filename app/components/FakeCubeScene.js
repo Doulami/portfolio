@@ -37,23 +37,28 @@ export default function FakeCubeScene() {
   }, []);
 
   return (
-    <div className="relative w-screen h-screen overflow-hidden bg-black">
+    <div
+      className="relative w-screen h-screen overflow-hidden bg-black"
+      style={{ perspective: "2000px" }}
+    >
       <div
         ref={cubeRef}
         className="w-full h-full absolute transition-transform"
         style={{
           transformStyle: "preserve-3d",
           transform: `rotateY(${index * -90}deg)`,
+          transformOrigin: "center center",
+          width: "100vw",
+          height: "100vh",
         }}
       >
         {faces.map((face, i) => (
           <div
             key={face.id}
-            className="absolute w-screen h-screen flex items-center justify-center text-4xl font-bold text-neon"
+            className="absolute w-full h-full flex items-center justify-center text-4xl font-bold text-[#00ffcc]"
             style={{
               backgroundColor: face.bg,
-              transform: `rotateY(${i * 90}deg) translateZ(100vw)`,
-              transformOrigin: "center center",
+              transform: `rotateY(${i * 90}deg) translateZ(50vw)`,
               backfaceVisibility: "hidden",
             }}
           >
@@ -62,7 +67,7 @@ export default function FakeCubeScene() {
         ))}
       </div>
 
-      {/* Top-right "Next" button */}
+      {/* Top-right Next button */}
       <div className="absolute top-4 right-4 z-20">
         <button
           onClick={() => rotateCube(1)}
