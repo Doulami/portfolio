@@ -11,7 +11,6 @@ export default function IntroOverlay({ onFinish }) {
 
   useEffect(() => {
     const orderedStripes = [...stripesRef.current];
-
     const tl = gsap.timeline({
       onComplete: () => {
         setTimeout(() => {
@@ -21,32 +20,46 @@ export default function IntroOverlay({ onFinish }) {
       },
     });
 
-    // Stripe cascade in (with debug gradient + stagger fix)
+    // Fully hide all before animation
+    gsap.set(orderedStripes, {
+      y: "-100%",
+      opacity: 0,
+      visibility: "hidden",
+    });
+    gsap.set(nameRef.current, {
+      y: -80,
+      opacity: 0,
+      visibility: "hidden",
+    });
+
+    // Animate stripes cascade in
     tl.to(orderedStripes, {
       y: "0%",
       opacity: 1,
       visibility: "visible",
-      stagger: 0.3, // WORKS NOW
+      stagger: 0.3,
       duration: 0.4,
       ease: "power2.out",
     });
 
-    // Name text appears right after stripes
-    tl.from(nameRef.current[0], {
-      y: -80,
-      opacity: 0,
+    // Text appears after stripes are fully in
+    tl.to(nameRef.current[0], {
+      y: 0,
+      opacity: 1,
+      visibility: "visible",
       duration: 0.4,
       ease: "power2.out",
-    }, "0");
+    });
 
-    tl.from(nameRef.current[1], {
-      y: -80,
-      opacity: 0,
+    tl.to(nameRef.current[1], {
+      y: 0,
+      opacity: 1,
+      visibility: "visible",
       duration: 0.4,
       ease: "power2.out",
     }, "-=0.2");
 
-    // Name exits top to bottom
+    // Text exits (top to bottom)
     tl.to(nameRef.current[0], {
       y: 80,
       opacity: 0,
@@ -61,7 +74,7 @@ export default function IntroOverlay({ onFinish }) {
       ease: "power2.in",
     }, "+=0.2");
 
-    // Stripes slide down (reverse cascade)
+    // Stripe exit: slide down
     tl.to(orderedStripes, {
       y: "100%",
       opacity: 0,
@@ -95,7 +108,7 @@ export default function IntroOverlay({ onFinish }) {
           className: "absolute w-full h-1/5",
           style: {
             top: `${i * 20}%`,
-            backgroundColor: `hsl(${i * 40}, 100%, 50%)`, // Debug color gradient
+            backgroundColor: `hsl(${i * 40}, 100%, 50%)`, // debug colors; replace with yellow if needed
             transform: "translateY(-100%)",
             opacity: 0,
             visibility: "hidden",
