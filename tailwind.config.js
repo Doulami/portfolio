@@ -10,3 +10,13 @@ module.exports = {
   },
   plugins: [],
 }
+
+
+
+theme: {
+  extend: {
+    colors: {
+      neon: "rgb(255,255,0)"
+    }
+  }
+}

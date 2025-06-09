@@ -100,14 +100,14 @@ requestAnimationFrame(() => {
     // Stripes
     createElement(
       'div',
-      { className: "absolute w-full h-full" },
+      { className: "absolute w-full h-full bg-neon" },
       [...Array(5)].map((_, i) =>
         createElement('div', {
           key: i,
           ref: el => {
             if (el) stripesRef.current[i] = el;
           },
-          className: "absolute w-full h-1/5",
+          className: "absolute w-full h-1/5 bg-neon",
           style: {
             top: `${i * 20}%`,
             backgroundColor: `hsl(${i * 40}, 100%, 50%)`, // debug colors; replace with yellow if needed

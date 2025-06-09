@@ -62,14 +62,14 @@ export default function IntroOverlay({ onFinish }) {
       }, "-=0.2");
 
       // Name exits (top to bottom)
-      tl.to(nameRef.current[0], {
+      tl.to(nameRef.current[1], {
         y: 80,
         opacity: 0,
         duration: 0.4,
         ease: "power2.in",
       }, "+=1");
 
-      tl.to(nameRef.current[1], {
+      tl.to(nameRef.current[0], {
         y: 80,
         opacity: 0,
         duration: 0.4,
@@ -118,22 +118,30 @@ export default function IntroOverlay({ onFinish }) {
         })
       )
     ),
-    // Name
+    // Name text absolutely positioned inside 3rd and 4th stripe blocks
     createElement(
       'div',
-      { className: "z-50 mt-[-5vh] ml-10" },
+      {
+        className: "z-50 absolute left-10",
+        style: { pointerEvents: "none" }
+      },
       createElement(
         'h1',
         {
           ref: el => nameRef.current[0] = el,
           className: "leading-none",
           style: {
+            position: "absolute",
+            top: "40%",
+            left: 0,
             fontFamily: "PolySans, Arial, sans-serif",
             fontWeight: 700,
             fontSize: "5.25rem",
             letterSpacing: "-0.05rem",
             lineHeight: 1.2,
-            color: "#182825"
+            color: "#f7f6f3",
+            WebkitFontSmoothing: "antialiased",
+            MozOsxFontSmoothing: "grayscale"
           }
         },
         "Khaled"
@@ -144,12 +152,17 @@ export default function IntroOverlay({ onFinish }) {
           ref: el => nameRef.current[1] = el,
           className: "leading-none",
           style: {
+            position: "absolute",
+            top: "60%",
+            left: 0,
             fontFamily: "PolySans, Arial, sans-serif",
             fontWeight: 700,
             fontSize: "5.25rem",
             letterSpacing: "-0.05rem",
             lineHeight: 1.2,
-            color: "#182825",
+            color: "#f7f6f3",
+            WebkitFontSmoothing: "antialiased",
+            MozOsxFontSmoothing: "grayscale"
           }
         },
         "Doulami"
