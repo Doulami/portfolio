@@ -1,15 +1,17 @@
+import HighlightWord from "../HighlightWord";
+
 export default function FaceEntrepreneur() {
   return (
-    <div className="text-center space-y-4">
-      <p className="text-xl text-neon text-opacity-75">
-        Built and sold multiple digital products and plugins.
+    <div className="text-center space-y-4 max-w-lg mx-auto">
+      <p>I’ve launched multiple products from scratch,</p>
+      <p>including plugins, SaaS tools, and e-commerce brands.</p>
+      <p>
+        Currently building the AI-powered <HighlightWord>InstaSite</HighlightWord> platform,
       </p>
-      <a
-        href="/#plugins"
-        className="inline-block mt-2 px-6 py-3 bg-neon text-black font-semibold rounded hover:opacity-90"
-      >
-        Explore Plugins
-      </a>
+      <p>and managing FixMySite — a web repair micro-agency.</p>
+      <p>
+        <HighlightWord>Fail fast</HighlightWord>, refine, launch again.
+      </p>
     </div>
   );
 }

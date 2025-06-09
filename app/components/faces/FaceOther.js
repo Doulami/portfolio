@@ -1,15 +1,19 @@
+import HighlightWord from "../HighlightWord";
+
 export default function FaceOther() {
   return (
-    <div className="text-center space-y-4">
-      <p className="text-xl text-neon text-opacity-75">
-        Want to collaborate or hire me? Let’s connect.
+    <div className="text-center space-y-4 max-w-lg mx-auto">
+      <p>Based in London.</p>
+      <p>Available for freelance work, collabs, or full-time missions.</p>
+      <p>
+        Email me at <HighlightWord>hello@khaleddoulami.net</HighlightWord>.
       </p>
-      <a
-        href="/#contact"
-        className="inline-block mt-2 px-6 py-3 bg-neon text-black font-semibold rounded hover:opacity-90"
-      >
-        Contact Me
-      </a>
+      <p>
+        Connect via{" "}
+        <HighlightWord image="/images/linkedin.png">LinkedIn</HighlightWord>
+        {" "}or explore my code on{" "}
+        <HighlightWord image="/images/github.png">GitHub</HighlightWord>.
+      </p>
     </div>
   );
 }
