@@ -6,17 +6,14 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+          colors: {
+      neon: "rgb(255,255,0)",
+
+    },
   },
   plugins: [],
 }
 
 
-
-theme: {
-  extend: {
-    colors: {
-      neon: "rgb(255,255,0)"
-    }
-  }
 }

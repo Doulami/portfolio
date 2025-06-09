@@ -10,7 +10,7 @@ const faces = [
     bg: "#0f1e17",
     content: (
       <div className="text-center space-y-4">
-        <p className="text-xl text-[#aaffee]">Experienced in AWS, WordPress, React & server ops.</p>
+        <p className="text-xl text-neon">Experienced in AWS, WordPress, React & server ops.</p>
         <a
           href="/#projects"
           className="inline-block mt-2 px-6 py-3 bg-neon       text-black font-semibold rounded hover:bg-neon      "
@@ -26,7 +26,7 @@ const faces = [
     bg: "#11303d",
     content: (
       <div className="text-center space-y-4">
-        <p className="text-xl text-[#aaffee]">Built and sold multiple digital products and plugins.</p>
+        <p className="text-xl text-neon">Built and sold multiple digital products and plugins.</p>
         <a
           href="/#plugins"
           className="inline-block mt-2 px-6 py-3 bg-neon       text-black font-semibold rounded hover:bg-neon"
@@ -42,7 +42,7 @@ const faces = [
     bg: "#1b103f",
     content: (
       <div className="text-center space-y-4">
-        <p className="text-xl text-[#aaffee]">Concepts across AI, travel, merch, SaaS, and tools.</p>
+        <p className="text-xl text-neon">Concepts across AI, travel, merch, SaaS, and tools.</p>
         <a
           href="/#ideas"
           className="inline-block mt-2 px-6 py-3 bg-neon text-black font-semibold rounded hover:bg-neon"
@@ -58,7 +58,7 @@ const faces = [
     bg: "#251b2e",
     content: (
       <div className="text-center space-y-4">
-        <p className="text-xl text-[#aaffee]">Want to collaborate or hire me? Let’s connect.</p>
+        <p className="text-xl text-neon">Want to collaborate or hire me? Let’s connect.</p>
         <a
           href="/#contact"
           className="inline-block mt-2 px-6 py-3 bg-neon text-black font-semibold rounded hover:bg-neon"
@@ -113,7 +113,7 @@ export default function FakeCubeScene() {
         {faces.map((face, i) => (
           <div
             key={face.id}
-            className="absolute w-full h-full flex flex-col items-center justify-center px-4 text-center text-[#00ffcc]"
+            className="absolute w-full h-full flex flex-col items-center justify-center px-4 text-center text-neon"
             style={{
               backgroundColor: face.bg,
               transform: `rotateY(${i * 90}deg) translateZ(50vw)`,
