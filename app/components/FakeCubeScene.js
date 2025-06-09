@@ -89,6 +89,7 @@ export default function FakeCubeScene() {
       rotateY: newAngle,
       duration: 0.8,
       ease: "power2.inOut",
+      force3D: false,
     });
     setAngle(newAngle);
   };
@@ -105,7 +106,6 @@ export default function FakeCubeScene() {
     return () => window.removeEventListener("keydown", handleKey);
   }, [angle]);
 
-  // Drag/Swipe detection
   useEffect(() => {
     let startX = null;
 
@@ -118,8 +118,8 @@ export default function FakeCubeScene() {
       const endX = e.changedTouches ? e.changedTouches[0].clientX : e.clientX;
       const diff = endX - startX;
 
-      if (diff > 50) rotateCube(-1); // Swipe right
-      else if (diff < -50) rotateCube(1); // Swipe left
+      if (diff > 50) rotateCube(-1);
+      else if (diff < -50) rotateCube(1);
 
       startX = null;
     };
@@ -161,9 +161,23 @@ export default function FakeCubeScene() {
               backgroundColor: face.bg,
               transform: `rotateY(${i * 90}deg) translateZ(50vw)`,
               backfaceVisibility: "hidden",
+              willChange: "transform",
+              transformStyle: "preserve-3d",
+              WebkitFontSmoothing: "antialiased",
+              textRendering: "optimizeLegibility",
             }}
           >
-            <h2 className="text-4xl font-bold mb-4">{face.label}</h2>
+            <h2
+              className="text-4xl font-bold mb-4"
+              style={{
+                textRendering: "optimizeLegibility",
+                WebkitFontSmoothing: "antialiased",
+                willChange: "transform",
+                backfaceVisibility: "hidden",
+              }}
+            >
+              {face.label}
+            </h2>
             {face.content}
           </div>
         ))}
