@@ -23,3 +23,7 @@ body {
   @apply  text-green-950 dark:bg-zinc-900 dark:text-white;
 }
 
+
+.stripe-yellow {
+  background-color: rgb(255, 255, 0);
+}
