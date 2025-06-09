@@ -1,5 +1,5 @@
 .highlight-image {
-  will-change: transform, opacity;
+  will-change: transform, opacity, background-position;
   transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
-  transition-property: opacity, transform;
+  transition-property: opacity, transform, background-position;
 }

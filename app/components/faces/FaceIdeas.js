@@ -9,7 +9,7 @@ export default function FaceIdeas() {
       </p>
       <p>
         Projects span{" "}
-        <HighlightWord image="/images/tatouine.jpg">travel</HighlightWord>, healthcare, content,
+        <HighlightWord image="/images/tatouine.png">travel</HighlightWord>, healthcare, content,
       </p>
       <p>and everything in between.</p>
       <p>

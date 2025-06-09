@@ -10,9 +10,11 @@ export default function FaceOther() {
       </p>
       <p>
         Connect via{" "}
-        <HighlightWord image="/images/linkedin.png">LinkedIn</HighlightWord>
-        {" "}or explore my code on{" "}
-        <HighlightWord image="/images/github.png">GitHub</HighlightWord>.
+        <HighlightWord image="/images/linkedin.webp">LinkedIn</HighlightWord> or explore my code on{" "}
+        <HighlightWord linkText="GitHub" href="https://github.com/khaleddoulami">
+          GitHub
+        </HighlightWord>
+        .
       </p>
     </div>
   );
