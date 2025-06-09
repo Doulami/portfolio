@@ -82,66 +82,102 @@ export default function FakeCubeScene() {
   const cubeRef = useRef();
   const containerRef = useRef();
   const [angle, setAngle] = useState(0);
+  const dragFactor = 1.5; // lower = more sensitive
 
-  const rotateCube = (dir = 1) => {
-    const newAngle = angle + dir * -90;
+  let isDragging = false;
+  let startX = 0;
+  let lastAngle = angle;
+
+  const rotateCubeTo = (targetAngle) => {
     gsap.to(cubeRef.current, {
-      rotateY: newAngle,
-      duration: 0.8,
-      ease: "power2.inOut",
+      rotateY: targetAngle,
+      duration: 0.5,
+      ease: "power2.out",
       force3D: false,
     });
+    setAngle(targetAngle);
+  };
+
+  const snapToNearestFace = () => {
+    const snapped = Math.round(angle / -90) * -90;
+    rotateCubeTo(snapped);
+  };
+
+  const handleMouseDown = (e) => {
+    isDragging = true;
+    startX = e.clientX;
+    lastAngle = angle;
+    document.body.style.cursor = "grabbing";
+  };
+
+  const handleTouchStart = (e) => {
+    isDragging = true;
+    startX = e.touches[0].clientX;
+    lastAngle = angle;
+  };
+
+  const handleMove = (clientX) => {
+    if (!isDragging) return;
+    const delta = clientX - startX;
+    const newAngle = lastAngle + delta / dragFactor;
+    cubeRef.current.style.transform = `rotateY(${newAngle}deg)`;
     setAngle(newAngle);
   };
 
-  const getIndexFromAngle = (a) => ((Math.round(a / -90) % faces.length) + faces.length) % faces.length;
-  const currentFace = faces[getIndexFromAngle(angle)];
+  const handleMouseMove = (e) => handleMove(e.clientX);
+  const handleTouchMove = (e) => handleMove(e.touches[0].clientX);
+
+  const endDrag = () => {
+    if (!isDragging) return;
+    isDragging = false;
+    document.body.style.cursor = "";
+    snapToNearestFace();
+  };
+
+  const rotateStep = (dir = 1) => rotateCubeTo(angle + dir * -90);
 
   useEffect(() => {
     const handleKey = (e) => {
-      if (e.key === "ArrowRight") rotateCube(1);
-      if (e.key === "ArrowLeft") rotateCube(-1);
+      if (e.key === "ArrowRight") rotateStep(1);
+      if (e.key === "ArrowLeft") rotateStep(-1);
     };
     window.addEventListener("keydown", handleKey);
     return () => window.removeEventListener("keydown", handleKey);
   }, [angle]);
 
   useEffect(() => {
-    let startX = null;
+    const container = containerRef.current;
 
-    const onStart = (e) => {
-      startX = e.touches ? e.touches[0].clientX : e.clientX;
-    };
+    container.addEventListener("mousedown", handleMouseDown);
+    container.addEventListener("touchstart", handleTouchStart, { passive: true });
 
-    const onEnd = (e) => {
-      if (startX === null) return;
-      const endX = e.changedTouches ? e.changedTouches[0].clientX : e.clientX;
-      const diff = endX - startX;
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("touchmove", handleTouchMove, { passive: true });
 
-      if (diff > 50) rotateCube(-1);
-      else if (diff < -50) rotateCube(1);
-
-      startX = null;
-    };
-
-    const el = containerRef.current;
-    el.addEventListener("mousedown", onStart);
-    el.addEventListener("mouseup", onEnd);
-    el.addEventListener("touchstart", onStart, { passive: true });
-    el.addEventListener("touchend", onEnd);
+    window.addEventListener("mouseup", endDrag);
+    window.addEventListener("touchend", endDrag);
 
     return () => {
-      el.removeEventListener("mousedown", onStart);
-      el.removeEventListener("mouseup", onEnd);
-      el.removeEventListener("touchstart", onStart);
-      el.removeEventListener("touchend", onEnd);
+      container.removeEventListener("mousedown", handleMouseDown);
+      container.removeEventListener("touchstart", handleTouchStart);
+
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("touchmove", handleTouchMove);
+
+      window.removeEventListener("mouseup", endDrag);
+      window.removeEventListener("touchend", endDrag);
     };
   }, [angle]);
+
+  const getIndexFromAngle = (a) =>
+    ((Math.round(a / -90) % faces.length) + faces.length) % faces.length;
+
+  const currentFace = faces[getIndexFromAngle(angle)];
 
   return (
     <div
       ref={containerRef}
-      className="relative w-screen h-screen overflow-hidden"
+      className="relative w-screen h-screen overflow-hidden select-none"
       style={{ perspective: "2000px", backgroundColor: currentFace.bg }}
     >
       <div
@@ -186,7 +222,7 @@ export default function FakeCubeScene() {
       {/* Next button */}
       <div className="absolute top-4 right-4 z-20">
         <button
-          onClick={() => rotateCube(1)}
+          onClick={() => rotateStep(1)}
           className="bg-neon text-black font-bold px-4 py-2 rounded"
         >
           ➤ Next
