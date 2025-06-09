@@ -13,7 +13,7 @@ const faces = [
         <p className="text-xl text-[#aaffee]">Experienced in AWS, WordPress, React & server ops.</p>
         <a
           href="/#projects"
-          className="inline-block mt-2 px-6 py-3 bg-[#00ff88] text-black font-semibold rounded hover:bg-[#00ffaa]"
+          className="inline-block mt-2 px-6 py-3 bg-neon       text-black font-semibold rounded hover:bg-neon      "
         >
           See My Projects
         </a>
@@ -29,7 +29,7 @@ const faces = [
         <p className="text-xl text-[#aaffee]">Built and sold multiple digital products and plugins.</p>
         <a
           href="/#plugins"
-          className="inline-block mt-2 px-6 py-3 bg-[#00ff88] text-black font-semibold rounded hover:bg-[#00ffaa]"
+          className="inline-block mt-2 px-6 py-3 bg-neon       text-black font-semibold rounded hover:bg-neon"
         >
           Explore Plugins
         </a>
@@ -45,7 +45,7 @@ const faces = [
         <p className="text-xl text-[#aaffee]">Concepts across AI, travel, merch, SaaS, and tools.</p>
         <a
           href="/#ideas"
-          className="inline-block mt-2 px-6 py-3 bg-[#00ff88] text-black font-semibold rounded hover:bg-[#00ffaa]"
+          className="inline-block mt-2 px-6 py-3 bg-neon text-black font-semibold rounded hover:bg-neon"
         >
           Browse Concepts
         </a>
@@ -61,7 +61,7 @@ const faces = [
         <p className="text-xl text-[#aaffee]">Want to collaborate or hire me? Let’s connect.</p>
         <a
           href="/#contact"
-          className="inline-block mt-2 px-6 py-3 bg-[#00ff88] text-black font-semibold rounded hover:bg-[#00ffaa]"
+          className="inline-block mt-2 px-6 py-3 bg-neon text-black font-semibold rounded hover:bg-neon"
         >
           Contact Me
         </a>
@@ -130,7 +130,7 @@ export default function FakeCubeScene() {
       <div className="absolute top-4 right-4 z-20">
         <button
           onClick={() => rotateCube(1)}
-          className="bg-[#00ff88] text-black font-bold px-4 py-2 rounded"
+          className="bg-neon text-black font-bold px-4 py-2 rounded"
         >
           ➤ Next
         </button>
