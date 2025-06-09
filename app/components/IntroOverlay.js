@@ -6,15 +6,12 @@ import gsap from "gsap";
 export default function IntroOverlay({ onFinish }) {
   const overlayRef = useRef(null);
   const stripesRef = useRef([]);
+  const nameRefs = useRef([]);
   const [isGone, setIsGone] = useState(false);
 
   useLayoutEffect(() => {
     requestAnimationFrame(() => {
       const orderedStripes = [...stripesRef.current];
-      const nameRefs = [
-        orderedStripes[2]?.querySelector("h1"), // Khaled
-        orderedStripes[3]?.querySelector("h1"), // Doulami
-      ];
 
       const tl = gsap.timeline({
         onComplete: () => {
@@ -31,7 +28,7 @@ export default function IntroOverlay({ onFinish }) {
         visibility: "hidden",
       });
 
-      gsap.set(nameRefs, {
+      gsap.set(nameRefs.current, {
         y: -80,
         opacity: 0,
         visibility: "hidden",
@@ -49,7 +46,7 @@ export default function IntroOverlay({ onFinish }) {
       });
 
       // Name appearance
-      tl.to(nameRefs[0], {
+      tl.to(nameRefs.current[0], {
         y: 0,
         opacity: 1,
         visibility: "visible",
@@ -57,7 +54,7 @@ export default function IntroOverlay({ onFinish }) {
         ease: "power2.out",
       });
 
-      tl.to(nameRefs[1], {
+      tl.to(nameRefs.current[1], {
         y: 0,
         opacity: 1,
         visibility: "visible",
@@ -66,14 +63,14 @@ export default function IntroOverlay({ onFinish }) {
       }, "-=0.1");
 
       // Name exit (Doulami first)
-      tl.to(nameRefs[1], {
+      tl.to(nameRefs.current[1], {
         y: 80,
         opacity: 0,
         duration: 0.2,
         ease: "power2.in",
       }, "+=0.5");
 
-      tl.to(nameRefs[0], {
+      tl.to(nameRefs.current[0], {
         y: 80,
         opacity: 0,
         duration: 0.2,
@@ -128,12 +125,14 @@ export default function IntroOverlay({ onFinish }) {
             ? createElement(
                 "h1",
                 {
-                  ref: (el) => (nameRefs[0] = el),
+                  ref: (el) => {
+                    if (el) nameRefs.current[0] = el;
+                  },
                   className: "leading-none cursor-pointer inline-block text-center",
                   style: {
                     fontFamily: '"PolySans", Arial, sans-serif',
                     fontWeight: 700,
-                    fontSize: "84px", // keep growing this if needed
+                    fontSize: "84px",
                     lineHeight: "84px",
                     height: "84px",
                     letterSpacing: "-0.05rem",
@@ -156,7 +155,9 @@ export default function IntroOverlay({ onFinish }) {
             ? createElement(
                 "h1",
                 {
-                  ref: (el) => (nameRefs[1] = el),
+                  ref: (el) => {
+                    if (el) nameRefs.current[1] = el;
+                  },
                   className: "leading-none cursor-pointer inline-block text-center",
                   style: {
                     fontFamily: '"PolySans", Arial, sans-serif',
