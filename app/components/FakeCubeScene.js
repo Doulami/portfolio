@@ -81,20 +81,20 @@ const faces = [
 export default function FakeCubeScene() {
   const cubeRef = useRef();
   const containerRef = useRef();
-  const [index, setIndex] = useState(0);
+  const [angle, setAngle] = useState(0);
 
   const rotateCube = (dir = 1) => {
-    setIndex((prev) => {
-      const newIndex = (prev + dir + faces.length) % faces.length;
-      const angle = newIndex * -90;
-      gsap.to(cubeRef.current, {
-        rotateY: angle,
-        duration: 0.8,
-        ease: "power2.inOut",
-      });
-      return newIndex;
+    const newAngle = angle + dir * -90;
+    gsap.to(cubeRef.current, {
+      rotateY: newAngle,
+      duration: 0.8,
+      ease: "power2.inOut",
     });
+    setAngle(newAngle);
   };
+
+  const getIndexFromAngle = (a) => ((Math.round(a / -90) % faces.length) + faces.length) % faces.length;
+  const currentFace = faces[getIndexFromAngle(angle)];
 
   useEffect(() => {
     const handleKey = (e) => {
@@ -103,7 +103,7 @@ export default function FakeCubeScene() {
     };
     window.addEventListener("keydown", handleKey);
     return () => window.removeEventListener("keydown", handleKey);
-  }, []);
+  }, [angle]);
 
   // Drag/Swipe detection
   useEffect(() => {
@@ -136,20 +136,20 @@ export default function FakeCubeScene() {
       el.removeEventListener("touchstart", onStart);
       el.removeEventListener("touchend", onEnd);
     };
-  }, []);
+  }, [angle]);
 
   return (
     <div
       ref={containerRef}
-      className="relative w-screen h-screen overflow-hidden bg-[#182825]"
-      style={{ perspective: "2000px" }}
+      className="relative w-screen h-screen overflow-hidden"
+      style={{ perspective: "2000px", backgroundColor: currentFace.bg }}
     >
       <div
         ref={cubeRef}
         className="w-full h-full absolute transition-transform"
         style={{
           transformStyle: "preserve-3d",
-          transform: `rotateY(${index * -90}deg)`,
+          transform: `rotateY(${angle}deg)`,
           transformOrigin: "center center",
         }}
       >
