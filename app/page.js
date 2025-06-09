@@ -19,16 +19,17 @@ export default function IntroOverlay({ onFinish }) {
       },
     });
 
-    // Stripe entrance: top to bottom
-    tl.from(stripesRef.current, {
-      y: "-100%",
-      opacity: 0,
+    // Stripe cascade in (with visibility fix)
+    tl.to(stripesRef.current, {
+      y: "0%",
+      opacity: 1,
+      visibility: "visible",
       stagger: 0.3,
       duration: 0.4,
       ease: "power2.out",
     });
 
-    // Name entrance (immediate after stripe cascade)
+    // Text appears immediately after
     tl.from(nameRef.current[0], {
       y: -80,
       opacity: 0,
@@ -43,7 +44,7 @@ export default function IntroOverlay({ onFinish }) {
       ease: "power2.out",
     }, "-=0.2");
 
-    // Exit text (top to bottom)
+    // Text exits top-to-bottom
     tl.to(nameRef.current[0], {
       y: 80,
       opacity: 0,
@@ -58,7 +59,7 @@ export default function IntroOverlay({ onFinish }) {
       ease: "power2.in",
     }, "+=0.2");
 
-    // Stripes slide DOWN individually (same stagger as entrance)
+    // Stripes slide down individually
     tl.to(stripesRef.current, {
       y: "100%",
       opacity: 0,
@@ -90,7 +91,10 @@ export default function IntroOverlay({ onFinish }) {
           className: "absolute w-full h-1/5",
           style: {
             top: `${i * 20}%`,
-            backgroundColor: "rgb(255,255,0)"
+            backgroundColor: "rgb(255,255,0)",
+            transform: "translateY(-100%)",
+            opacity: 0,
+            visibility: "hidden",
           }
         })
       )
@@ -98,7 +102,7 @@ export default function IntroOverlay({ onFinish }) {
     // Name
     createElement(
       'div',
-      { className: "z-50 mt-[-5vh] ml-10" }, // removed centering
+      { className: "z-50 mt-[-5vh] ml-10" },
       createElement(
         'h1',
         {
