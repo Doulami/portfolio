@@ -10,6 +10,8 @@ export default function IntroOverlay({ onFinish }) {
   const [isGone, setIsGone] = useState(false);
 
   useEffect(() => {
+    const orderedStripes = [...stripesRef.current];
+
     const tl = gsap.timeline({
       onComplete: () => {
         setTimeout(() => {
@@ -19,17 +21,17 @@ export default function IntroOverlay({ onFinish }) {
       },
     });
 
-    // Stripe cascade in (with visibility fix)
-    tl.to(stripesRef.current, {
+    // Stripe cascade in (with debug gradient + stagger fix)
+    tl.to(orderedStripes, {
       y: "0%",
       opacity: 1,
       visibility: "visible",
-      stagger: 0.3,
+      stagger: 0.3, // WORKS NOW
       duration: 0.4,
       ease: "power2.out",
     });
 
-    // Text appears immediately after
+    // Name text appears right after stripes
     tl.from(nameRef.current[0], {
       y: -80,
       opacity: 0,
@@ -44,7 +46,7 @@ export default function IntroOverlay({ onFinish }) {
       ease: "power2.out",
     }, "-=0.2");
 
-    // Text exits top-to-bottom
+    // Name exits top to bottom
     tl.to(nameRef.current[0], {
       y: 80,
       opacity: 0,
@@ -59,8 +61,8 @@ export default function IntroOverlay({ onFinish }) {
       ease: "power2.in",
     }, "+=0.2");
 
-    // Stripes slide down individually
-    tl.to(stripesRef.current, {
+    // Stripes slide down (reverse cascade)
+    tl.to(orderedStripes, {
       y: "100%",
       opacity: 0,
       stagger: 0.3,
@@ -87,11 +89,13 @@ export default function IntroOverlay({ onFinish }) {
       [...Array(5)].map((_, i) =>
         createElement('div', {
           key: i,
-          ref: el => stripesRef.current[i] = el,
+          ref: el => {
+            if (el) stripesRef.current[i] = el;
+          },
           className: "absolute w-full h-1/5",
           style: {
             top: `${i * 20}%`,
-            backgroundColor: "rgb(255,255,0)",
+            backgroundColor: `hsl(${i * 40}, 100%, 50%)`, // Debug color gradient
             transform: "translateY(-100%)",
             opacity: 0,
             visibility: "hidden",
