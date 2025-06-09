@@ -3,144 +3,35 @@
 import { useRef, useEffect, useState } from "react";
 import gsap from "gsap";
 
-const faces = [
-  {
-    id: "face1",
-    label: "CTO / Developer",
-    bg: "#182825",
-    content: (
-      <div className="text-center space-y-4">
-        <p className="text-xl text-neon text-opacity-75">
-          Experienced in AWS, WordPress, React & server ops.
-        </p>
-        <a
-          href="/#projects"
-          className="inline-block mt-2 px-6 py-3 bg-neon text-black font-semibold rounded hover:opacity-90"
-        >
-          See My Projects
-        </a>
-      </div>
-    ),
-  },
-  {
-    id: "face2",
-    label: "Entrepreneur",
-    bg: "#11303d",
-    content: (
-      <div className="text-center space-y-4">
-        <p className="text-xl text-neon text-opacity-75">
-          Built and sold multiple digital products and plugins.
-        </p>
-        <a
-          href="/#plugins"
-          className="inline-block mt-2 px-6 py-3 bg-neon text-black font-semibold rounded hover:opacity-90"
-        >
-          Explore Plugins
-        </a>
-      </div>
-    ),
-  },
-  {
-    id: "face3",
-    label: "Multiskill / Ideas",
-    bg: "#1b103f",
-    content: (
-      <div className="text-center space-y-4">
-        <p className="text-xl text-neon text-opacity-75">
-          Concepts across AI, travel, merch, SaaS, and tools.
-        </p>
-        <a
-          href="/#ideas"
-          className="inline-block mt-2 px-6 py-3 bg-neon text-black font-semibold rounded hover:opacity-90"
-        >
-          Browse Concepts
-        </a>
-      </div>
-    ),
-  },
-  {
-    id: "face4",
-    label: "Other",
-    bg: "#251b2e",
-    content: (
-      <div className="text-center space-y-4">
-        <p className="text-xl text-neon text-opacity-75">
-          Want to collaborate or hire me? Let’s connect.
-        </p>
-        <a
-          href="/#contact"
-          className="inline-block mt-2 px-6 py-3 bg-neon text-black font-semibold rounded hover:opacity-90"
-        >
-          Contact Me
-        </a>
-      </div>
-    ),
-  },
-];
+import FaceCTO from "./faces/FaceCTO";
+import FaceEntrepreneur from "./faces/FaceEntrepreneur";
+import FaceIdeas from "./faces/FaceIdeas";
+import FaceOther from "./faces/FaceOther";
 
+const faces = [
+  { id: "face1", label: "CTO / Developer", bg: "#182825", ContentComponent: FaceCTO },
+  { id: "face2", label: "Entrepreneur", bg: "#11303d", ContentComponent: FaceEntrepreneur },
+  { id: "face3", label: "Multiskill / Ideas", bg: "#1b103f", ContentComponent: FaceIdeas },
+  { id: "face4", label: "Other", bg: "#251b2e", ContentComponent: FaceOther },
+];
 export default function FakeCubeScene() {
   const cubeRef = useRef();
   const containerRef = useRef();
   const [angle, setAngle] = useState(0);
-  const dragFactor = 1.5;
-
-  let startX = 0;
-  let currentAngle = angle;
-  let isDragging = false;
 
   const rotateCubeTo = (targetAngle) => {
     gsap.to(cubeRef.current, {
       rotateY: targetAngle,
-      duration: 0.6,
-      ease: "power3.out",
+      duration: 0.8,
+      ease: "power2.inOut",
       force3D: false,
     });
     setAngle(targetAngle);
-    currentAngle = targetAngle;
   };
 
-  const snapToNearestFace = (deltaX) => {
-    const dragThreshold = 50; // px
-    const direction = deltaX > dragThreshold ? -1 : deltaX < -dragThreshold ? 1 : 0;
-    const snapped = Math.round(currentAngle / -90 + direction) * -90;
-    rotateCubeTo(snapped);
+  const rotateStep = (dir = 1) => {
+    rotateCubeTo(angle + dir * -90);
   };
-
-  const handleMouseDown = (e) => {
-    isDragging = true;
-    startX = e.clientX;
-    currentAngle = angle;
-    document.body.style.cursor = "grabbing";
-  };
-
-  const handleTouchStart = (e) => {
-    isDragging = true;
-    startX = e.touches[0].clientX;
-    currentAngle = angle;
-  };
-
-  const handleMove = (clientX) => {
-    if (!isDragging) return;
-    const delta = clientX - startX;
-    const nextAngle = currentAngle + delta / dragFactor;
-    cubeRef.current.style.transform = `rotateY(${nextAngle}deg)`;
-  };
-
-  const handleMouseMove = (e) => handleMove(e.clientX);
-  const handleTouchMove = (e) => handleMove(e.touches[0].clientX);
-
-  const endDrag = (clientX) => {
-    if (!isDragging) return;
-    isDragging = false;
-    document.body.style.cursor = "";
-    const delta = clientX - startX;
-    snapToNearestFace(delta);
-  };
-
-  const handleMouseUp = (e) => endDrag(e.clientX);
-  const handleTouchEnd = (e) => endDrag(e.changedTouches[0].clientX);
-
-  const rotateStep = (dir = 1) => rotateCubeTo(angle + dir * -90);
 
   useEffect(() => {
     const handleKey = (e) => {
@@ -149,29 +40,6 @@ export default function FakeCubeScene() {
     };
     window.addEventListener("keydown", handleKey);
     return () => window.removeEventListener("keydown", handleKey);
-  }, [angle]);
-
-  useEffect(() => {
-    const container = containerRef.current;
-    container.addEventListener("mousedown", handleMouseDown);
-    container.addEventListener("touchstart", handleTouchStart, { passive: true });
-
-    window.addEventListener("mousemove", handleMouseMove);
-    window.addEventListener("touchmove", handleTouchMove, { passive: true });
-
-    window.addEventListener("mouseup", handleMouseUp);
-    window.addEventListener("touchend", handleTouchEnd);
-
-    return () => {
-      container.removeEventListener("mousedown", handleMouseDown);
-      container.removeEventListener("touchstart", handleTouchStart);
-
-      window.removeEventListener("mousemove", handleMouseMove);
-      window.removeEventListener("touchmove", handleTouchMove);
-
-      window.removeEventListener("mouseup", handleMouseUp);
-      window.removeEventListener("touchend", handleTouchEnd);
-    };
   }, [angle]);
 
   const getIndexFromAngle = (a) =>
@@ -187,7 +55,7 @@ export default function FakeCubeScene() {
     >
       <div
         ref={cubeRef}
-        className="w-full h-full absolute"
+        className="w-full h-full absolute transition-transform"
         style={{
           transformStyle: "preserve-3d",
           transform: `rotateY(${angle}deg)`,
