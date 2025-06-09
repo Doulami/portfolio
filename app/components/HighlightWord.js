@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import "./hoverWords.css";
+import "../../styles/hoverWords.css";
 
 export default function HighlightWord({ children, image, linkText, href }) {
   const [pos, setPos] = useState({ x: 50, y: 50 });
