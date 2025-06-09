@@ -40,7 +40,7 @@ requestAnimationFrame(() => {
     y: "0%",
     opacity: 1,
     visibility: "visible",
-    stagger: 0.3,
+    stagger: 0.35,
     duration: 0.4,
     delay: 0.2,
     ease: "power2.out",
