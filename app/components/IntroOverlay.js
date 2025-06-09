@@ -133,9 +133,7 @@ export default function IntroOverlay({ onFinish }) {
             fontSize: "5.25rem",
             letterSpacing: "-0.05rem",
             lineHeight: 1.2,
-            color: "#f7f6f3",
-            WebkitFontSmoothing: "antialiased",
-            MozOsxFontSmoothing: "grayscale"
+            color: "#182825"
           }
         },
         "Khaled"
@@ -151,9 +149,7 @@ export default function IntroOverlay({ onFinish }) {
             fontSize: "5.25rem",
             letterSpacing: "-0.05rem",
             lineHeight: 1.2,
-            color: "#f7f6f3",
-            WebkitFontSmoothing: "antialiased",
-            MozOsxFontSmoothing: "grayscale"
+            color: "#182825",
           }
         },
         "Doulami"
