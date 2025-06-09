@@ -4,10 +4,70 @@ import { useRef, useEffect, useState } from "react";
 import gsap from "gsap";
 
 const faces = [
-  { id: "face1", label: "CTO / Developer", bg: "#0f1e17" },
-  { id: "face2", label: "Entrepreneur", bg: "#11303d" },
-  { id: "face3", label: "Multiskill / Ideas", bg: "#1b103f" },
-  { id: "face4", label: "Other", bg: "#251b2e" },
+  {
+    id: "face1",
+    label: "CTO / Developer",
+    bg: "#0f1e17",
+    content: (
+      <div className="text-center space-y-4">
+        <p className="text-xl text-[#aaffee]">Experienced in AWS, WordPress, React & server ops.</p>
+        <a
+          href="/#projects"
+          className="inline-block mt-2 px-6 py-3 bg-[#00ff88] text-black font-semibold rounded hover:bg-[#00ffaa]"
+        >
+          See My Projects
+        </a>
+      </div>
+    ),
+  },
+  {
+    id: "face2",
+    label: "Entrepreneur",
+    bg: "#11303d",
+    content: (
+      <div className="text-center space-y-4">
+        <p className="text-xl text-[#aaffee]">Built and sold multiple digital products and plugins.</p>
+        <a
+          href="/#plugins"
+          className="inline-block mt-2 px-6 py-3 bg-[#00ff88] text-black font-semibold rounded hover:bg-[#00ffaa]"
+        >
+          Explore Plugins
+        </a>
+      </div>
+    ),
+  },
+  {
+    id: "face3",
+    label: "Multiskill / Ideas",
+    bg: "#1b103f",
+    content: (
+      <div className="text-center space-y-4">
+        <p className="text-xl text-[#aaffee]">Concepts across AI, travel, merch, SaaS, and tools.</p>
+        <a
+          href="/#ideas"
+          className="inline-block mt-2 px-6 py-3 bg-[#00ff88] text-black font-semibold rounded hover:bg-[#00ffaa]"
+        >
+          Browse Concepts
+        </a>
+      </div>
+    ),
+  },
+  {
+    id: "face4",
+    label: "Other",
+    bg: "#251b2e",
+    content: (
+      <div className="text-center space-y-4">
+        <p className="text-xl text-[#aaffee]">Want to collaborate or hire me? Let’s connect.</p>
+        <a
+          href="/#contact"
+          className="inline-block mt-2 px-6 py-3 bg-[#00ff88] text-black font-semibold rounded hover:bg-[#00ffaa]"
+        >
+          Contact Me
+        </a>
+      </div>
+    ),
+  },
 ];
 
 export default function FakeCubeScene() {
@@ -48,26 +108,25 @@ export default function FakeCubeScene() {
           transformStyle: "preserve-3d",
           transform: `rotateY(${index * -90}deg)`,
           transformOrigin: "center center",
-          width: "100vw",
-          height: "100vh",
         }}
       >
         {faces.map((face, i) => (
           <div
             key={face.id}
-            className="absolute w-full h-full flex items-center justify-center text-4xl font-bold text-[#00ffcc]"
+            className="absolute w-full h-full flex flex-col items-center justify-center px-4 text-center text-[#00ffcc]"
             style={{
               backgroundColor: face.bg,
               transform: `rotateY(${i * 90}deg) translateZ(50vw)`,
               backfaceVisibility: "hidden",
             }}
           >
-            {face.label}
+            <h2 className="text-4xl font-bold mb-4">{face.label}</h2>
+            {face.content}
           </div>
         ))}
       </div>
 
-      {/* Top-right Next button */}
+      {/* Next button */}
       <div className="absolute top-4 right-4 z-20">
         <button
           onClick={() => rotateCube(1)}
