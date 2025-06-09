@@ -90,7 +90,7 @@ export default function IntroOverlay({ onFinish }) {
   if (isGone) return null;
 
   return createElement(
-    'div',
+    'span',
     {
       ref: overlayRef,
       className: "fixed inset-0 z-[100] flex flex-col items-start justify-center",
@@ -98,7 +98,7 @@ export default function IntroOverlay({ onFinish }) {
     },
     // Stripes
     createElement(
-      'div',
+      'span',
       { className: "absolute w-full h-full" },
       [...Array(5)].map((_, i) =>
         createElement('div', {
