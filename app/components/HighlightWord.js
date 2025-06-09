@@ -6,6 +6,7 @@ export default function HighlightWord({ children, image, linkText, href }) {
   const containerRef = useRef();
 
   const onMouseMove = (e) => {
+    console.log("MouseMove inside highlight:", e.clientX, e.clientY);
     if (!containerRef.current) return;
 
     const rect = containerRef.current.getBoundingClientRect();
@@ -21,6 +22,14 @@ export default function HighlightWord({ children, image, linkText, href }) {
     });
   };
 
+  const onMouseEnter = () => {
+    console.log("Hover start on:", children);
+  };
+
+  const onMouseLeave = () => {
+    console.log("Hover end on:", children);
+  };
+
   return (
     <span
       ref={containerRef}
@@ -28,10 +37,12 @@ export default function HighlightWord({ children, image, linkText, href }) {
         linkText ? "text-neon text-opacity-75 cursor-pointer" : "text-white"
       }`}
       onMouseMove={image ? onMouseMove : undefined}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
     >
       <span className="relative z-10">{children}</span>
 
-      {/* Image circle for city/name (no blur) */}
+      {/* Image circle for city/name */}
       {image && (
         <span
           className="highlight-image absolute top-0 left-full ml-4 w-32 h-32 rounded-full opacity-0 scale-75 group-hover:opacity-90 group-hover:scale-100 transition-all duration-500 pointer-events-none z-0"
@@ -43,7 +54,7 @@ export default function HighlightWord({ children, image, linkText, href }) {
         />
       )}
 
-      {/* Link circle with text or logo */}
+      {/* Link circle */}
       {linkText && (
         <a
           href={href}
