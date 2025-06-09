@@ -6,18 +6,22 @@ import gsap from "gsap";
 export default function IntroOverlay({ onFinish }) {
   const overlayRef = useRef(null);
   const stripesRef = useRef([]);
-  const nameRef = useRef([]);
   const [isGone, setIsGone] = useState(false);
 
   useLayoutEffect(() => {
     requestAnimationFrame(() => {
       const orderedStripes = [...stripesRef.current];
+      const nameRefs = [
+        orderedStripes[2]?.querySelector("h1"), // Khaled
+        orderedStripes[3]?.querySelector("h1"), // Doulami
+      ];
+
       const tl = gsap.timeline({
         onComplete: () => {
           setTimeout(() => {
             setIsGone(true);
             if (onFinish) onFinish();
-          }, 100); // tiny buffer
+          }, 100);
         },
       });
 
@@ -27,7 +31,7 @@ export default function IntroOverlay({ onFinish }) {
         visibility: "hidden",
       });
 
-      gsap.set(nameRef.current, {
+      gsap.set(nameRefs, {
         y: -80,
         opacity: 0,
         visibility: "hidden",
@@ -44,8 +48,8 @@ export default function IntroOverlay({ onFinish }) {
         ease: "power2.out",
       });
 
-      // Name appears right after stripes
-      tl.to(nameRef.current[0], {
+      // Name appearance
+      tl.to(nameRefs[0], {
         y: 0,
         opacity: 1,
         visibility: "visible",
@@ -53,7 +57,7 @@ export default function IntroOverlay({ onFinish }) {
         ease: "power2.out",
       });
 
-      tl.to(nameRef.current[1], {
+      tl.to(nameRefs[1], {
         y: 0,
         opacity: 1,
         visibility: "visible",
@@ -61,22 +65,22 @@ export default function IntroOverlay({ onFinish }) {
         ease: "power2.out",
       }, "-=0.1");
 
-      // Name exits (surname first)
-      tl.to(nameRef.current[1], {
+      // Name exit (Doulami first)
+      tl.to(nameRefs[1], {
         y: 80,
         opacity: 0,
         duration: 0.2,
         ease: "power2.in",
       }, "+=0.5");
 
-      tl.to(nameRef.current[0], {
+      tl.to(nameRefs[0], {
         y: 80,
         opacity: 0,
         duration: 0.2,
         ease: "power2.in",
       }, "+=0.1");
 
-      // Stripe exit (staggered)
+      // Stripe exit
       tl.to(orderedStripes, {
         y: "100%",
         opacity: 0,
@@ -94,9 +98,8 @@ export default function IntroOverlay({ onFinish }) {
     {
       ref: overlayRef,
       className: "fixed inset-0 z-[100] flex flex-col items-start justify-center",
-      style: { backgroundColor: "#182825" }
+      style: { backgroundColor: "#182825" },
     },
-    // Stripes
     createElement(
       "span",
       { className: "absolute w-full h-full" },
@@ -105,13 +108,13 @@ export default function IntroOverlay({ onFinish }) {
           "div",
           {
             key: i,
-            ref: el => {
+            ref: (el) => {
               if (el) stripesRef.current[i] = el;
             },
             className:
-              "absolute w-full h-1/5" +
-              (i === 2 ? " flex items-center pl-10" : "") +
-              (i === 3 ? " pl-10 pt-2" : ""),
+              "absolute w-full h-1/5 flex pl-10 " +
+              (i === 2 ? "justify-start items-end" : "") +
+              (i === 3 ? "justify-start items-start" : ""),
             style: {
               top: `${i * 20}%`,
               backgroundColor: "rgb(255,255,0)",
@@ -119,24 +122,33 @@ export default function IntroOverlay({ onFinish }) {
               transformOrigin: "top",
               opacity: 0,
               visibility: "hidden",
-            }
+            },
           },
           i === 2
             ? createElement(
                 "h1",
                 {
-                  ref: el => (nameRef.current[0] = el),
-                  className: "leading-none",
+                  ref: (el) => (nameRefs[0] = el),
+                  className: "leading-none cursor-pointer inline-block text-center",
                   style: {
-                    fontFamily: '"PolySans", sans-serif',
+                    fontFamily: '"PolySans", Arial, sans-serif',
                     fontWeight: 700,
-                    fontSize: "5.25rem",
+                    fontSize: "84px", // keep growing this if needed
+                    lineHeight: "84px",
+                    height: "84px",
                     letterSpacing: "-0.05rem",
-                    lineHeight: 1.2,
-                    color: "#182825",
+                    color: "rgb(24, 40, 37)",
+                    boxSizing: "border-box",
+                    fontStyle: "normal",
+                    fontStretch: "100%",
+                    fontKerning: "auto",
+                    fontFeatureSettings: "normal",
+                    fontOpticalSizing: "auto",
+                    fontVariationSettings: "normal",
+                    textRendering: "auto",
                     WebkitFontSmoothing: "antialiased",
                     MozOsxFontSmoothing: "grayscale",
-                  }
+                  },
                 },
                 "Khaled"
               )
@@ -144,18 +156,27 @@ export default function IntroOverlay({ onFinish }) {
             ? createElement(
                 "h1",
                 {
-                  ref: el => (nameRef.current[1] = el),
-                  className: "leading-none",
+                  ref: (el) => (nameRefs[1] = el),
+                  className: "leading-none cursor-pointer inline-block text-center",
                   style: {
-                    fontFamily: '"PolySans", sans-serif',
+                    fontFamily: '"PolySans", Arial, sans-serif',
                     fontWeight: 700,
-                    fontSize: "5.25rem",
+                    fontSize: "84px",
+                    lineHeight: "84px",
+                    height: "84px",
                     letterSpacing: "-0.05rem",
-                    lineHeight: 1.2,
-                    color: "#182825",
+                    color: "rgb(24, 40, 37)",
+                    boxSizing: "border-box",
+                    fontStyle: "normal",
+                    fontStretch: "100%",
+                    fontKerning: "auto",
+                    fontFeatureSettings: "normal",
+                    fontOpticalSizing: "auto",
+                    fontVariationSettings: "normal",
+                    textRendering: "auto",
                     WebkitFontSmoothing: "antialiased",
                     MozOsxFontSmoothing: "grayscale",
-                  }
+                  },
                 },
                 "Doulami"
               )
