@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import "../../styles/hoverWords.css";
+import "./hoverWords.css";
 
 export default function HighlightWord({ children, image, linkText, href }) {
   const [pos, setPos] = useState({ x: 50, y: 50 });
@@ -24,11 +24,14 @@ export default function HighlightWord({ children, image, linkText, href }) {
   return (
     <span
       ref={containerRef}
-      className="relative inline-block group cursor-pointer font-bold text-neon text-opacity-75"
+      className={`relative inline-block group font-bold ${
+        linkText ? "text-neon text-opacity-75 cursor-pointer" : "text-white"
+      }`}
       onMouseMove={image ? onMouseMove : undefined}
     >
       <span className="relative z-10">{children}</span>
 
+      {/* Only render blurred background for images */}
       {image && (
         <span
           className="highlight-image absolute top-0 left-full ml-4 w-32 h-32 rounded-full opacity-0 scale-75 group-hover:opacity-80 group-hover:scale-100 transition-all duration-500 pointer-events-none z-0"
@@ -41,6 +44,7 @@ export default function HighlightWord({ children, image, linkText, href }) {
         />
       )}
 
+      {/* Only render circle link for links */}
       {linkText && (
         <a
           href={href}
