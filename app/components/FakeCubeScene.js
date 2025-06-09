@@ -82,57 +82,63 @@ export default function FakeCubeScene() {
   const cubeRef = useRef();
   const containerRef = useRef();
   const [angle, setAngle] = useState(0);
-  const dragFactor = 1.5; // lower = more sensitive
+  const dragFactor = 1.5;
 
-  let isDragging = false;
   let startX = 0;
-  let lastAngle = angle;
+  let currentAngle = angle;
+  let isDragging = false;
 
   const rotateCubeTo = (targetAngle) => {
     gsap.to(cubeRef.current, {
       rotateY: targetAngle,
-      duration: 0.5,
-      ease: "power2.out",
+      duration: 0.6,
+      ease: "power3.out",
       force3D: false,
     });
     setAngle(targetAngle);
+    currentAngle = targetAngle;
   };
 
-  const snapToNearestFace = () => {
-    const snapped = Math.round(angle / -90) * -90;
+  const snapToNearestFace = (deltaX) => {
+    const dragThreshold = 50; // px
+    const direction = deltaX > dragThreshold ? -1 : deltaX < -dragThreshold ? 1 : 0;
+    const snapped = Math.round(currentAngle / -90 + direction) * -90;
     rotateCubeTo(snapped);
   };
 
   const handleMouseDown = (e) => {
     isDragging = true;
     startX = e.clientX;
-    lastAngle = angle;
+    currentAngle = angle;
     document.body.style.cursor = "grabbing";
   };
 
   const handleTouchStart = (e) => {
     isDragging = true;
     startX = e.touches[0].clientX;
-    lastAngle = angle;
+    currentAngle = angle;
   };
 
   const handleMove = (clientX) => {
     if (!isDragging) return;
     const delta = clientX - startX;
-    const newAngle = lastAngle + delta / dragFactor;
-    cubeRef.current.style.transform = `rotateY(${newAngle}deg)`;
-    setAngle(newAngle);
+    const nextAngle = currentAngle + delta / dragFactor;
+    cubeRef.current.style.transform = `rotateY(${nextAngle}deg)`;
   };
 
   const handleMouseMove = (e) => handleMove(e.clientX);
   const handleTouchMove = (e) => handleMove(e.touches[0].clientX);
 
-  const endDrag = () => {
+  const endDrag = (clientX) => {
     if (!isDragging) return;
     isDragging = false;
     document.body.style.cursor = "";
-    snapToNearestFace();
+    const delta = clientX - startX;
+    snapToNearestFace(delta);
   };
+
+  const handleMouseUp = (e) => endDrag(e.clientX);
+  const handleTouchEnd = (e) => endDrag(e.changedTouches[0].clientX);
 
   const rotateStep = (dir = 1) => rotateCubeTo(angle + dir * -90);
 
@@ -147,15 +153,14 @@ export default function FakeCubeScene() {
 
   useEffect(() => {
     const container = containerRef.current;
-
     container.addEventListener("mousedown", handleMouseDown);
     container.addEventListener("touchstart", handleTouchStart, { passive: true });
 
     window.addEventListener("mousemove", handleMouseMove);
     window.addEventListener("touchmove", handleTouchMove, { passive: true });
 
-    window.addEventListener("mouseup", endDrag);
-    window.addEventListener("touchend", endDrag);
+    window.addEventListener("mouseup", handleMouseUp);
+    window.addEventListener("touchend", handleTouchEnd);
 
     return () => {
       container.removeEventListener("mousedown", handleMouseDown);
@@ -164,8 +169,8 @@ export default function FakeCubeScene() {
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("touchmove", handleTouchMove);
 
-      window.removeEventListener("mouseup", endDrag);
-      window.removeEventListener("touchend", endDrag);
+      window.removeEventListener("mouseup", handleMouseUp);
+      window.removeEventListener("touchend", handleTouchEnd);
     };
   }, [angle]);
 
@@ -182,7 +187,7 @@ export default function FakeCubeScene() {
     >
       <div
         ref={cubeRef}
-        className="w-full h-full absolute transition-transform"
+        className="w-full h-full absolute"
         style={{
           transformStyle: "preserve-3d",
           transform: `rotateY(${angle}deg)`,
