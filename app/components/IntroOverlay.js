@@ -33,14 +33,13 @@ export default function IntroOverlay({ onFinish }) {
         visibility: "hidden",
       });
 
-      // Stripe entrance
+      // Stripe entrance — all at once with delay
       tl.to(orderedStripes, {
         y: "0%",
         opacity: 1,
         visibility: "visible",
-        stagger: 0.35,
-        delay: 0.2,
-        duration: 0.4,
+        delay: 1,
+        duration: 0.6,
         ease: "power2.out",
       });
 
@@ -61,7 +60,7 @@ export default function IntroOverlay({ onFinish }) {
         ease: "power2.out",
       }, "-=0.2");
 
-      // Name exits (top to bottom)
+      // Name exits (Doulami first, then Khaled)
       tl.to(nameRef.current[1], {
         y: 80,
         opacity: 0,
@@ -76,7 +75,7 @@ export default function IntroOverlay({ onFinish }) {
         ease: "power2.in",
       }, "+=0.2");
 
-      // Stripe exit
+      // Stripe exit — still cascading
       tl.to(orderedStripes, {
         y: "100%",
         opacity: 0,
@@ -90,7 +89,7 @@ export default function IntroOverlay({ onFinish }) {
   if (isGone) return null;
 
   return createElement(
-    'span',
+    'div',
     {
       ref: overlayRef,
       className: "fixed inset-0 z-[100] flex flex-col items-start justify-center",
@@ -98,7 +97,7 @@ export default function IntroOverlay({ onFinish }) {
     },
     // Stripes
     createElement(
-      'span',
+      'div',
       { className: "absolute w-full h-full" },
       [...Array(5)].map((_, i) =>
         createElement('div', {
@@ -118,7 +117,7 @@ export default function IntroOverlay({ onFinish }) {
         })
       )
     ),
-    // Name text absolutely positioned inside 3rd and 4th stripe blocks
+    // Name text
     createElement(
       'div',
       {
