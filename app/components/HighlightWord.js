@@ -31,20 +31,19 @@ export default function HighlightWord({ children, image, linkText, href }) {
     >
       <span className="relative z-10">{children}</span>
 
-      {/* Only render blurred background for images */}
+      {/* Image circle for city/name (no blur) */}
       {image && (
         <span
-          className="highlight-image absolute top-0 left-full ml-4 w-32 h-32 rounded-full opacity-0 scale-75 group-hover:opacity-80 group-hover:scale-100 transition-all duration-500 pointer-events-none z-0"
+          className="highlight-image absolute top-0 left-full ml-4 w-32 h-32 rounded-full opacity-0 scale-75 group-hover:opacity-90 group-hover:scale-100 transition-all duration-500 pointer-events-none z-0"
           style={{
             backgroundImage: `url(${image})`,
-            backgroundSize: "150% auto",
+            backgroundSize: "cover",
             backgroundPosition: `${pos.x}% ${pos.y}%`,
-            filter: "blur(20px)",
           }}
         />
       )}
 
-      {/* Only render circle link for links */}
+      {/* Link circle with text or logo */}
       {linkText && (
         <a
           href={href}
@@ -52,7 +51,16 @@ export default function HighlightWord({ children, image, linkText, href }) {
           rel="noopener noreferrer"
           className="absolute top-0 left-full ml-4 flex items-center justify-center w-24 h-24 rounded-full bg-white text-green-900 font-semibold opacity-0 scale-75 group-hover:opacity-100 group-hover:scale-100 transition-all duration-500 pointer-events-auto z-10"
         >
-          {linkText}
+          {linkText === "GitHub" ? (
+            <img
+              src="/images/github.png"
+              alt="GitHub"
+              className="w-12 h-12"
+              draggable={false}
+            />
+          ) : (
+            linkText
+          )}
         </a>
       )}
     </span>
