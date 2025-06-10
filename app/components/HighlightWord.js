@@ -22,6 +22,20 @@ export default function HighlightWord({ children, image, linkText, href }) {
 
 
    return (
+    <>
+    <span
+  style={{
+    position: "absolute",
+    top: "2rem",
+    left: "100%",
+    background: "red",
+    color: "white",
+    padding: "10px",
+    zIndex: 99999,
+  }}
+>
+  TOOLTIP TEST
+</span>
   <span
     ref={containerRef}
     onMouseEnter={onMouseEnter}
@@ -36,7 +50,7 @@ export default function HighlightWord({ children, image, linkText, href }) {
     {/* Floating image on hover */}
     {image && (
       <span
-        className="highlight-image absolute top-0 left-full ml-4 w-32 h-32 rounded-full opacity-0 scale-75 group-hover:opacity-90 group-hover:scale-100 transition-all duration-500 z-0"
+        className="z-[9999] highlight-image absolute top-0 left-0 translate-x-full ml-4 w-32 h-32 rounded-full opacity-0 scale-75 group-hover:opacity-90 group-hover:scale-100 transition-all duration-500 "
         style={{
           backgroundImage: `url(${image})`,
           backgroundSize: "cover",
@@ -51,7 +65,7 @@ export default function HighlightWord({ children, image, linkText, href }) {
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        className="absolute top-0 left-full ml-4 flex items-center justify-center w-24 h-24 rounded-full bg-white text-green-900 font-semibold opacity-0 scale-75 group-hover:opacity-100 group-hover:scale-100 transition-all duration-500 z-10"
+        className="z-[9999] absolute top-0 left-0 translate-x-full ml-4 flex items-center justify-center w-24 h-24 rounded-full bg-white text-green-900 font-semibold opacity-0 scale-75 group-hover:opacity-100 group-hover:scale-100 transition-all duration-500"
       >
         {linkText === "GitHub" ? (
           <img
@@ -66,6 +80,8 @@ export default function HighlightWord({ children, image, linkText, href }) {
       </a>
     )}
   </span>
+  
+</>
 );
 
 }
