@@ -10,4 +10,7 @@
     display: none !important;
   }
 }
-<HighlightWord>Test Hover</HighlightWord>
+/* In hoverWords.css */
+.highlight-image {
+  background: red;
+}
