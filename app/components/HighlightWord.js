@@ -27,10 +27,13 @@ export default function HighlightWord({ children, image, linkText, href }) {
     onMouseEnter={onMouseEnter}
     onMouseLeave={onMouseLeave}
     onMouseMove={image ? onMouseMove : undefined}
-    className="relative inline-block group font-bold text-neon text-opacity-75 cursor-pointer"
+    className={`relative inline-block group font-bold cursor-pointer ${
+      linkText || image ? "text-neon text-opacity-75" : "text-white"
+    }`}
   >
-    <span className="z-10">{children}</span>
+    {children} {/* <-- Keep child directly here, not inside inner span */}
 
+    {/* Floating image on hover */}
     {image && (
       <span
         className="highlight-image absolute top-0 left-full ml-4 w-32 h-32 rounded-full opacity-0 scale-75 group-hover:opacity-90 group-hover:scale-100 transition-all duration-500 z-0"
@@ -42,6 +45,7 @@ export default function HighlightWord({ children, image, linkText, href }) {
       />
     )}
 
+    {/* Link bubble on hover */}
     {linkText && (
       <a
         href={href}
