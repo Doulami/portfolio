@@ -17,6 +17,9 @@ export default function HighlightWord({ children, image, linkText, href }) {
     const percY = offsetY / rect.height;
     setPos({ x: (1 - percX) * 100, y: (1 - percY) * 100 });
   };
+    const onMouseEnter = () => console.log("Hover start on:", children);
+  const onMouseLeave = () => console.log("Hover end on:", children);
+
 
    return (
   <span
