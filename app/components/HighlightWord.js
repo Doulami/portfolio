@@ -52,7 +52,7 @@ export default function HighlightWord({ children, image, linkText, href }) {
         >
           {linkText === "GitHub" ? (
             <img
-              src="/images/github.png"
+              src="/images/git_hub.png"
               alt="GitHub"
               className="w-12 h-12"
               draggable={false}
