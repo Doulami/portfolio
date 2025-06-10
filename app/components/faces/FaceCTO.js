@@ -5,8 +5,9 @@ export default function FaceCTO() {
     <div className="text-center space-y-4 max-w-lg mx-auto">
       <p>
         Hello, I’m Khaled Doulami, a{" "}
-<HighlightWord>Test Hover</HighlightWord>
+        <HighlightWord>Test Hover</HighlightWord>.
 
+      </p>
       <p>With a passion for clean code and scalable architecture,</p>
       <p>
         I’ve led full-stack teams across{" "}
