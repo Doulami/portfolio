@@ -1,8 +1,10 @@
+// app/components/HighlightWord.js
+"use client";
+
 import React, { useState, useRef } from "react";
-import "../../styles/hoverWords.css";
+import "@/styles/hoverWords.css";
 
 export default function HighlightWord({ children, image, linkText, href }) {
-  console.log("HighlightWord rendered:", children);
   const [pos, setPos] = useState({ x: 50, y: 50 });
   const containerRef = useRef();
 
@@ -13,33 +15,22 @@ export default function HighlightWord({ children, image, linkText, href }) {
     const offsetY = e.clientY - rect.top;
     const percX = offsetX / rect.width;
     const percY = offsetY / rect.height;
-    setPos({
-      x: (1 - percX) * 100,
-      y: (1 - percY) * 100,
-    });
-  };
-
-  const onMouseEnter = () => {
-    console.log("Hover start on:", children);
-  };
-
-  const onMouseLeave = () => {
-    console.log("Hover end on:", children);
+    setPos({ x: (1 - percX) * 100, y: (1 - percY) * 100 });
   };
 
   return (
     <span
       ref={containerRef}
       onMouseMove={image ? onMouseMove : undefined}
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
-      className={`relative inline-block group font-bold ${
-        linkText || image ? "text-neon text-opacity-75 cursor-pointer" : "text-white"
+      className={`relative inline-block group font-bold transition duration-200 ${
+        linkText || image
+          ? "text-neon text-opacity-75 cursor-pointer"
+          : "text-white"
       }`}
     >
       <span className="relative z-10">{children}</span>
 
-      {/* Floating image on hover */}
+      {/* Floating image (hover-following) */}
       {image && (
         <span
           className="highlight-image absolute top-0 left-full ml-4 w-32 h-32 rounded-full opacity-0 scale-75 group-hover:opacity-90 group-hover:scale-100 transition-all duration-500 z-0"
@@ -51,7 +42,7 @@ export default function HighlightWord({ children, image, linkText, href }) {
         />
       )}
 
-      {/* Floating link circle on hover */}
+      {/* Floating link circle */}
       {linkText && (
         <a
           href={href}

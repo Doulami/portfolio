@@ -10,7 +10,7 @@ export default function FaceCTO() {
       <p>With a passion for clean code and scalable architecture,</p>
       <p>
         I’ve led full-stack teams across{" "}
-        <HighlightWord >Europe</HighlightWord>.
+        <HighlightWord>Europe</HighlightWord>.
       </p>
       <p>
         Previously at{" "}
