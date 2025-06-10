@@ -45,7 +45,8 @@ return (
     }}
     className="font-bold text-white"
   >
-    {children}
+      <span className="relative z-10">{children}</span>
+
   </span>
 );
 
