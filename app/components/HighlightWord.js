@@ -3,7 +3,6 @@ import "../../styles/hoverWords.css";
 
 export default function HighlightWord({ children, image, linkText, href }) {
   console.log("HighlightWord rendered:", children);
-
   const [pos, setPos] = useState({ x: 50, y: 50 });
   const containerRef = useRef();
 
