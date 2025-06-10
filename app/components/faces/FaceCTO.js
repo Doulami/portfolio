@@ -2,7 +2,7 @@ import HighlightWord from "../HighlightWord";
 
 export default function FaceCTO() {
   return (
-    <div className="text-center space-y-4 max-w-lg mx-auto">
+<div   className="absolute w-full h-full flex flex-col items-center justify-center px-4 text-center text-neon">
       <p>
         Hello, I’m Khaled Doulami, a{" "}
         <HighlightWord>hands-on CTO</HighlightWord>.
