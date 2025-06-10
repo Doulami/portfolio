@@ -18,7 +18,7 @@ export default function HighlightWord({ children, image, linkText, href }) {
     setPos({ x: (1 - percX) * 100, y: (1 - percY) * 100 });
   };
 
-  return (return (
+  return (
   <span
     onMouseEnter={() => console.log("🟢 HOVER ENTER")}
     onMouseLeave={() => console.log("🔴 HOVER LEAVE")}
@@ -26,5 +26,5 @@ export default function HighlightWord({ children, image, linkText, href }) {
   >
     Test Hover
   </span>
-););
+);
 }
