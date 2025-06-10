@@ -6,7 +6,8 @@ export default function FaceEntrepreneur() {
       <p>I’ve launched multiple products from scratch,</p>
       <p>including plugins, SaaS tools, and e-commerce brands.</p>
       <p>
-        Currently building the AI-powered <HighlightWord>InstaSite</HighlightWord> platform,
+        Currently building the AI-powered{" "}
+        <HighlightWord>InstaSite</HighlightWord> platform,
       </p>
       <p>and managing FixMySite — a web repair micro-agency.</p>
       <p>

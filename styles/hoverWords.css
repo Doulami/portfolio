@@ -1,5 +1,12 @@
 .highlight-image {
-  will-change: transform, opacity, background-position;
-  transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
-  transition-property: opacity, transform, background-position;
+  will-change: transform, opacity;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  transition: transform 0.4s ease, opacity 0.4s ease;
+  pointer-events: none;
+}
+
+@media (hover: none) {
+  .highlight-image {
+    display: none !important;
+  }
 }

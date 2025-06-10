@@ -1,63 +1,67 @@
+// app/components/HighlightWord.js
 "use client";
 
-import { motion } from "framer-motion";
+import React, { useState, useRef } from "react";
+import "@/styles/hoverWords.css";
 
-export function ContactCTASection() {
+export default function HighlightWord({ children, image, linkText, href }) {
+  const [pos, setPos] = useState({ x: 50, y: 50 });
+  const containerRef = useRef();
+
+  const onMouseMove = (e) => {
+    if (!containerRef.current) return;
+    const rect = containerRef.current.getBoundingClientRect();
+    const offsetX = e.clientX - rect.left;
+    const offsetY = e.clientY - rect.top;
+    const percX = offsetX / rect.width;
+    const percY = offsetY / rect.height;
+    setPos({ x: (1 - percX) * 100, y: (1 - percY) * 100 });
+  };
+
   return (
-    <section id="contact" className="py-20 px-6 bg-gray-50 text-center">
-      <motion.h2
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
-        className="text-3xl sm:text-4xl font-bold mb-6"
-      >
-        Let’s Work Together
-      </motion.h2>
+    <span
+      ref={containerRef}
+      onMouseMove={image ? onMouseMove : undefined}
+      className={`relative inline-block group font-bold transition duration-200 ${
+        linkText || image
+          ? "text-neon text-opacity-75 cursor-pointer"
+          : "text-white"
+      }`}
+    >
+      <span className="relative z-10">{children}</span>
 
-      <motion.p
-        initial={{ opacity: 0, y: 10 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ delay: 0.2, duration: 0.6 }}
-        className="text-lg text-gray-600 mb-10 max-w-xl mx-auto"
-      >
-        I’m open to remote developer roles, CTO consulting, and creative tech projects.
-        Let’s connect and build something meaningful.
-      </motion.p>
+      {/* Floating image (hover-following) */}
+      {image && (
+        <span
+          className="highlight-image absolute top-0 left-full ml-4 w-32 h-32 rounded-full opacity-0 scale-75 group-hover:opacity-90 group-hover:scale-100 transition-all duration-500 z-0"
+          style={{
+            backgroundImage: `url(${image})`,
+            backgroundSize: "cover",
+            backgroundPosition: `${pos.x}% ${pos.y}%`,
+          }}
+        />
+      )}
 
-      <div className="flex flex-col sm:flex-row gap-4 justify-center">
-        <motion.a
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.97 }}
-          href="mailto:contact@wappdev.co.uk"
-          className="bg-black text-white px-6 py-2 rounded-full text-sm font-medium hover:bg-gray-800 transition"
-        >
-          Email Me
-        </motion.a>
-
-        <motion.a
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.97 }}
-          href="/Khaled-Doulami-CV.pdf"
+      {/* Floating link circle */}
+      {linkText && (
+        <a
+          href={href}
           target="_blank"
           rel="noopener noreferrer"
-          className="border border-black px-6 py-2 rounded-full text-sm font-medium hover:bg-black hover:text-white transition"
+          className="absolute top-0 left-full ml-4 flex items-center justify-center w-24 h-24 rounded-full bg-white text-green-900 font-semibold opacity-0 scale-75 group-hover:opacity-100 group-hover:scale-100 transition-all duration-500 z-10"
         >
-          View CV
-        </motion.a>
-
-        <motion.a
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.97 }}
-          href="https://linkedin.com/in/khaleddoulami"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-sm text-blue-600 underline"
-        >
-          Connect on LinkedIn
-        </motion.a>
-      </div>
-    </section>
+          {linkText === "GitHub" ? (
+            <img
+              src="/images/github.png"
+              alt="GitHub"
+              className="w-12 h-12"
+              draggable={false}
+            />
+          ) : (
+            linkText
+          )}
+        </a>
+      )}
+    </span>
   );
 }

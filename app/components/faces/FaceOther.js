@@ -6,15 +6,19 @@ export default function FaceOther() {
       <p>Based in London.</p>
       <p>Available for freelance work, collabs, or full-time missions.</p>
       <p>
-        Email me at <HighlightWord>hello@khaleddoulami.net</HighlightWord>.
+        Email me at{" "}
+        <HighlightWord>hello@khaleddoulami.net</HighlightWord>.
       </p>
       <p>
         Connect via{" "}
-        <HighlightWord image="/images/linkedin.webp">LinkedIn</HighlightWord> or explore my code on{" "}
-        <HighlightWord linkText="GitHub" href="https://github.com/khaleddoulami">
+        <HighlightWord image="/images/linkedin.webp">LinkedIn</HighlightWord>{" "}
+        or explore my code on{" "}
+        <HighlightWord
+          linkText="GitHub"
+          href="https://github.com/khaleddoulami"
+        >
           GitHub
-        </HighlightWord>
-        .
+        </HighlightWord>.
       </p>
     </div>
   );
