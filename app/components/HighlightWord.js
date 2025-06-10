@@ -33,7 +33,7 @@ export default function HighlightWord({ children, image, linkText, href }) {
   };
 
   return (
-  return (
+    
   <span
     ref={containerRef}
     onMouseMove={onMouseMove}
@@ -49,5 +49,5 @@ export default function HighlightWord({ children, image, linkText, href }) {
     {children}
   </span>
 );
-  );
+
 }
