@@ -1,5 +1,6 @@
 import HighlightWord from "../HighlightWord";
 
+
 export default function FaceCTO() {
   return (
     <div className="text-center space-y-4 max-w-lg mx-auto">

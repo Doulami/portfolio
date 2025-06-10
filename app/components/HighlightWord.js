@@ -2,6 +2,8 @@ import React, { useState, useRef } from "react";
 import "../../styles/hoverWords.css";
 
 export default function HighlightWord({ children, image, linkText, href }) {
+    console.log("HighlightWord rendered:", children);
+
   const [pos, setPos] = useState({ x: 50, y: 50 });
   const containerRef = useRef();
 
@@ -31,15 +33,16 @@ export default function HighlightWord({ children, image, linkText, href }) {
   };
 
   return (
-    <span
-      ref={containerRef}
-      className={`relative inline-block group font-bold ${
-        linkText ? "text-neon text-opacity-75 cursor-pointer" : "text-white"
-      }`}
-      onMouseMove={image ? onMouseMove : undefined}
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
-    >
+   <span
+  ref={containerRef}
+  onMouseEnter={onMouseEnter}
+  onMouseLeave={onMouseLeave}
+  onMouseMove={onMouseMove}
+  style={{ background: "rgba(0,255,0,0.05)", padding: "4px" }}
+  className={`relative inline-block group font-bold ${
+    linkText ? "text-neon text-opacity-75 cursor-pointer" : "text-white"
+  }`}
+>
       <span className="relative z-10">{children}</span>
 
       {/* Image circle for city/name */}
