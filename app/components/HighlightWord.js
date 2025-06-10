@@ -34,7 +34,7 @@ export default function HighlightWord({ children, image, linkText, href }) {
 
   return (
     
- <span
+<span
   ref={containerRef}
   onMouseMove={onMouseMove}
   onMouseEnter={onMouseEnter}
@@ -46,6 +46,7 @@ export default function HighlightWord({ children, image, linkText, href }) {
 >
   <span className="relative z-10">{children}</span>
 </span>
+
 );
 
 }
