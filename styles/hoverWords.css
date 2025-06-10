@@ -1,3 +1,16 @@
+body::before {
+  content: "🔴 CSS LOADED";
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  z-index: 9999;
+  color: red;
+  background: yellow;
+  padding: 4px;
+  font-size: 12px;
+}
+
+
 .highlight-image {
   will-change: transform, opacity;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
