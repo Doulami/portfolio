@@ -1,4 +1,3 @@
-// app/components/HighlightWord.js
 "use client";
 
 import React, { useState, useRef } from "react";
@@ -11,7 +10,7 @@ export default function HighlightWord({ children, image, linkText, href }) {
   const [hoverPos, setHoverPos] = useState({ x: 0, y: 0 });
 
   const onMouseMove = (e) => {
-    setHoverPos({ x: e.clientX + 24, y: e.clientY - 24 });
+    setHoverPos({ x: e.clientX + 12, y: e.clientY + 12 }); // soft offset
   };
 
   const onMouseEnter = () => {
@@ -24,13 +23,15 @@ export default function HighlightWord({ children, image, linkText, href }) {
     console.log("Hover end on:", children);
   };
 
+  const shouldShow = hovered && (image || linkText);
+
   return (
     <span
       ref={containerRef}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
       onMouseMove={(e) => {
-        if (image) onMouseMove(e);
+        if (image || linkText) onMouseMove(e);
       }}
       className={`relative inline-block group font-bold cursor-pointer ${
         linkText || image ? "text-neon text-opacity-75" : "text-white"
@@ -38,38 +39,39 @@ export default function HighlightWord({ children, image, linkText, href }) {
     >
       {children}
 
-      {/* Hover Image via Portal */}
-      {image && hovered && (
+      {shouldShow && (
         <HoverPortal x={hoverPos.x} y={hoverPos.y}>
           <div
-            className="w-32 h-32 rounded-full opacity-90 scale-100 transition-all duration-500 z-50 shadow-xl"
+            className="w-24 h-24 rounded-full shadow-lg flex items-center justify-center font-semibold transform scale-75 opacity-0 transition-all duration-300 pointer-events-none animate-fade-in"
             style={{
-              backgroundImage: `url(${image})`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
+              backgroundColor: "white",
             }}
-          />
+          >
+            {image ? (
+              <div
+                className="w-full h-full rounded-full"
+                style={{
+                  backgroundColor: "white", // for transparency fallback
+                  backgroundImage: `url(${image})`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                }}
+              />
+            ) : (
+              <span className="text-green-900">Visit</span>
+            )}
+          </div>
         </HoverPortal>
       )}
 
-      {/* Link Circle (stays in DOM, not in portal) */}
-      {linkText && (
+      {linkText && !image && (
         <a
           href={href}
           target="_blank"
           rel="noopener noreferrer"
-          className="z-[9999] absolute top-0 left-0 translate-x-full ml-4 flex items-center justify-center w-24 h-24 rounded-full bg-white text-green-900 font-semibold opacity-0 scale-75 group-hover:opacity-100 group-hover:scale-100 transition-all duration-500"
+          className="sr-only"
         >
-          {linkText === "GitHub" ? (
-            <img
-              src="/images/git_hub.png"
-              alt="GitHub"
-              className="w-12 h-12"
-              draggable={false}
-            />
-          ) : (
-            linkText
-          )}
+          {linkText}
         </a>
       )}
     </span>

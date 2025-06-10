@@ -6,7 +6,7 @@ export default function FaceCTO() {
   className="absolute w-full h-full flex flex-col items-center justify-center px-4 text-center text-neon"
   style={{ overflow: "visible", position: "relative", zIndex: 10 }}
 >      <p>
-        Hello, I’m Khaled Doulami, a{" "}
+        Hello, I’m  <HighlightWord image="/images/khaleddoulami.jpg">Khaled Doulami</HighlightWord>, a{" "}
         <HighlightWord>hands-on CTO</HighlightWord>.
       </p>
       <p>With a passion for clean code and scalable architecture,</p>
