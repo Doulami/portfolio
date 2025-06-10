@@ -22,7 +22,6 @@ export default function HighlightWord({ children, image, linkText, href }) {
 
 
    return (
-    <>
     <span
   style={{
     position: "absolute",
@@ -38,7 +37,6 @@ export default function HighlightWord({ children, image, linkText, href }) {
 </span>
   
   
-</>
 );
 
 }
