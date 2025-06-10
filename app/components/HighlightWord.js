@@ -32,21 +32,21 @@ export default function HighlightWord({ children, image, linkText, href }) {
     console.log("Hover end on:", children);
   };
 
-  return (
-    
-<span
-  ref={containerRef}
-  onMouseMove={onMouseMove}
-  onMouseEnter={onMouseEnter}
-  onMouseLeave={onMouseLeave}
-  style={{ background: "rgba(0,255,0,0.05)", padding: "4px" }}
-  className={`relative inline-block group font-bold ${
-    linkText ? "text-neon text-opacity-75 cursor-pointer" : "text-white"
-  }`}
->
-  <span className="relative z-10">{children}</span>
-</span>
-
+return (
+  <span
+    ref={containerRef}
+    onMouseMove={onMouseMove}
+    onMouseEnter={onMouseEnter}
+    onMouseLeave={onMouseLeave}
+    style={{
+      background: "rgba(0,255,0,0.05)",
+      padding: "4px",
+      display: "inline-block",
+    }}
+    className="font-bold text-white"
+  >
+    {children}
+  </span>
 );
 
 }
