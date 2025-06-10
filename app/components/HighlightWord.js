@@ -33,50 +33,21 @@ export default function HighlightWord({ children, image, linkText, href }) {
   };
 
   return (
-   <span
-  ref={containerRef}
-  onMouseEnter={onMouseEnter}
-  onMouseLeave={onMouseLeave}
-  onMouseMove={onMouseMove}
-  style={{ background: "rgba(0,255,0,0.05)", padding: "4px" }}
-  className={`relative inline-block group font-bold ${
-    linkText ? "text-neon text-opacity-75 cursor-pointer" : "text-white"
-  }`}
->
-      <span className="relative z-10">{children}</span>
-
-      {/* Image circle for city/name */}
-      {image && (
-        <span
-          className="highlight-image absolute top-0 left-full ml-4 w-32 h-32 rounded-full opacity-0 scale-75 group-hover:opacity-90 group-hover:scale-100 transition-all duration-500 pointer-events-none z-0"
-          style={{
-            backgroundImage: `url(${image})`,
-            backgroundSize: "cover",
-            backgroundPosition: `${pos.x}% ${pos.y}%`,
-          }}
-        />
-      )}
-
-      {/* Link circle */}
-      {linkText && (
-        <a
-          href={href}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="absolute top-0 left-full ml-4 flex items-center justify-center w-24 h-24 rounded-full bg-white text-green-900 font-semibold opacity-0 scale-75 group-hover:opacity-100 group-hover:scale-100 transition-all duration-500 pointer-events-auto z-10"
-        >
-          {linkText === "GitHub" ? (
-            <img
-              src="/images/github.png"
-              alt="GitHub"
-              className="w-12 h-12"
-              draggable={false}
-            />
-          ) : (
-            linkText
-          )}
-        </a>
-      )}
-    </span>
+  return (
+  <span
+    ref={containerRef}
+    onMouseMove={onMouseMove}
+    onMouseEnter={onMouseEnter}
+    onMouseLeave={onMouseLeave}
+    style={{
+      background: "rgba(0,255,0,0.05)",
+      padding: "4px",
+      display: "inline-block",
+    }}
+    className="font-bold text-white"
+  >
+    {children}
+  </span>
+);
   );
 }
