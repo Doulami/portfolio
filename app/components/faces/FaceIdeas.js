@@ -2,8 +2,10 @@ import HighlightWord from "../HighlightWord";
 
 export default function FaceIdeas() {
   return (
-    <div className="text-center space-y-4 max-w-lg mx-auto">
-      <p>Designer? Developer? Strategist? Bit of all three.</p>
+<div
+  className="absolute w-full h-full flex flex-col items-center justify-center px-4 text-center text-neon"
+  style={{ overflow: "visible", position: "relative", zIndex: 10 }}
+>      <p>Designer? Developer? Strategist? Bit of all three.</p>
       <p>
         I connect <HighlightWord>UX</HighlightWord> with AI, motion, and performance.
       </p>

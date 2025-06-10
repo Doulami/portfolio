@@ -10,21 +10,17 @@ body::before {
   font-size: 12px;
 }
 
-
 .highlight-image {
   will-change: transform, opacity;
   pointer-events: none;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
   transition: transform 0.3s ease, opacity 0.3s ease;
+  /* ❌ DO NOT set background here or you'll override React image */
 }
 
-
+/* Hide on mobile/tablet where hover doesn't exist */
 @media (hover: none) {
   .highlight-image {
     display: none !important;
   }
-}
-/* In hoverWords.css */
-.highlight-image {
-  background: red;
 }

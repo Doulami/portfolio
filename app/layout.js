@@ -12,6 +12,8 @@ export default function RootLayout({ children }) {
         <ApolloProvider client={client}>
           {children}
         </ApolloProvider>
+       <div id="hover-root" />
+
       </body>
     </html>
   );
