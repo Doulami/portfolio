@@ -43,10 +43,13 @@ return (
       padding: "4px",
       display: "inline-block",
     }}
-    className="font-bold text-white"
+    className="relative inline-block group font-bold text-white"
   >
-      <span className="relative z-10">{children}</span>
-
+    <span
+      className="relative z-10 pointer-events-none"
+    >
+      {children}
+    </span>
   </span>
 );
 
