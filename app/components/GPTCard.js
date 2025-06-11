@@ -7,6 +7,12 @@ import HighlightWord from "./HighlightWord";
 
 export default function GPTCard() {
   const [flipped, setFlipped] = useState(false);
+  useEffect(() => {
+    if (flipOverride) {
+      setFlipped(true);
+      resetFlip();
+    }
+  }, [flipOverride]);
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-start px-4 py-12 text-neon">
