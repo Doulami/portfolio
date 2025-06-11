@@ -1,4 +1,4 @@
-body::before {
+/*body::before {
   content: "🔴 CSS LOADED";
   position: fixed;
   top: 1rem;
@@ -8,7 +8,7 @@ body::before {
   background: yellow;
   padding: 4px;
   font-size: 12px;
-}
+}*/
 
 .highlight-image {
   will-change: transform, opacity;
@@ -22,5 +22,19 @@ body::before {
 @media (hover: none) {
   .highlight-image {
     display: none !important;
+  }
+}
+
+.blinking-cursor {
+  display: inline-block;
+  width: 1px;
+  background-color: currentColor;
+  margin-left: 2px;
+  animation: blink 1s step-start infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
   }
 }

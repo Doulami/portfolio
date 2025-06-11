@@ -78,23 +78,41 @@ function addToChat(content, isUser) {
     let index = 0;
     const typed = [];
 
-    setChatHistory((prev) => [...prev, { content: <p></p>, isUser: false }]);
+    setChatHistory((prev) => [
+      ...prev,
+      { content: <p><span className="blinking-cursor">|</span></p>, isUser: false }
+    ]);
 
     const typeNext = () => {
       if (index < childrenArray.length) {
         typed.push(childrenArray[index]);
         setChatHistory((prev) => [
           ...prev.slice(0, -1),
-          { content: <p>{typed.slice()}</p>, isUser: false }
+          {
+            content: (
+              <p>
+                {typed.slice()}
+                <span className="blinking-cursor">|</span>
+              </p>
+            ),
+            isUser: false
+          }
         ]);
         index++;
-        setTimeout(typeNext, 40);
+        setTimeout(typeNext, 80); // slow down here
+      } else {
+        // remove cursor
+        setChatHistory((prev) => [
+          ...prev.slice(0, -1),
+          { content: <p>{typed}</p>, isUser: false }
+        ]);
       }
     };
 
-    setTimeout(typeNext, 300);
+    setTimeout(typeNext, 400); // initial delay
   }
 }
+
 
   function handleSubmit() {
     if (!input.trim()) return;
