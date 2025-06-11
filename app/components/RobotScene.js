@@ -9,9 +9,12 @@ export default function RobotScene() {
     <Canvas camera={{ position: [0, 1, 5], fov: 50 }}>
       <ambientLight intensity={0.5} />
       <directionalLight position={[2, 2, 2]} />
+      <OrbitControls enableZoom={false} />
+
       <Suspense fallback={null}>
-        <AnimatedRobot scale={1} position={[0, -1, 0]} />
+        <AnimatedRobot scale={3} position={[0, -1, 0]} />
       </Suspense>
+      
     </Canvas>
   );
 }
