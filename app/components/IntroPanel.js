@@ -4,7 +4,7 @@ import HighlightWord from "./HighlightWord";
 
 export default function IntroPanel({ onFlip }) {
   return (
-<div className="w-full h-full flex flex-col justify-center items-end pr-5 pl-5 lg:pr-20 lg:pl-20 text-right max-w-[90%] lg:text-[56px] text-[28px] leading-tight">
+<div className="w-full h-full flex flex-col justify-center items-end pr-5 pl-5 lg:pr-20 lg:pl-20 text-left max-w-[90%] lg:text-[50px] text-[25px] leading-tight">
       <p>
         Hello, I’m{" "}
         <HighlightWord image="/images/khaleddoulami.jpg">
