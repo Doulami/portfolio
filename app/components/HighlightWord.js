@@ -42,7 +42,7 @@ export default function HighlightWord({ children, image, linkText, href }) {
       {shouldShow && (
         <HoverPortal x={hoverPos.x} y={hoverPos.y}>
           <div
-            className="w-24 h-24 rounded-full shadow-lg flex items-center justify-center font-semibold transform scale-75 opacity-0 transition-all duration-300 pointer-events-none animate-fade-in"
+            className="w-64 h-64 rounded-full shadow-lg flex items-center justify-center font-semibold transform scale-75 opacity-0 transition-all duration-300 pointer-events-none animate-fade-in"
             style={{
               backgroundColor: "white",
             }}
