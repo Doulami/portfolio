@@ -65,7 +65,7 @@ export default function FakeCubeScene() {
  {faces.map((face, i) => (
   <div
     key={face.id}
-    className="absolute w-full h-full flex flex-col items-center justify-center px-4 text-center text-neon"
+    className="absolute w-full h-full overflow-y-auto flex flex-col items-center justify-center px-4 text-center text-neon"
     style={{
       backgroundColor: face.bg,
       transform: `rotateY(${i * 90}deg) translateZ(50vw)`,
