@@ -5,7 +5,7 @@ import FakeGPTChatBox from "./FakeGPTChatBox";
 import PortfolioContent from "./PortfolioContent";
 import HighlightWord from "./HighlightWord";
 
-export default function GPTCard() {
+export default function GPTCard({ flipOverride = false, resetFlip = () => {} }) {
   const [flipped, setFlipped] = useState(false);
   useEffect(() => {
     if (flipOverride) {
