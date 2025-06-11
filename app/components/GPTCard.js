@@ -2,7 +2,7 @@
 
 import { useState,useEffect } from "react";
 import FakeGPTChatBox from "./FakeGPTChatBox";
-import PortfolioContent from "./PortfolioContent";
+import CVSwitcher from "./CVSwitcher";
 import HighlightWord from "./HighlightWord";
 
 export default function GPTCard({ flipOverride = false, resetFlip = () => {} }) {
@@ -44,7 +44,7 @@ export default function GPTCard({ flipOverride = false, resetFlip = () => {} }) 
 
           {/* Back – Portfolio */}
           <div className="absolute top-0 left-0 w-full h-full rotate-y-180 backface-hidden overflow-y-auto">
-            <PortfolioContent />
+            <CVSwitcher />
           </div>
         </div>
       </div>
