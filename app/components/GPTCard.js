@@ -6,6 +6,7 @@ import CVSwitcher from "./CVSwitcher";
 import HighlightWord from "./HighlightWord";
 
 export default function GPTCard({ flipOverride = false, resetFlip = () => {} }) {
+    
   const [flipped, setFlipped] = useState(false);
   useEffect(() => {
     if (flipOverride) {
