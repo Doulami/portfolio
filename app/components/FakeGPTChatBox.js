@@ -1,6 +1,6 @@
 // app/components/FakeGPTChatBox.js
 "use client";
-
+import React from "react";
 import { useState, useRef, useEffect } from "react";
 import HighlightWord from "./HighlightWord";
 import gsap from "gsap";
