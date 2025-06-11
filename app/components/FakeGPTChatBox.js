@@ -2,7 +2,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import HighlightWord from "../HighlightWord";
+import HighlightWord from "./HighlightWord";
 import gsap from "gsap";
 
 const suggestions = [
