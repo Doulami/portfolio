@@ -19,7 +19,7 @@ export default function GPTCard({ flipOverride = false, resetFlip = () => {} }) 
       <div className="w-full max-w-3xl bg-black/80 rounded-xl shadow-lg p-6 text-green-400 flex flex-col">
 
         {/* Flip Card */}
-        <div className="relative w-full perspective" style={{ minHeight: "520px" }}>
+        <div className="relative w-full perspective h-[520px]">
           <div
             className={`w-full h-full transition-transform duration-700 transform-style preserve-3d ${
               flipped ? "rotate-y-180" : ""
