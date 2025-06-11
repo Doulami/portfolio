@@ -71,18 +71,18 @@ export default function FakeGPTChatBox() {
   return (
     <div className="bg-black text-green-400 rounded-xl p-6 w-full h-full flex flex-col max-h-full">
       {/* 🧠 Assistant Intro */}
-      <div className="flex items-center mb-4">
+      <div className="flex flex-col items-center text-center mb-6">
         <img
-          src="/images/airobot.png"
-          alt="Avatar"
-          className="w-10 h-10 rounded-full mr-3"
+            src="/images/khaleddoulami.jpg"
+            alt="Avatar"
+            className="w-16 h-16 rounded-full shadow-lg mb-2"
         />
-        <p className="text-sm">
-          Hi, I’m <strong>Khaled’s Assistant</strong>. Ask me anything about his{" "}
-          <HighlightWord>CV</HighlightWord> or{" "}
-          <HighlightWord>portfolio</HighlightWord> — I’ve got all the answers 💡
+        <p className="text-sm leading-relaxed max-w-xs">
+            Hi, I’m <strong>Khaled’s Assistant</strong> — here to help you explore his{" "}
+            <HighlightWord>CV</HighlightWord> and{" "}
+            <HighlightWord>portfolio</HighlightWord>. Ask away!
         </p>
-      </div>
+       </div>
 
       {/* 💬 Chat Display */}
       <div ref={chatBoxRef} className="flex-1 overflow-y-auto space-y-3 text-sm mb-4">

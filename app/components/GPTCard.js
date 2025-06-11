@@ -15,9 +15,9 @@ export default function GPTCard({ flipOverride = false, resetFlip = () => {} }) 
   }, [flipOverride]);
 
   return (
-    <div className="w-full h-full flex flex-col items-center justify-start px-6">
+    <div className="w-full min-h-screen flex flex-col items-center justify-start px-6">
       {/* Flip Box */}
-      <div className="relative w-full max-w-3xl aspect-[4/3] perspective">
+      <div className="relative w-full max-w-3xl flex-1 perspective min-h-[400px]">
         <div className={`w-full h-full transition-transform duration-700 transform-style preserve-3d ${flipped ? "rotate-y-180" : ""}`}>
           
           {/* Front: Chat Assistant */}

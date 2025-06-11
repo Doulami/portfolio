@@ -45,7 +45,7 @@ export default function IntroPanel({ onFlip }) {
         >
           portfolio
         </HighlightWord>
-        — or ask me anything on the right.
+         or ask me anything on the right.
       </p>
 
       <p>

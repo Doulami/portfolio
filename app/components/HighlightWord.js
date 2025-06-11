@@ -9,18 +9,21 @@ export default function HighlightWord({ children, image, linkText, href }) {
   const [hovered, setHovered] = useState(false);
   const [hoverPos, setHoverPos] = useState({ x: 0, y: 0 });
 
+  const bubbleSize = 128; // match w-32 h-32
+
   const onMouseMove = (e) => {
-    setHoverPos({ x: e.clientX + 12, y: e.clientY + 12 }); // soft offset
+    setHoverPos({
+      x: e.clientX - bubbleSize / 2,
+      y: e.clientY - bubbleSize / 2,
+    });
   };
 
   const onMouseEnter = () => {
     setHovered(true);
-    console.log("Hover start on:", children);
   };
 
   const onMouseLeave = () => {
     setHovered(false);
-    console.log("Hover end on:", children);
   };
 
   const shouldShow = hovered && (image || linkText);
@@ -42,16 +45,14 @@ export default function HighlightWord({ children, image, linkText, href }) {
       {shouldShow && (
         <HoverPortal x={hoverPos.x} y={hoverPos.y}>
           <div
-            className="w-64 h-64 rounded-full shadow-lg flex items-center justify-center font-semibold transform scale-75 opacity-0 transition-all duration-300 pointer-events-none animate-fade-in"
-            style={{
-              backgroundColor: "white",
-            }}
+            className="w-32 h-32 rounded-full shadow-lg flex items-center justify-center font-semibold transform scale-75 opacity-0 transition-all duration-300 pointer-events-none animate-fade-in"
+            style={{ backgroundColor: "white" }}
           >
             {image ? (
               <div
                 className="w-full h-full rounded-full"
                 style={{
-                  backgroundColor: "white", // for transparency fallback
+                  backgroundColor: "white",
                   backgroundImage: `url(${image})`,
                   backgroundSize: "cover",
                   backgroundPosition: "center",
