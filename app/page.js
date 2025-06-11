@@ -24,7 +24,11 @@ export default function HomePage() {
 
           {/* 🟦 Right Panel: GPT & CV */}
           <div className="w-full lg:w-[40%] flex items-center justify-center p-6">
-            <GPTCard flipOverride={flipGPT} resetFlip={() => setFlipGPT(false)} />
+            <GPTCard
+  key="gpt"
+  flipOverride={flipGPT}
+  resetFlip={() => setFlipGPT(false)}
+/>
           </div>
         </div>
       )}

@@ -6,15 +6,15 @@ import CVSwitcher from "./CVSwitcher";
 
 export default function GPTCard({ flipOverride = false, resetFlip = () => {} }) {
   const [flipped, setFlipped] = useState(false);
-
-  useEffect(() => {
-    if (flipOverride) {
-        console.log("flipOverride triggered");
-
-      setFlipped(true);
-      resetFlip();
-    }
-  }, [flipOverride]);
+  
+useEffect(() => {
+  console.log("flipOverride:", flipOverride);
+  if (flipOverride) {
+    console.log("✅ Flipping now!");
+    setFlipped(true);
+    resetFlip();
+  }
+}, [flipOverride]);
 
   return (
     <div className="w-full flex items-center justify-center p-6">
