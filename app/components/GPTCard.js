@@ -20,7 +20,7 @@ export default function FakeGPTChatBox() {
   const responses = {
     "What have you built?": () => (
       <p>
-        Khaled built <HighlightWord linkText="Impact Nutrition" href="https://impactnutrition.com.tn">Impact Nutrition</HighlightWord>,{" "}
+        Khaled built <HighlightWord linkText="Impact Nutrition" href="https://impactnutrition.com.tn">NOT Impact Nutrition</HighlightWord>,{" "}
         <HighlightWord linkText="DNS Abuse Tool" href="https://acidtool.com">DNS Abuse Tool</HighlightWord>, and more.
       </p>
     ),
