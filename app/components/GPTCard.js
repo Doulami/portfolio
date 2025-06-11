@@ -73,7 +73,7 @@ export default function FakeGPTChatBox() {
       {/* 🧠 Assistant Intro */}
       <div className="flex items-center mb-4">
         <img
-          src="/images/khaleddoulami.jpg"
+          src="/images/airobot.png"
           alt="Avatar"
           className="w-10 h-10 rounded-full mr-3"
         />
