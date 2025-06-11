@@ -1,46 +1,59 @@
 "use client";
 
-import { useState } from "react";
-import FakeGPTChatBox from "./FakeGPTChatBox";
-//import PortfolioContent from "./PortfolioContent"; // Will be replaced by CVSwitcher
-import CVSwitcher from "./CVSwitcher"; // Placeholder for now
+import HighlightWord from "./HighlightWord";
 
-export default function GPTCard({ flipOverride = false, resetFlip = () => {} }) {
-  const [flipped, setFlipped] = useState(false);
-
-  useEffect(() => {
-    if (flipOverride) {
-      setFlipped(true);
-      resetFlip();
-    }
-  }, [flipOverride]);
+export default function IntroPanel({ onFlip }) {
   return (
-    <div className="w-full h-full flex flex-col items-center justify-center px-6">
-      <div className="relative w-full max-w-3xl aspect-[4/3] perspective">
-        <div
-          className={`w-full h-full transition-transform duration-700 transform-style preserve-3d ${
-            flipped ? "rotate-y-180" : ""
-          }`}
+    <div className="w-full h-full flex flex-col justify-center text-left space-y-4 px-6 max-w-xl">
+      <p>
+        Hello, I’m{" "}
+        <HighlightWord image="/images/khaleddoulami.jpg">
+          Khaled Doulami
+        </HighlightWord>
+        , an experienced{" "}
+        <HighlightWord>full-stack developer</HighlightWord> and{" "}
+        <HighlightWord>hands-on CTO</HighlightWord>.
+      </p>
+
+      <p>
+        A world traveler now based in{" "}
+        <HighlightWord image="/images/london.jpg">London</HighlightWord>. I
+        thrive in the fast-paced tech world, building scalable tools, launching
+        products, and keeping clients happy.
+      </p>
+
+      <p>
+        You can{" "}
+        <HighlightWord
+          linkText="browse my CV"
+          href="#"
+          onClick={e => {
+            e.preventDefault();
+            onFlip();
+          }}
         >
-          {/* Front – GPT Chat */}
-          <div className="absolute w-full h-full backface-hidden">
-            <FakeGPTChatBox />
-          </div>
+          browse my CV
+        </HighlightWord>{" "}
+        or{" "}
+        <HighlightWord
+          linkText="portfolio"
+          href="#"
+          onClick={e => {
+            e.preventDefault();
+            onFlip();
+          }}
+        >
+          portfolio
+        </HighlightWord>
+        — or ask me anything on the right.
+      </p>
 
-          {/* Back – CV Switcher */}
-          <div className="absolute w-full h-full rotate-y-180 backface-hidden overflow-y-auto bg-white text-black p-4 rounded-xl">
-            <CVSwitcher />
-          </div>
-        </div>
-      </div>
-
-      {/* Flip Button */}
-      <button
-        onClick={() => setFlipped(!flipped)}
-        className="mt-4 bg-green-700 text-white px-5 py-2 rounded hover:bg-green-600"
-      >
-        {flipped ? "Back to Chat" : "Read My CV"}
-      </button>
+      <p>
+        Contact?{" "}
+        <HighlightWord >
+          doulami.khaled@gmail.com
+        </HighlightWord>
+      </p>
     </div>
   );
 }
