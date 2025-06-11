@@ -9,6 +9,8 @@ export default function GPTCard({ flipOverride = false, resetFlip = () => {} }) 
 
   useEffect(() => {
     if (flipOverride) {
+        console.log("flipOverride triggered");
+
       setFlipped(true);
       resetFlip();
     }
