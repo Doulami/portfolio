@@ -18,12 +18,12 @@ export default function HomePage() {
       {showContent && (
         <div className="flex flex-col lg:flex-row w-full h-full">
           {/* 🟩 Left Panel: Intro */}
-          <div className="w-full lg:w-1/2 flex items-center justify-center p-6">
+          <div className="w-full lg:w-[60%] flex items-center justify-center p-6">
             <IntroPanel onFlip={() => setFlipGPT(true)} />
           </div>
 
           {/* 🟦 Right Panel: GPT & CV */}
-          <div className="w-full lg:w-1/2 flex items-center justify-center p-6">
+          <div className="w-full lg:w-[40%] flex items-center justify-center p-6">
             <GPTCard flipOverride={flipGPT} resetFlip={() => setFlipGPT(false)} />
           </div>
         </div>
