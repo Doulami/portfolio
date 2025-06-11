@@ -1,62 +1,143 @@
 "use client";
 
-import { useState,useEffect } from "react";
-import FakeGPTChatBox from "./FakeGPTChatBox";
-import CVSwitcher from "./CVSwitcher";
+import { useState, useRef, useEffect } from "react";
 import HighlightWord from "./HighlightWord";
+import { FaMicrophone } from "react-icons/fa";
+import { motion } from "framer-motion";
 
-export default function GPTCard({ flipOverride = false, resetFlip = () => {} }) {
-    
-  const [flipped, setFlipped] = useState(false);
+const suggestions = [
+  "What have you built?",
+  "Show me a cool project",
+  "What’s your tech stack?",
+  "Ever led a team?",
+];
+
+export default function FakeGPTChatBox() {
+  const [chatHistory, setChatHistory] = useState([]);
+  const [input, setInput] = useState("");
+  const chatBoxRef = useRef(null);
+
+  const responses = {
+    "What have you built?": () => (
+      <p>
+        Khaled built <HighlightWord linkText="Impact Nutrition" href="https://impactnutrition.com.tn">Impact Nutrition</HighlightWord>,{" "}
+        <HighlightWord linkText="DNS Abuse Tool" href="https://acidtool.com">DNS Abuse Tool</HighlightWord>, and more.
+      </p>
+    ),
+    "Show me a cool project": () => (
+      <p>
+        Try <HighlightWord image="/images/impact.png">Impact Nutrition</HighlightWord> — a Next.js headless WordPress shop.
+      </p>
+    ),
+    "What’s your tech stack?": () => (
+      <p>
+        He works with <HighlightWord linkText="Next.js" href="https://nextjs.org">Next.js</HighlightWord>,{" "}
+        <HighlightWord linkText="GraphQL" href="https://graphql.org">GraphQL</HighlightWord>,{" "}
+        <HighlightWord linkText="WordPress" href="https://wordpress.org">WordPress</HighlightWord>, and AWS.
+      </p>
+    ),
+    "Ever led a team?": () => (
+      <p>
+        Yes — he was CTO at <HighlightWord linkText="WAPPDEV" href="https://wappdev.co.uk">WAPPDEV</HighlightWord> and{" "}
+        <HighlightWord linkText="WWT Technologies" href="https://wwt-technology.com">WWT</HighlightWord>.
+      </p>
+    ),
+  };
+
+  const addToChat = (content, isUser) => {
+    setChatHistory((prev) => [...prev, { content, isUser }]);
+  };
+
+  const handleSubmit = () => {
+    if (!input.trim()) return;
+    addToChat(input, true);
+    setInput("");
+
+    setTimeout(() => {
+      const match = responses[input.trim()];
+      if (match) addToChat(match(), false);
+      else addToChat(<p>I’ll check with Khaled about that 🧐</p>, false);
+    }, 400);
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") handleSubmit();
+  };
+
   useEffect(() => {
-    if (flipOverride) {
-      setFlipped(true);
-      resetFlip();
-    }
-  }, [flipOverride]);
+    chatBoxRef.current?.scrollTo(0, chatBoxRef.current.scrollHeight);
+  }, [chatHistory]);
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-start px-4 py-12 text-neon">
-
-      {/* 🔹 Visible Intro Text */}
-      <div className="w-full max-w-3xl text-center mb-8 space-y-2">
-        <p>
-          Hello, I’m <HighlightWord image="/images/khaleddoulami.jpg">Khaled Doulami</HighlightWord>, a{" "}
-          <HighlightWord>hands-on CTO</HighlightWord>,{" "}
-          <HighlightWord>entrepreneur</HighlightWord>, and{" "}
-          <HighlightWord>creative technologist</HighlightWord>.
-        </p>
-        <p>
-          I’ve built platforms, led dev teams, launched products, and designed scalable solutions.
-        </p>
-        <p>
-          Ask me anything below — or{" "}
-          <span className="underline cursor-pointer" onClick={() => setFlipped(true)}>flip to my CV</span>.
+    <div className="bg-black text-green-400 rounded-xl p-6 w-full h-full flex flex-col max-h-full">
+      {/* 🧠 Assistant Intro */}
+      <div className="flex items-center mb-4">
+        <img
+          src="/images/khaleddoulami.jpg"
+          alt="Avatar"
+          className="w-10 h-10 rounded-full mr-3"
+        />
+        <p className="text-sm">
+          Hi, I’m <strong>Khaled’s Assistant</strong>. Ask me anything about his{" "}
+          <HighlightWord>CV</HighlightWord> or{" "}
+          <HighlightWord>portfolio</HighlightWord> — I’ve got all the answers 💡
         </p>
       </div>
 
-      {/* 🔁 Flip Box */}
-      <div className="relative w-full max-w-3xl aspect-[4/3] perspective mb-4">
-        <div className={`w-full h-full transition-transform duration-700 transform-style preserve-3d ${flipped ? "rotate-y-180" : ""}`}>
-          {/* Front – Chat */}
-          <div className="absolute top-0 left-0 w-full h-full backface-hidden">
-            <FakeGPTChatBox />
-          </div>
-
-          {/* Back – Portfolio */}
-          <div className="absolute top-0 left-0 w-full h-full rotate-y-180 backface-hidden overflow-y-auto">
-            <CVSwitcher />
-          </div>
-        </div>
+      {/* 💬 Chat Display */}
+      <div ref={chatBoxRef} className="flex-1 overflow-y-auto space-y-3 text-sm mb-4">
+        {chatHistory.map((entry, i) => (
+          <motion.div
+            key={i}
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            className={`p-2 rounded-lg max-w-[90%] ${
+              entry.isUser ? "bg-green-900 text-white self-end ml-auto" : "bg-zinc-800 text-green-400"
+            }`}
+          >
+            {typeof entry.content === "string" ? <p>{entry.content}</p> : entry.content}
+          </motion.div>
+        ))}
       </div>
 
-      {/* 🔘 Flip Button */}
-      <button
-        onClick={() => setFlipped(!flipped)}
-        className="mt-2 bg-green-700 text-white px-5 py-2 rounded hover:bg-green-600"
-      >
-        {flipped ? "Back to Chat" : "Read My CV"}
-      </button>
+      {/* ⚡ Suggested Buttons */}
+      <div className="flex flex-wrap gap-2 mb-3">
+        {suggestions.map((q) => (
+          <button
+            key={q}
+            onClick={() => {
+              addToChat(q, true);
+              setTimeout(() => {
+                const r = responses[q];
+                if (r) addToChat(r(), false);
+              }, 300);
+            }}
+            className="bg-green-700 text-white text-xs px-3 py-1 rounded-full hover:bg-green-600"
+          >
+            {q}
+          </button>
+        ))}
+      </div>
+
+      {/* 🧾 Input + Mic */}
+      <div className="flex gap-2 items-center">
+        <input
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          onKeyDown={handleKeyDown}
+          placeholder="Ask something…"
+          className="flex-1 p-2 rounded text-black"
+        />
+        <button
+          onClick={handleSubmit}
+          className="bg-green-700 text-white px-4 rounded hover:bg-green-600"
+        >
+          Send
+        </button>
+        <button className="text-green-400 hover:text-white text-xl">
+          <FaMicrophone />
+        </button>
+      </div>
     </div>
   );
 }
