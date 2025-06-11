@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import FakeGPTChatBox from "./FakeGPTChatBox";
 import PortfolioContent from "./PortfolioContent";
 import HighlightWord from "./HighlightWord";
