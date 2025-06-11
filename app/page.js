@@ -1,17 +1,24 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import IntroOverlay from "./components/IntroOverlay";
- import FakeCubeScene from "./components/FakeCubeScene";
+import GPTCard from "./components/GPTCard";
 
- 
-export default function HomePage() {
-  const [showCube, setShowCube] = useState(false);
+export default function Home() {
+  const [showMain, setShowMain] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setShowMain(true), 3500); // intro duration
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
-    <>
-      {!showCube && <IntroOverlay onFinish={() => setShowCube(true)} />}
-      {showCube && <FakeCubeScene />}
-    </>
+    <main className="w-full h-full bg-zinc-900 text-white">
+      {!showMain ? (
+        <IntroOverlay onFinish={() => setShowMain(true)} />
+      ) : (
+        <GPTCard />
+      )}
+    </main>
   );
 }
