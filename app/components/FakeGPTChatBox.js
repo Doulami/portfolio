@@ -70,9 +70,31 @@ export default function FakeGPTChatBox() {
     }, 300);
   }
 
-  function addToChat(content, isUser) {
+function addToChat(content, isUser) {
+  if (typeof content === "string" || isUser) {
     setChatHistory((prev) => [...prev, { content, isUser }]);
+  } else {
+    const childrenArray = React.Children.toArray(content.props.children);
+    let index = 0;
+    const typed = [];
+
+    setChatHistory((prev) => [...prev, { content: <p></p>, isUser: false }]);
+
+    const typeNext = () => {
+      if (index < childrenArray.length) {
+        typed.push(childrenArray[index]);
+        setChatHistory((prev) => [
+          ...prev.slice(0, -1),
+          { content: <p>{typed.slice()}</p>, isUser: false }
+        ]);
+        index++;
+        setTimeout(typeNext, 40);
+      }
+    };
+
+    setTimeout(typeNext, 300);
   }
+}
 
   function handleSubmit() {
     if (!input.trim()) return;
