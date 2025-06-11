@@ -23,7 +23,15 @@ body {
   @apply  text-green-950 dark:bg-zinc-900 dark:text-white;
 }
 
-
-.stripe-yellow {
-  background-color: rgb(255, 255, 0);
+.perspective {
+  perspective: 2000px;
+}
+.transform-style {
+  transform-style: preserve-3d;
+}
+.backface-hidden {
+  backface-visibility: hidden;
+}
+.rotate-y-180 {
+  transform: rotateY(180deg);
 }
