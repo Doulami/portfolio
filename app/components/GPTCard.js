@@ -15,21 +15,17 @@ export default function GPTCard({ flipOverride = false, resetFlip = () => {} }) 
   }, [flipOverride]);
 
   return (
-    <div className="w-full max-w-3xl rounded-xl bg-black/80 shadow-lg p-6 flex flex-col items-center justify-start text-green-400">
-      
+    <div className="w-full h-full flex flex-col items-center justify-start px-6">
       {/* Flip Box */}
-      <div className="relative w-full perspective" style={{ minHeight: "500px" }}>
-        <div
-          className={`w-full h-full transition-transform duration-700 transform-style preserve-3d ${
-            flipped ? "rotate-y-180" : ""
-          }`}
-        >
-          {/* Front */}
-          <div className="absolute top-0 left-0 w-full h-full backface-hidden rounded-xl overflow-hidden">
+      <div className="relative w-full max-w-3xl aspect-[4/3] perspective">
+        <div className={`w-full h-full transition-transform duration-700 transform-style preserve-3d ${flipped ? "rotate-y-180" : ""}`}>
+          
+          {/* Front: Chat Assistant */}
+          <div className="absolute top-0 left-0 w-full h-full backface-hidden">
             <FakeGPTChatBox />
           </div>
 
-          {/* Back */}
+          {/* Back: CV Switcher */}
           <div className="absolute top-0 left-0 w-full h-full rotate-y-180 backface-hidden overflow-y-auto bg-white text-black p-4 rounded-xl">
             <CVSwitcher />
           </div>
@@ -39,7 +35,7 @@ export default function GPTCard({ flipOverride = false, resetFlip = () => {} }) 
       {/* Flip Button */}
       <button
         onClick={() => setFlipped(!flipped)}
-        className="mt-6 bg-green-700 text-white px-5 py-2 rounded hover:bg-green-600"
+        className="mt-4 bg-green-700 text-white px-5 py-2 rounded hover:bg-green-600"
       >
         {flipped ? "Back to Chat" : "Read My CV"}
       </button>
