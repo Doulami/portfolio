@@ -31,8 +31,20 @@ useEffect(() => {
           >
             {/* Front – Chat */}
             <div className="absolute top-0 left-0 w-full  h-screen  backface-hidden rounded-xl overflow-hidden">
-            <div className="w-full h-screen relative">
-            <RobotScene />
+            <div className="w-full h-screen relative flex items-center justify-center">
+            {/* Glow Background */}
+                    <img
+                    src="/images/robot-glow-bg.png"
+                    alt="glow background"
+                    className="absolute bottom-[10%] w-[300px] max-w-[80vw] opacity-90 pointer-events-none z-0"
+                    />
+
+                    {/* Robot Canvas */}
+                    <div className="relative z-10">
+                    <RobotScene />
+                    </div>
+
+
             </div>
 
              
