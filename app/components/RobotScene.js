@@ -17,6 +17,8 @@ export default function RobotScene() {
   <directionalLight position={[2, 2, 2]} />
   <Suspense fallback={null}>
     <AnimatedRobot scale={1.8} position={[0, -1.2, 0]} />
+    <OrbitControls enableZoom={false} autoRotate autoRotateSpeed={2} />
+
   </Suspense>
 </Canvas>
 
