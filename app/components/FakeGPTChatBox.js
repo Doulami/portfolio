@@ -4,7 +4,6 @@ import { useState, useRef, useEffect } from "react";
 import HighlightWord from "./HighlightWord";
 import { FaMicrophone } from "react-icons/fa";
 import { motion } from "framer-motion";
-import RobotScene from "./RobotScene";
 
 
 const suggestions = [
@@ -74,7 +73,6 @@ export default function FakeGPTChatBox() {
     <div className="bg-black text-green-400 rounded-xl p-6 w-full h-full flex flex-col max-h-full">
       {/* 🧠 Assistant Intro */}
       <div className="flex flex-col items-center text-center mb-6">
-         <RobotScene />
         <p className="text-sm leading-relaxed max-w-xs">
             Hi, I’m <strong>Khaled’s Assistant</strong> — here to help you explore his{" "}
             <HighlightWord>CV</HighlightWord> and{" "}
