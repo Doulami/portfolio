@@ -11,7 +11,7 @@ export default function RobotScene() {
   return (
  <Canvas
   style={{ width: "100%", height: "100%", background: "transparent" }}
-  camera={{ position: [0, 0.8, 3.5], fov: 40 }}
+  camera={{ position: [0, 0.8, 3.5], fov: 80 }}
 >
   <ambientLight intensity={0.4} />
   <directionalLight position={[2, 2, 2]} />
