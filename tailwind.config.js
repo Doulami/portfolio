@@ -7,6 +7,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+        textShadow: {
+        glow: '0 0 8px #00CFFF, 0 0 16px #00CFFF',
+      },
           colors: {
       neon: "rgb(255,255,0)",
           },
@@ -23,6 +26,9 @@ module.exports = {
     },
   },
 },
-  plugins: [],
+  plugins: [
+        require('tailwindcss-textshadow')
+
+  ],
 }
 

@@ -35,7 +35,7 @@ useEffect(() => {
                 
                 {/* 🔵 Glowing Background Image */}
                 <img
-                    src="/images/robot-glow-bg.png"
+                    src="/images/robotbg.png"
                     alt="glow"
                     className="absolute bottom-[8%] w-[40vw] max-w-[300px] z-0 pointer-events-none select-none glow-pulse"
                     
