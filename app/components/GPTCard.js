@@ -31,23 +31,22 @@ useEffect(() => {
           >
             {/* Front – Chat */}
             <div className="absolute top-0 left-0 w-full  h-screen  backface-hidden rounded-xl overflow-hidden">
-            <div className="w-full h-screen relative flex items-center justify-center">
-            {/* Glow Background */}
-                    <img
+                <div className="relative w-full h-screen flex items-center justify-center bg-[#0B0F1A]">
+                
+                {/* 🔵 Glowing Background Image */}
+                <img
                     src="/images/robot-glow-bg.png"
-                    alt="glow background"
-                    className="absolute bottom-[10%] w-[300px] max-w-[80vw] opacity-90 pointer-events-none z-0"
-                    />
+                    alt="glow"
+                    className="absolute bottom-[8%] w-[40vw] max-w-[300px] z-0 pointer-events-none select-none glow-pulse"
+                    
+                />
 
-                    {/* Robot Canvas */}
-                    <div className="relative z-10">
+                {/* 🤖 Robot Canvas */}
+                <div className="relative z-10 w-full h-full flex items-center justify-center">
                     <RobotScene />
-                    </div>
+                </div>
 
-
-            </div>
-
-             
+                        </div>   
             </div>
 
             {/* Back – CV Switcher */}

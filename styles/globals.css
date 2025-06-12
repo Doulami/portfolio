@@ -39,3 +39,18 @@ body {
 canvas {
   background: #0f172a; /* deep navy space tone */
 }
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.15;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.3;
+    transform: scale(1.05);
+  }
+}
+
+.glow-pulse {
+  animation: pulse 4s ease-in-out infinite;
+}
