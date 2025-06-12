@@ -12,24 +12,25 @@ export default function AnimatedRobot(props) {
   }, [actions]);
 
 
-return (
-    <>
-      {/* Robot model */}
-     <primitive ref={group} object={scene} {...props} />
+  return (
+    <group {...props} ref={group}>
+      {/* Robot Model */}
+      <primitive object={scene} />
 
-      {/* Glow sphere behind robot */}
-      <mesh>
-        <sphereGeometry args={[2, 64, 64]} />
-        <meshBasicMaterial color="#00CFFF" transparent opacity={0.15} />
+      {/* Glow Sphere */}
+      <mesh position={[0, 0.5, -1]}>
+        <sphereGeometry args={[2.5, 64, 64]} />
+        <meshBasicMaterial color="#00CFFF" transparent opacity={0.1} />
       </mesh>
 
-      {/* Point light for glow */}
+      {/* Glow Light */}
       <pointLight
         color="#00CFFF"
-        intensity={1.5}
-        distance={6}
-        position={[0, 0.5, 1]}
+        intensity={2}
+        distance={8}
+        position={[0, 1.5, 2]}
+        castShadow={false}
       />
-    </>
-  )
+    </group>
+  );
 }
