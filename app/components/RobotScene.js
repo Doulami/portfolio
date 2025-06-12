@@ -9,17 +9,17 @@ import AnimatedRobot from "./AnimatedRobot";
 
 export default function RobotScene() {
   return (
-    <Canvas camera={{ position: [0, 0.8, 3.8], fov: 40}}>
-      <ambientLight intensity={0.5} />
-      <directionalLight position={[0, -1, 0]} />
+ <Canvas
+  style={{ width: "100%", height: "100%", background: "transparent" }}
+  camera={{ position: [0, 0.8, 3.5], fov: 40 }}
+>
+  <ambientLight intensity={0.4} />
+  <directionalLight position={[2, 2, 2]} />
+  <Suspense fallback={null}>
+    <AnimatedRobot scale={1.8} position={[0, -1.2, 0]} />
+  </Suspense>
+</Canvas>
 
-      <Suspense fallback={null}>
-        <AnimatedRobot scale={1} position={[0, -1, 0]} />
-        <OrbitControls enableZoom={false} autoRotate autoRotateSpeed={2} />
-
-      </Suspense>
-      
-    </Canvas>
   );
 }
 

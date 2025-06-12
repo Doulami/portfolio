@@ -11,32 +11,32 @@ export default function AnimatedRobot(props) {
     actions[Object.keys(actions)[0]]?.play(); // auto-play first animation
   }, [actions]);
 
-
   return (
     <group {...props} ref={group}>
-      {/* Robot Model */}
+
+      {/* Glow floor under robot */}
+      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -1.3, 0]}>
+        <circleGeometry args={[2.5, 64]} />
+        <meshBasicMaterial color="#00CFFF" transparent opacity={0.08} />
+      </mesh>
+
+      {/* Background glow sphere */}
+      <mesh position={[0, 0.1, -1.5]}>
+        <sphereGeometry args={[3.2, 64, 64]} />
+        <meshBasicMaterial color="#00CFFF" transparent opacity={0.1} />
+      </mesh>
+
+      {/* Main robot model */}
       <primitive object={scene} />
 
-      {/* Glow Sphere */}
-    <mesh position={[0, 0.2, -1]}>
-        <sphereGeometry args={[2.2, 64, 64]} />
-        <meshBasicMaterial color="#00CFFF" transparent opacity={0.2} />
-      </mesh>
-
-      {/* Hologram-style Floor */}
-      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -1.1, 0]}>
-        <circleGeometry args={[2.8, 64]} />
-        <meshBasicMaterial color="#00CFFF" transparent opacity={0.05} />
-      </mesh>
-
-      {/* Glow Light */}
+      {/* Glow light */}
       <pointLight
         color="#00CFFF"
-        intensity={1.4}
-        distance={4.5}
-        position={[0, 1.2, 1.2]}
+        intensity={1.2}
+        distance={6}
+        position={[0, 1.5, 2.5]}
+        castShadow={false}
       />
-
     </group>
   );
 }

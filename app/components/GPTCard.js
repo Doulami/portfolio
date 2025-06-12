@@ -30,8 +30,11 @@ useEffect(() => {
             }`}
           >
             {/* Front – Chat */}
-            <div className="absolute top-0 left-0 w-full h-full backface-hidden rounded-xl overflow-hidden">
-            <RobotScene />
+            <div className="absolute top-0 left-0 w-full  h-[400px]  backface-hidden rounded-xl overflow-hidden">
+            <div className="w-full h-[400px] relative">
+                <RobotScene />
+            </div>
+
              
             </div>
 
