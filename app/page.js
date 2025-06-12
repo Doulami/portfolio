@@ -10,7 +10,7 @@ export default function HomePage() {
   const [flipGPT, setFlipGPT] = useState(false);
 
   return (
-    <main className="w-full h-screen overflow-hidden bg-zinc-900 text-white font-sans">
+    <main className="w-full h-screen overflow-hidden bg-slate-900 text-white font-sans">
       {!showContent && (
         <IntroOverlay onFinish={() => setShowContent(true)} />
       )}

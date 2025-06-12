@@ -20,7 +20,7 @@ useEffect(() => {
 
   return (
     <div className="w-full flex items-center justify-center p-6">
-      <div className="w-full max-w-3xl bg-black/80 rounded-xl shadow-lg p-6 text-green-400 flex flex-col">
+      <div className="w-full max-w-3xl shadow-lg p-6 text-white flex flex-col">
 
         {/* Flip Card */}
         <div className="relative w-full perspective h-[520px]">
@@ -45,7 +45,7 @@ useEffect(() => {
         {/* Flip Button */}
         <button
           onClick={() => setFlipped(!flipped)}
-          className="mt-6 bg-green-700 text-white px-5 py-2 rounded hover:bg-green-600"
+          className="mt-6 bg-green-700 text-gray-200 px-5 py-2 rounded hover:bg-green-600"
         >
           {flipped ? "Read My CV" : "Talk to Me"}
         </button>
