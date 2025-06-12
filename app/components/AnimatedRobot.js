@@ -18,24 +18,25 @@ export default function AnimatedRobot(props) {
       <primitive object={scene} />
 
       {/* Glow Sphere */}
-      <mesh position={[0, -1.5, -2]}>
-        <sphereGeometry args={[3.5, 64, 64]} />
-        <meshBasicMaterial color="#00CFFF" transparent opacity={0.15} />
-      </mesh>
-      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -2, 0]}>
-        <circleGeometry args={[5, 64]} />
-        <meshBasicMaterial color="#00CFFF" transparent opacity={0.05} />
+    <mesh position={[0, 0.2, -1]}>
+        <sphereGeometry args={[2.2, 64, 64]} />
+        <meshBasicMaterial color="#00CFFF" transparent opacity={0.2} />
       </mesh>
 
+      {/* Hologram-style Floor */}
+      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -1.1, 0]}>
+        <circleGeometry args={[2.8, 64]} />
+        <meshBasicMaterial color="#00CFFF" transparent opacity={0.05} />
+      </mesh>
 
       {/* Glow Light */}
       <pointLight
         color="#00CFFF"
-        intensity={1.2}
-        distance={10}
-        position={[0, 2, -4]} // behind and above
-        castShadow={false}
+        intensity={1.4}
+        distance={4.5}
+        position={[0, 1.2, 1.2]}
       />
+
     </group>
   );
 }

@@ -9,7 +9,7 @@ import AnimatedRobot from "./AnimatedRobot";
 
 export default function RobotScene() {
   return (
-    <Canvas camera={{ position: [0, 0.5, 3.5], fov: 40}}>
+    <Canvas camera={{ position: [0, 0.8, 3.8], fov: 40}}>
       <ambientLight intensity={0.5} />
       <directionalLight position={[0, -1, 0]} />
 
