@@ -20,7 +20,7 @@ html, body {
   overflow-x: hidden;
 }
 body {
-  @apply  text-green-950 dark:bg-zinc-900 dark:text-white;
+  @apply  text-white dark:bg-slate-900 dark:text-white;
 }
 
 .perspective {
