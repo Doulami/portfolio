@@ -35,3 +35,7 @@ body {
 .rotate-y-180 {
   transform: rotateY(180deg);
 }
+
+canvas {
+  background: #0B0F1A; /* deep navy space tone */
+}
