@@ -3,10 +3,12 @@
 import { useState, useEffect } from "react";
 import FakeGPTChatBox from "./FakeGPTChatBox";
 import CVSwitcher from "./CVSwitcher";
+import RobotScene from "./RobotScene";
+
 
 export default function GPTCard({ flipOverride = false, resetFlip = () => {} }) {
   const [flipped, setFlipped] = useState(false);
-  
+
 useEffect(() => {
   console.log("flipOverride:", flipOverride);
   if (flipOverride) {
@@ -29,12 +31,13 @@ useEffect(() => {
           >
             {/* Front – Chat */}
             <div className="absolute top-0 left-0 w-full h-full backface-hidden rounded-xl overflow-hidden">
-              <FakeGPTChatBox />
+            <RobotScene />
+             
             </div>
 
             {/* Back – CV Switcher */}
             <div className="absolute top-0 left-0 w-full h-full rotate-y-180 backface-hidden overflow-y-auto bg-white text-black p-4 rounded-xl">
-              <CVSwitcher />
+               <FakeGPTChatBox />
             </div>
           </div>
         </div>
@@ -44,7 +47,7 @@ useEffect(() => {
           onClick={() => setFlipped(!flipped)}
           className="mt-6 bg-green-700 text-white px-5 py-2 rounded hover:bg-green-600"
         >
-          {flipped ? "Back to Chat" : "Read My CV"}
+          {flipped ? "Read My CV" : "Talk to Me"}
         </button>
       </div>
     </div>
