@@ -8,8 +8,33 @@ export default function AnimatedRobot(props) {
   const { actions } = useAnimations(animations, group);
 
   useEffect(() => {
-    actions[Object.keys(actions)[0]]?.play(); // auto-play first animation
-  }, [actions]);
+    if (!actions || !animations.length) return;
 
-  return <primitive ref={group} object={scene} {...props} />;
+    const wakeUp = actions["WakeUp"];
+    const idle = actions["Idle"];
+
+    if (wakeUp && idle) {
+      wakeUp.setLoop(THREE.LoopOnce);
+      wakeUp.clampWhenFinished = true;
+      wakeUp.reset().play();
+
+      // Wait for WakeUp duration then play Idle
+      const wakeUpDuration = wakeUp.getClip().duration * 1000;
+
+      const timeout = setTimeout(() => {
+        idle.reset().fadeIn(0.5).play();
+      }, wakeUpDuration);
+
+      return () => clearTimeout(timeout);
+    } else {
+      // fallback: just play first available
+      actions[Object.keys(actions)[0]]?.play();
+    }
+  }, [actions, animations]);
+
+  return (
+    <group {...props} ref={group}>
+      <primitive object={scene} />
+    </group>
+  );
 }

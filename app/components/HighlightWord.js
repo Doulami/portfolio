@@ -37,7 +37,7 @@ export default function HighlightWord({ children, image, linkText, href }) {
         if (image || linkText) onMouseMove(e);
       }}
       className={`relative inline-block group font-bold cursor-pointer ${
-        linkText || image ? "text-[#00CFFF] text-shadow-glow" : "text-white"
+        linkText || image ? "text-[#00CFFF] " : "text-white"
       }`}
     >
       {children}
