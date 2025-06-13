@@ -3,6 +3,8 @@
 import { useState } from "react";
 import CardLeft from "./components/CardLeft";
 import CardRight from "./components/CardRight";
+import IntroOverlay from "./components/IntroOverlay";
+
 
 export default function HomePage() {
   const [showContent, setShowContent] = useState(false);
