@@ -18,7 +18,7 @@ export default function RobotScene() {
 
       {/* 🟣 CANVAS LAYER */}
       <Canvas
-        style={{ width: "100%", height: "100%", background: "transparent";    position: "relative",  zIndex: 10, }}
+        style={{ width: "100%", height: "100%", background: "transparent",  position: "relative",  zIndex: 10, }}
   camera={{ position: [0, 0.8, 3.5], fov: 80 }}
       >
   <ambientLight intensity={0.4} />
