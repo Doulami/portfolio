@@ -56,10 +56,7 @@ html, body, #__next {
   transform: rotateY(180deg);
 }
 
-/* Canvas BG (Robot) */
-canvas {
-  background: #0f172a;
-}
+
 
 /* Glow / Pulse */
 @keyframes pulse {

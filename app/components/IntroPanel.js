@@ -17,12 +17,12 @@ export default function IntroPanel() {
       </p>
 
 
-      <a
-        href="#cv"
-        className="inline-block px-6 py-3 rounded-fulltext-white border border-[#00CFFF] hover:shadow-[0_0_15px_#00CFFF] shadow-[0_0_8px_#00CFFF]   transition"
-      >
-        Visit CV
-      </a>
+    <a
+  href="#cv"
+  className="inline-block px-5 py-2.5 rounded-full text-sm font-medium text-white border border-[#00CFFF] hover:shadow-[0_0_12px_#00CFFF] shadow-[0_0_6px_#00CFFF] transition"
+>
+  Visit CV
+</a>
     </div>
   );
 }
