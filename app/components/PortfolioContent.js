@@ -1,57 +1,55 @@
 "use client";
 
-import HighlightWord from "./HighlightWord";
-
 export default function PortfolioContent() {
   return (
-    <div className="bg-white text-black p-6 rounded-xl max-w-3xl mx-auto text-left space-y-4">
-      <h2 className="text-2xl font-bold">Khaled Doulami</h2>
-      <p>
-        Full Stack WordPress Developer based in London with{" "}
-        <HighlightWord>14+ years of experience</HighlightWord> building scalable, performant websites and applications.
-      </p>
+    <div className="space-y-10 text-black text-left bg-white p-6 lg:p-12">
+      <h2 className="text-3xl font-bold">CV in Motion</h2>
 
-      <p>
-        Previously CTO and founder of{" "}
-        <HighlightWord linkText="WAPPDEV" href="https://wappdev.co.uk" />, now focused on{" "}
-        hands-on WordPress, Next.js, and plugin development.
-      </p>
+      <div>
+        <h3 className="text-xl font-semibold">Khaled Doulami</h3>
+        <p className="text-gray-800 mt-2 max-w-2xl">
+          Full Stack WordPress Developer based in London with 14+ years of experience building scalable, performant websites and applications.
+        </p>
+        <p className="text-gray-600 mt-2">
+          Previously CTO and founder of WAPPDEV, now focused on hands-on WordPress, Next.js, and plugin development.
+        </p>
+      </div>
 
-      <h3 className="text-xl font-semibold mt-4">Key Skills</h3>
-      <ul className="list-disc pl-5">
-        <li><HighlightWord>PHP, JavaScript, Node.js</HighlightWord></li>
-        <li><HighlightWord>WordPress, WooCommerce, Elementor, ACF</HighlightWord></li>
-        <li><HighlightWord>Next.js, GraphQL, React, Vue</HighlightWord></li>
-        <li><HighlightWord>AWS, CyberPanel, Plesk, Redis, Cloudflare</HighlightWord></li>
-        <li>Core Web Vitals, SEO audits, WCAG accessibility</li>
-      </ul>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <h4 className="text-lg font-semibold mb-2">Key Skills</h4>
+          <ul className="list-disc list-inside space-y-1 text-gray-700">
+            <li>PHP, JavaScript, Node.js</li>
+            <li>WordPress, WooCommerce, Elementor, ACF</li>
+            <li>Next.js, GraphQL, React, Vue</li>
+            <li>AWS, CyberPanel, Plesk, Redis, Cloudflare</li>
+            <li>Core Web Vitals, SEO, Accessibility</li>
+          </ul>
+        </div>
 
-      <h3 className="text-xl font-semibold mt-4">Notable Projects</h3>
-      <ul className="list-disc pl-5">
-        <li>
-          <HighlightWord linkText="Impact Nutrition" href="https://impactnutrition.com.tn" /> — multilingual WooCommerce shop
-        </li>
-        <li>
-          <HighlightWord linkText="DNS Abuse Tool" href="https://acidtool.com" /> — WordPress plugin for domain intelligence
-        </li>
-        <li>
-          <HighlightWord linkText="Elementor Headless API" href="#" /> — headless integration with Next.js
-        </li>
-      </ul>
+        <div>
+          <h4 className="text-lg font-semibold mb-2">Notable Projects</h4>
+          <ul className="list-disc list-inside space-y-1 text-gray-700">
+            <li><strong>Impact Nutrition</strong> — multilingual WooCommerce shop</li>
+            <li><strong>DNS Abuse Tool</strong> — WP plugin for domain intelligence</li>
+            <li><strong>Elementor Headless API</strong> — integration with Next.js</li>
+          </ul>
+        </div>
+      </div>
 
-      <h3 className="text-xl font-semibold mt-4">Work History</h3>
-      <p><strong>WAPPDEV (London/Tunis)</strong> – 2020–Now</p>
-      <p><strong>WWT Technologies</strong> – Founder & CTO</p>
-      <p><strong>Webi / Microsoft Innovation Center</strong> – Senior Web Dev</p>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <h4 className="text-lg font-semibold mb-2">Work History</h4>
+          <p><strong>WAPPDEV</strong> (London/Tunis) – 2020–Now</p>
+          <p><strong>WWT Technologies</strong> – Founder & CTO</p>
+          <p><strong>Webi / Microsoft Innovation Center</strong> – Senior Web Dev</p>
+        </div>
 
-      <h3 className="text-xl font-semibold mt-4">Languages</h3>
-      <p>Arabic (Native), English (Fluent), French (Fluent), Italian (Beginner)</p>
-
-      <h3 className="text-xl font-semibold mt-4">Links</h3>
-      <p>
-        <HighlightWord linkText="wappdev.co.uk" href="https://wappdev.co.uk" /> ·{" "}
-        <HighlightWord linkText="LinkedIn" href="https://linkedin.com/in/doulami-khaled-5221502" />
-      </p>
+        <div>
+          <h4 className="text-lg font-semibold mb-2">Languages</h4>
+          <p>Arabic (Native), English (Fluent), French (Fluent), Italian (Beginner)</p>
+        </div>
+      </div>
     </div>
   );
 }
