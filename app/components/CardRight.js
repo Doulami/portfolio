@@ -12,7 +12,7 @@ export default function CardRight({ flipOverride = false, resetFlip = () => {} }
   }, [flipOverride]);
 
   return (
-    <div className="w-full h-full flex flex-col justify-between bg-[#0B0F1A] text-white">
+    <div className="w-full h-full flex flex-col justify-between bg-[#0f172a] text-white">
       {!flipped ? (
         <div
           className="relative w-full h-full flex items-center justify-center bg-[url('/images/robotbg.png')] bg-no-repeat bg-bottom bg-contain"
