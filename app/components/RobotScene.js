@@ -9,10 +9,18 @@ import AnimatedRobot from "./AnimatedRobot";
 
 export default function RobotScene() {
   return (
- <Canvas
-  style={{ width: "100%", height: "100%", background: "transparent" }}
+        <div className="relative w-full h-full">
+      {/* 🔵 BACKGROUND IMAGE */}
+      <div
+        className="absolute inset-0 z-0 bg-[url('/images/robotbg.png')] bg-no-repeat bg-bottom bg-contain opacity-50"
+        style={{ pointerEvents: "none" }}
+      />
+
+      {/* 🟣 CANVAS LAYER */}
+      <Canvas
+        style={{ width: "100%", height: "100%", background: "transparent";    position: "relative",  zIndex: 10, }}
   camera={{ position: [0, 0.8, 3.5], fov: 80 }}
->
+      >
   <ambientLight intensity={0.4} />
   <directionalLight position={[2, 2, 2]} />
   <Suspense fallback={null}>
@@ -20,7 +28,10 @@ export default function RobotScene() {
     <OrbitControls enableZoom={false} autoRotate autoRotateSpeed={2} />
 
   </Suspense>
-</Canvas>
+        {/* your robot goes here */}
+      </Canvas>
+    </div>
+ 
 
   );
 }
