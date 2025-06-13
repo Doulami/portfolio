@@ -31,7 +31,17 @@ export default function HomePage() {
 />
           </div>
         </div>
+        
       )}
+      {showContent && (
+  <button
+    onClick={() => setFlipGPT(prev => !prev)}
+    className="fixed bottom-6 left-1/2 transform -translate-x-1/2 bg-green-500 hover:bg-green-600 text-white font-semibold px-6 py-3 rounded-full shadow-lg glow-button z-50"
+    style={{ fontSize: "18px", height: "42px" }}
+  >
+    {flipGPT ? "Read My CV" : "Talk to my assistant"}
+  </button>
+)}
     </main>
   );
 }

@@ -56,13 +56,6 @@ useEffect(() => {
           </div>
         </div>
 
-        {/* Flip Button */}
-        <button
-          onClick={() => setFlipped(!flipped)}
-          className="mt-6 bg-green-700 text-gray-200 px-5 py-2 rounded hover:bg-green-600"
-        >
-          {flipped ? "Read My CV" : "Talk to Me"}
-        </button>
       </div>
     </div>
   );
