@@ -32,16 +32,16 @@ export default function HomePage() {
       </div>
 
       {/* 🟢 Floating Flip Button */}
-      <button
-        onClick={() => setFlipGPT(prev => !prev)}
-        className="fixed bottom-6 left-1/2 transform -translate-x-1/2 w-56 h-156 rounded-full bg-white-500 hover:bg-blue-600 text-white glow-button glow-pulse flex items-center justify-center z-40 shadow-xl"
-        aria-label="Flip Assistant"
-      >
-        {/* Assistant icon or chat */}
-        <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16h6m2 4H7a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v12a2 2 0 01-2 2z" />
-        </svg>
-      </button>
+ <button
+  onClick={() => setFlipGPT(prev => !prev)}
+  className="fixed bottom-6 left-1/2 transform -translate-x-1/2 w-16 h-16 rounded-full bg-green-500 hover:bg-green-600 text-white glow-button glow-pulse flex items-center justify-center z-40 shadow-xl"
+  aria-label={flipGPT ? "Back to Intro" : "Visit CV"}
+  title={flipGPT ? "Back to Intro" : "Visit CV"} // Optional tooltip
+>
+ <span className="text-xs text-center leading-tight font-semibold">
+  {flipGPT ? "Back to Intro" : "Visit CV"}
+</span>
+</button>
     </>
   )}
 </main>
