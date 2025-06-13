@@ -54,3 +54,7 @@ canvas {
 .glow-pulse {
   animation: pulse 4s ease-in-out infinite;
 }
+.glow-button {
+  box-shadow: 0 0 10px rgba(0, 255, 128, 0.6), 0 0 20px rgba(0, 255, 128, 0.4);
+  transition: box-shadow 0.3s ease;
+}
