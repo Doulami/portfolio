@@ -34,7 +34,7 @@ export default function HomePage() {
       {/* 🟢 Floating Flip Button */}
       <button
         onClick={() => setFlipGPT(prev => !prev)}
-        className="fixed bottom-6 left-1/2 transform -translate-x-1/2 w-16 h-16 rounded-full bg-green-500 hover:bg-green-600 text-white glow-button glow-pulse flex items-center justify-center z-40 shadow-xl"
+        className="fixed bottom-6 left-1/2 transform -translate-x-1/2 w-56 h-156 rounded-full bg-white-500 hover:bg-blue-600 text-white glow-button glow-pulse flex items-center justify-center z-40 shadow-xl"
         aria-label="Flip Assistant"
       >
         {/* Assistant icon or chat */}

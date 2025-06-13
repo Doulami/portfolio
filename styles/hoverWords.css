@@ -1,15 +1,3 @@
-/*body::before {
-  content: "🔴 CSS LOADED";
-  position: fixed;
-  top: 1rem;
-  left: 1rem;
-  z-index: 9999;
-  color: red;
-  background: yellow;
-  padding: 4px;
-  font-size: 12px;
-}*/
-
 .highlight-image {
   will-change: transform, opacity;
   pointer-events: none;
