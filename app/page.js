@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import IntroOverlay from "./components/IntroOverlay";
 import CardLeft from "./components/CardLeft";
 import CardRight from "./components/CardRight";
 
