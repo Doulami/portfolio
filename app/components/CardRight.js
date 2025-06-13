@@ -7,12 +7,9 @@ import RobotScene from "./RobotScene";
 export default function CardRight({ flipOverride = false, resetFlip = () => {} }) {
   const [flipped, setFlipped] = useState(false);
 
-  useEffect(() => {
-    if (flipOverride) {
-      setFlipped(true);
-      resetFlip();
-    }
-  }, [flipOverride]);
+useEffect(() => {
+  setFlipped(flipOverride);
+}, [flipOverride]);
 
   return (
     <div className="w-full h-full flex items-center justify-center p-6">

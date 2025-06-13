@@ -7,12 +7,9 @@ import PortfolioContent from "./PortfolioContent";
 export default function CardLeft({ flipOverride = false, resetFlip = () => {} }) {
   const [flipped, setFlipped] = useState(false);
 
-  useEffect(() => {
-    if (flipOverride) {
-      setFlipped(true);
-      resetFlip();
-    }
-  }, [flipOverride]);
+useEffect(() => {
+  setFlipped(flipOverride);
+}, [flipOverride]);
 
   return (
     <div className="w-full flex items-center justify-center p-6">

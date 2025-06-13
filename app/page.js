@@ -32,15 +32,15 @@ export default function HomePage() {
       </div>
 
       {/* 🟢 Floating Flip Button */}
- <button
+<button
   onClick={() => setFlipGPT(prev => !prev)}
-  className="fixed bottom-6 left-1/2 transform -translate-x-1/2 w-16 h-16 rounded-full bg-green-500 hover:bg-green-600 text-white glow-button glow-pulse flex items-center justify-center z-40 shadow-xl"
+  className="fixed bottom-6 left-1/2 transform -translate-x-1/2 w-16 h-16 rounded-full text-white border border-[#00CFFF] hover:shadow-[0_0_15px_#00CFFF] shadow-[0_0_8px_#00CFFF] transition-all duration-300 z-50"
   aria-label={flipGPT ? "Back to Intro" : "Visit CV"}
-  title={flipGPT ? "Back to Intro" : "Visit CV"} // Optional tooltip
+  title={flipGPT ? "Back to Intro" : "Visit CV"}
 >
- <span className="text-xs text-center leading-tight font-semibold">
-  {flipGPT ? "Back to Intro" : "Visit CV"}
-</span>
+  <span className="text-xs text-center font-semibold">
+    {flipGPT ? "Back to Intro" : "Visit CV"}
+  </span>
 </button>
     </>
   )}
