@@ -4,19 +4,31 @@ import HighlightWord from "./HighlightWord";
 
 export default function IntroPanel() {
   return (
-    <div className="w-full h-full flex flex-col justify-center items-start gap-6 text-left p-6 lg:p-12">
-      <h1 className="text-4xl lg:text-6xl font-bold leading-tight text-white">
-        Hi, I’m <span className="text-[#00CFFF]">Khaled Doulami</span>.
-      </h1>
+    <div className="w-full h-full flex flex-col justify-center px-6 lg:px-20 text-left max-w-[90%] lg:text-[50px] text-[26px] leading-tight">
+      <p className="mb-4">
+        Hi, I’m{" "}
+        <HighlightWord image="/images/khaleddoulami.jpg">
+          Khaled Doulami
+        </HighlightWord>
+        , an experienced{" "}
+        <HighlightWord>full-stack developer</HighlightWord> and{" "}
+        <HighlightWord>hands-on CTO</HighlightWord>.
+      </p>
 
-      <h2 className="text-xl lg:text-2xl text-gray-300">
-        CTO · Developer · Nomad
-      </h2>
+      <p className="mb-4">
+        Currently based in{" "}
+        <HighlightWord image="/images/london.jpg">London</HighlightWord>, I help companies build and scale platforms with smart tech and clean code.
+      </p>
 
-      <p className="text-base lg:text-lg text-gray-400 max-w-xl">
-        I build scalable tools, products, and websites with modern tech. You can explore my portfolio or{" "}
-        <HighlightWord linkText="talk to my assistant" href="#">
-          ask me anything.
+      <p className="mb-4">
+        Explore my <HighlightWord>portfolio</HighlightWord> or{" "}
+        <HighlightWord>ask my assistant</HighlightWord> on the right.
+      </p>
+
+      <p>
+        Contact?{" "}
+        <HighlightWord>
+          doulami.khaled@gmail.com
         </HighlightWord>
       </p>
     </div>
