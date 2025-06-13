@@ -44,8 +44,10 @@ export default function HighlightWord({ children, image, linkText, href }) {
 
       {shouldShow && (
         <HoverPortal x={hoverPos.x} y={hoverPos.y}>
-          <div
-            className="w-32 h-32 rounded-full shadow-lg flex items-center justify-center font-semibold transform scale-75 opacity-0 transition-all duration-300 pointer-events-none animate-fade-in"
+            <div
+            className={`w-32 h-32 rounded-full shadow-lg flex items-center justify-center font-semibold pointer-events-none transition-all duration-300 ${
+              hovered ? "opacity-100 scale-100" : "opacity-0 scale-75"
+            }`}
             style={{ backgroundColor: "white" }}
           >
             {image ? (
