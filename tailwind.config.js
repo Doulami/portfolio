@@ -27,7 +27,10 @@ module.exports = {
   },
 },
   plugins: [
+        require('tailwindcss-textshadow'),
+        require('@tailwindcss/typography'),
         require('tailwindcss-textshadow')
+
 
   ],
 }

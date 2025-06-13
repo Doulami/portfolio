@@ -12,8 +12,8 @@ export default function CardLeft({ flipOverride = false, resetFlip = () => {} })
   }, [flipOverride]);
 
   return (
-    <div className="w-full h-full flex items-start justify-start overflow-y-auto p-6 bg-white text-black">
-      <div className="w-full max-w-4xl">
+    <div className="w-full h-full flex items-center justify-center bg-[#0B0F1A] text-white p-6 overflow-y-auto">
+      <div className="w-full max-w-3xl">
         {!flipped ? <IntroPanel /> : <PortfolioContent />}
       </div>
     </div>
