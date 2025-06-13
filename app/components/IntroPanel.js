@@ -1,4 +1,5 @@
 "use client";
+import HighlightWord from "./HighlightWord";
 
 export default function IntroPanel() {
   return (
