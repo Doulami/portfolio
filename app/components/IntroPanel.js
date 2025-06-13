@@ -16,9 +16,10 @@ export default function IntroPanel() {
         I build scalable tools and products for the web.
       </p>
 
+
       <a
         href="#cv"
-        className="inline-block px-6 py-3 rounded-full bg-sky-500 hover:bg-sky-600 text-white font-medium shadow glow-button transition"
+        className="inline-block px-6 py-3 rounded-fulltext-white border border-[#00CFFF] hover:shadow-[0_0_15px_#00CFFF] shadow-[0_0_8px_#00CFFF]   transition"
       >
         Visit CV
       </a>
